@@ -7,7 +7,8 @@
         <Product>App</Product>
         <Description>Description</Description>
         <Version>1.0.0</Version>
-        <AssemblyName>Apps.App</AssemblyName>
+        <PackageId>Apps.Okapi</PackageId>
+        <RootNamespace>Apps.App</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
