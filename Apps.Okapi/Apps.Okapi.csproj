@@ -9,11 +9,12 @@
         <Version>1.0.0</Version>
         <PackageId>Apps.Okapi</PackageId>
         <RootNamespace>Apps.Okapi</RootNamespace>
+        <AssemblyName>Apps.Okapi</AssemblyName>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Blackbird.Applications.Sdk.Common" Version="2.2.0-alpha3"/>
-        <PackageReference Include="Blackbird.Applications.Sdk.Utils" Version="1.0.12"/>
+        <PackageReference Include="Blackbird.Applications.Sdk.Common" Version="2.4.0-alpha2" />
+        <PackageReference Include="Blackbird.Applications.Sdk.Utils" Version="1.0.24" />
     </ItemGroup>
 
     <ItemGroup>

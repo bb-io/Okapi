@@ -10,6 +10,8 @@ public class Application : IApplication
         set { }
     }
 
+    public IPublicApplicationMetadata? PublicApplicationMetadata { get; }
+
     public T GetInstance<T>()
     {
         throw new NotImplementedException();
