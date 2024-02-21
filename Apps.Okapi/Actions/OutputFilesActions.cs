@@ -35,6 +35,26 @@ public class OutputFilesActions(InvocationContext invocationContext, IFileManage
         return new(fileReference);
     }
     
+    [Action("Download all output files", Description = "Download all output files from the project")]
+    public async Task<DownloadFilesResponse> DownloadAllOutputFiles([ActionParameter] GetProjectRequest projectRequest)
+    {
+        var fileNames = await GetOutputFiles(projectRequest);
+        
+        var downloadFilesResponse = new DownloadFilesResponse();
+        foreach (var fileName in fileNames.FileNames)
+        {
+            var fileReference = await DownloadOutputFile(new GetOutputFileRequest()
+            {
+                ProjectId = projectRequest.ProjectId,
+                FileName = fileName
+            });
+            
+            downloadFilesResponse.Files.Add(fileReference.File);
+        }
+        
+        return downloadFilesResponse;
+    }
+    
     [Action("Download output files as zip", Description = "Returns all output files in a zip archive\n")]
     public async Task<DownloadFileResponse> DownloadOutputFilesAsZip([ActionParameter] GetProjectRequest projectRequest)
     {
