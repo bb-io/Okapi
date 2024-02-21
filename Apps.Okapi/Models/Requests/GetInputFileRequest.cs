@@ -4,11 +4,11 @@ using Blackbird.Applications.Sdk.Common.Dynamic;
 
 namespace Apps.Okapi.Models.Requests;
 
-public class GetOutputFileRequest
+public class GetInputFileRequest
 {
     [Display("Project ID"), DataSource(typeof(ProjectDataHandler))]
     public string ProjectId { get; set; }
     
-    [Display("File name"), DataSource(typeof(OutputFileDataHandler))]
+    [Display("File name"), DataSource(typeof(InputFileDataHandler))]
     public string FileName { get; set; }
 }

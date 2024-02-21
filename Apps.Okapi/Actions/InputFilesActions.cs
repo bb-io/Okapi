@@ -20,9 +20,9 @@ public class InputFilesActions(InvocationContext invocationContext, IFileManagem
     }
     
     [Action("Download input file", Description = "Download input file by id")]
-    public async Task<DownloadFileResponse> DownloadInputFile([ActionParameter] GetProjectRequest projectRequest, [ActionParameter, Display("File name")] string fileName)
+    public async Task<DownloadFileResponse> DownloadInputFile([ActionParameter] GetInputFileRequest request)
     {
-        var response = await Client.Execute(ApiEndpoints.Projects + $"/{projectRequest.ProjectId}" + ApiEndpoints.InputFiles + $"/{fileName}", Method.Get, null, Creds);
+        var response = await Client.Execute(ApiEndpoints.Projects + $"/{request.ProjectId}" + ApiEndpoints.InputFiles + $"/{request.FileName}", Method.Get, null, Creds);
         if (!response.IsSuccessStatusCode)
         {
             throw new($"Status code: {response.StatusCode}, Content: {response.Content}");
@@ -31,7 +31,7 @@ public class InputFilesActions(InvocationContext invocationContext, IFileManagem
         var stream = new MemoryStream(response.RawBytes);
         stream.Seek(0, SeekOrigin.Begin);
         
-        var fileReference = await fileManagementClient.UploadAsync(stream, ContentType.Binary, fileName);
+        var fileReference = await fileManagementClient.UploadAsync(stream, ContentType.Binary, request.FileName);
         return new(fileReference);
     }
 }

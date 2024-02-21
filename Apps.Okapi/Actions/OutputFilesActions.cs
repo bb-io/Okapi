@@ -1,4 +1,5 @@
-﻿using Apps.Okapi.Constants;
+﻿using RestSharp;
+using Apps.Okapi.Constants;
 using Apps.Okapi.Invocables;
 using Apps.Okapi.Models.Requests;
 using Apps.Okapi.Models.Responses;
@@ -6,7 +7,6 @@ using Blackbird.Applications.Sdk.Common;
 using Blackbird.Applications.Sdk.Common.Actions;
 using Blackbird.Applications.Sdk.Common.Invocation;
 using Blackbird.Applications.SDK.Extensions.FileManagement.Interfaces;
-using RestSharp;
 
 namespace Apps.Okapi.Actions;
 
@@ -14,15 +14,15 @@ namespace Apps.Okapi.Actions;
 public class OutputFilesActions(InvocationContext invocationContext, IFileManagementClient fileManagementClient) : AppInvocable(invocationContext)
 {
     [Action("Get output files", Description = "Get ids of output files")]
-    public async Task<GetFilesResponse> GetInputFiles([ActionParameter] GetProjectRequest projectRequest)
+    public async Task<GetFilesResponse> GetOutputFiles([ActionParameter] GetProjectRequest projectRequest)
     {
         return await Client.ExecuteWithXml<GetFilesResponse>(ApiEndpoints.Projects + $"/{projectRequest.ProjectId}" + ApiEndpoints.OutputFiles, Method.Get, null, Creds);
     }
     
     [Action("Download output file", Description = "Download output file by name")]
-    public async Task<DownloadFileResponse> DownloadOutputFile([ActionParameter] GetProjectRequest projectRequest, [ActionParameter] GetOutputFileRequest request)
+    public async Task<DownloadFileResponse> DownloadOutputFile([ActionParameter] GetOutputFileRequest request)
     {
-        var response = await Client.Execute(ApiEndpoints.Projects + $"/{projectRequest.ProjectId}" + ApiEndpoints.OutputFiles + $"/{request.FileName}", Method.Get, null, Creds);
+        var response = await Client.Execute(ApiEndpoints.Projects + $"/{request.ProjectId}" + ApiEndpoints.OutputFiles + $"/{request.FileName}", Method.Get, null, Creds);
         if (!response.IsSuccessStatusCode)
         {
             throw new($"Status code: {response.StatusCode}, Content: {response.Content}");

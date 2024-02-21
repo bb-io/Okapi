@@ -1,5 +1,6 @@
 using Apps.Okapi.Constants;
 using Apps.Okapi.Invocables;
+using Apps.Okapi.Models.Requests;
 using Apps.Okapi.Models.Responses;
 using Blackbird.Applications.Sdk.Common;
 using Blackbird.Applications.Sdk.Common.Actions;
@@ -18,9 +19,9 @@ public class ProjectActions(InvocationContext invocationContext) : AppInvocable(
     }
     
     [Action("Delete project", Description = "Delete project by id")]
-    public async Task DeleteProject([ActionParameter] string projectId)
+    public async Task DeleteProject([ActionParameter] GetProjectRequest request)
     {
-        var response = await Client.Execute(ApiEndpoints.Projects + $"/{projectId}", Method.Delete, null, Creds);
+        var response = await Client.Execute(ApiEndpoints.Projects + $"/{request.ProjectId}", Method.Delete, null, Creds);
         if (!response.IsSuccessStatusCode)
         {
             throw new($"Status code: {response.StatusCode}, Content: {response.Content}");
@@ -50,6 +51,4 @@ public class ProjectActions(InvocationContext invocationContext) : AppInvocable(
             ProjectId = projectId
         };
     }
-    
-    
 }
