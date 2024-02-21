@@ -40,27 +40,27 @@ public class InputFilesActions(InvocationContext invocationContext, IFileManagem
         return new(fileReference);
     }
     
-    [Action("Upload input file", Description = "Upload input file")]
+    [Action("Upload input file", Description = "Uploads a file that will have the name of the file in the request")]
     public async Task UploadInputFile([ActionParameter] GetProjectRequest projectRequest, [ActionParameter] UploadFileRequest request)
     {
         var fileBytes = await ValidateAndGetFileBytes(request.File);
         var endpoint = ConstructEndpoint(projectRequest.ProjectId, request.File.Name, isZip: false);
-        await ExecuteUploadRequest(endpoint, fileBytes, request.File.Name, request.File.ContentType);
+        await ExecuteUploadRequest(endpoint, fileBytes, request.File.Name, request.File.ContentType, Method.Put);
     }
 
-    [Action("Upload input files as ZIP", Description = "Upload input files as ZIP")]
+    [Action("Upload input files as ZIP", Description = "Adds input files as a zip archive (the zip will be extracted and the included files will be used as input files)")]
     public async Task UploadInputFilesAsZip([ActionParameter] GetProjectRequest projectRequest, [ActionParameter] UploadFileRequest request)
     {
         var fileBytes = await ValidateAndGetFileBytes(request.File);
         var endpoint = ConstructEndpoint(projectRequest.ProjectId, request.File.Name, isZip: true);
-        await ExecuteUploadRequest(endpoint, fileBytes, request.File.Name, request.File.ContentType);
+        await ExecuteUploadRequest(endpoint, fileBytes, request.File.Name, request.File.ContentType, Method.Post);
     }
 
     private async Task<byte[]> ValidateAndGetFileBytes(FileReference file)
     {
         if (string.IsNullOrEmpty(file.Name))
         {
-            throw new("File name is required");
+            throw new("File name is required.");
         }
 
         var fileStream = await fileManagementClient.DownloadAsync(file);
@@ -73,12 +73,12 @@ public class InputFilesActions(InvocationContext invocationContext, IFileManagem
         return isZip ? $"{endpoint}.zip" : $"{endpoint}/{fileName}";
     }
 
-    private async Task ExecuteUploadRequest(string endpoint, byte[] fileBytes, string fileName, string contentType)
+    private async Task ExecuteUploadRequest(string endpoint, byte[] fileBytes, string fileName, string contentType, Method method)
     {
         var baseUrl = Creds.Get(CredsNames.Url).Value;
         var uploadFileRequest = new OkapiRequest(new OkapiRequestParameters
         {
-            Method = Method.Put,
+            Method = method,
             Url = baseUrl + endpoint
         }).AddFile("inputFile", fileBytes, fileName, contentType);
 
