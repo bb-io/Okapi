@@ -7,4 +7,5 @@ public static class ApiEndpoints
     public const string OutputFiles = "/outputFiles";
     public const string Tasks = "/tasks";
     public const string Execute = "/execute";
+    public const string BatchConfiguration = "/batchConfiguration";
 }

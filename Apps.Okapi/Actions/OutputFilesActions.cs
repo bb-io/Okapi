@@ -13,7 +13,7 @@ namespace Apps.Okapi.Actions;
 [ActionList]
 public class OutputFilesActions(InvocationContext invocationContext, IFileManagementClient fileManagementClient) : AppInvocable(invocationContext)
 {
-    [Action("Get output files", Description = "Get ids of output files")]
+    [Action("Get output files", Description = "Returns a list of the output files generated")]
     public async Task<GetFilesResponse> GetOutputFiles([ActionParameter] GetProjectRequest projectRequest)
     {
         return await Client.ExecuteWithXml<GetFilesResponse>(ApiEndpoints.Projects + $"/{projectRequest.ProjectId}" + ApiEndpoints.OutputFiles, Method.Get, null, Creds);
@@ -35,7 +35,7 @@ public class OutputFilesActions(InvocationContext invocationContext, IFileManage
         return new(fileReference);
     }
     
-    [Action("Download output files as zip", Description = "Download output files as zip")]
+    [Action("Download output files as zip", Description = "Returns all output files in a zip archive\n")]
     public async Task<DownloadFileResponse> DownloadOutputFilesAsZip([ActionParameter] GetProjectRequest projectRequest)
     {
         var response = await Client.Execute(ApiEndpoints.Projects + $"/{projectRequest.ProjectId}" + ApiEndpoints.OutputFiles + ".zip", Method.Get, null, Creds);
