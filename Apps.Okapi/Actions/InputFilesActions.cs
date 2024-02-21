@@ -1,5 +1,4 @@
-﻿using System.Net.Mime;
-using Apps.Okapi.Api;
+﻿using Apps.Okapi.Api;
 using RestSharp;
 using Apps.Okapi.Constants;
 using Apps.Okapi.Invocables;
