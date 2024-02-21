@@ -14,9 +14,9 @@ namespace Apps.Okapi.Actions;
 public class InputFilesActions(InvocationContext invocationContext, IFileManagementClient fileManagementClient) : AppInvocable(invocationContext)
 {
     [Action("Get input files", Description = "Get ids of input files")]
-    public async Task<GetInputFilesResponse> GetInputFiles([ActionParameter] GetProjectRequest projectRequest)
+    public async Task<GetFilesResponse> GetInputFiles([ActionParameter] GetProjectRequest projectRequest)
     {
-        return await Client.ExecuteWithXml<GetInputFilesResponse>(ApiEndpoints.Projects + $"/{projectRequest.ProjectId}" + ApiEndpoints.InputFiles, Method.Get, null, Creds);
+        return await Client.ExecuteWithXml<GetFilesResponse>(ApiEndpoints.Projects + $"/{projectRequest.ProjectId}" + ApiEndpoints.InputFiles, Method.Get, null, Creds);
     }
     
     [Action("Download input file", Description = "Download input file by id")]
