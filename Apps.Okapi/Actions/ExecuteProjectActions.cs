@@ -43,13 +43,13 @@ public class ExecuteProjectActions(InvocationContext invocationContext, IFileMan
         
         var outputFiles = await DownloadAllOutputFiles(projectRequest.ProjectId);
         
-        bool delete = deleteProject ?? true;
+        var delete = deleteProject ?? true;
         if (delete)
         {
             await DeleteProject(projectRequest.ProjectId);
         }
         
-        return new ExecuteProjectResponse()
+        return new ExecuteProjectResponse
         {
             OutputFiles = outputFiles
         };
@@ -62,6 +62,11 @@ public class ExecuteProjectActions(InvocationContext invocationContext, IFileMan
             if (request.TargetLanguage != null && request.TargetLanguages != null)
             {
                 throw new("Both Target language and Target languages are set. Only one of them should be set.");
+            }
+            
+            if(request.TargetLanguage == null && request.TargetLanguages == null)
+            {
+                throw new("Source language is set, but neither target language nor Target languages are set. One of them should be set.");
             }
         }
         else
@@ -77,14 +82,14 @@ public class ExecuteProjectActions(InvocationContext invocationContext, IFileMan
     {
         var fileNames = await GetOutputFiles(projectId);
         
-        var downloadFilesResponse = new DownloadFilesResponse();
+        var downloadedFiles = new List<FileReference>();
         foreach (var fileName in fileNames.FileNames)
         {
             var fileReference = await DownloadOutputFile(projectId, fileName);
-            downloadFilesResponse.Files.Add(fileReference);
+            downloadedFiles.Add(fileReference);
         }
-        
-        return downloadFilesResponse.Files;
+
+        return downloadedFiles;
     }
     
     private async Task<GetFilesResponse> GetOutputFiles(string projectId)
