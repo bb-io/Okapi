@@ -1,6 +1,6 @@
 ﻿using Blackbird.Applications.Sdk.Common;
 
-namespace Apps.App;
+namespace Apps.Okapi;
 
 public class Application : IApplication
 {
@@ -9,6 +9,8 @@ public class Application : IApplication
         get => "App";
         set { }
     }
+
+    public IPublicApplicationMetadata? PublicApplicationMetadata { get; }
 
     public T GetInstance<T>()
     {
