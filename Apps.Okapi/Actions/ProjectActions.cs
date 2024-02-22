@@ -20,7 +20,7 @@ public class ProjectActions(InvocationContext invocationContext, IFileManagement
     [Action("Create project", Description = "Create new project, returns id of created project, and uploads batch configuration file")]
     public async Task<ProjectCreatedResponse> CreateProject([ActionParameter] UploadBatchConfigurationFileRequest request)
     {
-        var response = await Client.Execute(ApiEndpoints.Projects, Method.Post, null, Creds);
+        var response = await Client.Execute(ApiEndpoints.Projects + "/new", Method.Post, null, Creds);
         if (!response.IsSuccessStatusCode)
         {
             throw new($"Status code: {response.StatusCode}, Content: {response.Content}");
