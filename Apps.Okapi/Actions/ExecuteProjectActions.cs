@@ -107,8 +107,9 @@ public class ExecuteProjectActions(InvocationContext invocationContext, IFileMan
         
         var stream = new MemoryStream(response.RawBytes);
         stream.Seek(0, SeekOrigin.Begin);
-        
-        return await fileManagementClient.UploadAsync(stream, ContentType.Binary, fileName);
+
+        string mimeType = MimeTypes.GetMimeType(fileName);
+        return await fileManagementClient.UploadAsync(stream, mimeType, fileName);
     }
     
     private async Task DeleteProject(string projectId)
