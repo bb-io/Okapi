@@ -14,8 +14,8 @@ namespace Apps.Okapi.Actions;
 [ActionList]
 public class ExecuteProjectActions(InvocationContext invocationContext, IFileManagementClient fileManagementClient) : AppInvocable(invocationContext)
 {
-    [Action("Execute project", Description = "Executes the Batch Configuration on the uploaded input files")]
-    public async Task<ExecuteProjectResponse> ExecuteTasks([ActionParameter] GetProjectRequest projectRequest, [ActionParameter]ExecuteTasksRequest request)
+    [Action("Execute project", Description = "Executes the Batch Configuration on the uploaded input files, returns the output files")]
+    public async Task<ExecuteProjectResponse> ExecuteTasks([ActionParameter] GetProjectRequest projectRequest, [ActionParameter]ExecuteTasksRequest request, [ActionParameter, Display("Delete project")] bool? deleteProject)
     {
         ValidateRequest(request);
         
@@ -42,8 +42,13 @@ public class ExecuteProjectActions(InvocationContext invocationContext, IFileMan
         }
         
         var outputFiles = await DownloadAllOutputFiles(projectRequest.ProjectId);
-
-        await DeleteProject(projectRequest);
+        
+        bool delete = deleteProject ?? true;
+        if (delete)
+        {
+            await DeleteProject(projectRequest);
+        }
+        
         return new ExecuteProjectResponse()
         {
             OutputFiles = outputFiles.Files

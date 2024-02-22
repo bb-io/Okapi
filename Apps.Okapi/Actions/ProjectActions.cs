@@ -17,7 +17,7 @@ namespace Apps.Okapi.Actions;
 [ActionList]
 public class ProjectActions(InvocationContext invocationContext, IFileManagementClient fileManagementClient) : AppInvocable(invocationContext)
 {
-    [Action("Create project", Description = "Create new project, returns id of created project")]
+    [Action("Create project", Description = "Create new project, returns id of created project, and uploads batch configuration file")]
     public async Task<ProjectCreatedResponse> CreateProject([ActionParameter] UploadBatchConfigurationFileRequest request)
     {
         var response = await Client.Execute(ApiEndpoints.Projects, Method.Post, null, Creds);
