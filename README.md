@@ -21,14 +21,16 @@ Longhorn is a server application that allows you to execute Batch Configurations
 
 ## Actions
 
-
-
 #### Upload files
 - **Upload files**: Uploads files to a specific project. This action will upload each file provided in the request, handling them based on their file types, including special handling for ZIP files.
 
 #### Projects
-- **Create project**: Creates a new project within the system, returns the ID of the newly created project, and uploads a batch configuration file. This process involves making a POST request to the projects endpoint, extracting the project ID from the response's Location header, and subsequently uploading the batch configuration file provided in the request.
+- **Create project**: Creates a new project within the system, returns the ID of the newly created project, and uploads a batch configuration file. 
 - **Execute project** Executes the batch configuration on the uploaded input files, returns the output files
+
+## Example
+
+![image](https://github.com/bb-io/Okapi/assets/157373241/45cdbf35-6f41-4fcd-9b2c-b4211397107c)
 
 ## Feedback
 
