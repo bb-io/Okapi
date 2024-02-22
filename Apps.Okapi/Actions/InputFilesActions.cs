@@ -18,13 +18,13 @@ namespace Apps.Okapi.Actions;
 [ActionList]
 public class InputFilesActions(InvocationContext invocationContext, IFileManagementClient fileManagementClient) : AppInvocable(invocationContext)
 {
-    [Action("Get input file IDs", Description = "Get ids of input files")]
+    [Action("Get input file names", Description = "Get names of input files")]
     public async Task<GetFilesResponse> GetInputFiles([ActionParameter] GetProjectRequest projectRequest)
     {
         return await Client.ExecuteWithXml<GetFilesResponse>(ApiEndpoints.Projects + $"/{projectRequest.ProjectId}" + ApiEndpoints.InputFiles, Method.Get, null, Creds);
     }
     
-    [Action("Download input file", Description = "Download input file by id")]
+    [Action("Download input file", Description = "Download input file by name")]
     public async Task<DownloadFileResponse> DownloadInputFile([ActionParameter] GetInputFileRequest request)
     {
         var response = await Client.Execute(ApiEndpoints.Projects + $"/{request.ProjectId}" + ApiEndpoints.InputFiles + $"/{request.FileName}", Method.Get, null, Creds);

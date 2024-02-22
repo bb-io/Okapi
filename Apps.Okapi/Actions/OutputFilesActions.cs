@@ -13,7 +13,7 @@ namespace Apps.Okapi.Actions;
 [ActionList]
 public class OutputFilesActions(InvocationContext invocationContext, IFileManagementClient fileManagementClient) : AppInvocable(invocationContext)
 {
-    [Action("Get output files", Description = "Returns a list of the output files generated")]
+    [Action("Get output file names", Description = "Returns a list of the output files generated")]
     public async Task<GetFilesResponse> GetOutputFiles([ActionParameter] GetProjectRequest projectRequest)
     {
         return await Client.ExecuteWithXml<GetFilesResponse>(ApiEndpoints.Projects + $"/{projectRequest.ProjectId}" + ApiEndpoints.OutputFiles, Method.Get, null, Creds);
