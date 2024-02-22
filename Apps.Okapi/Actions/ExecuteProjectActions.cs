@@ -14,7 +14,7 @@ namespace Apps.Okapi.Actions;
 [ActionList]
 public class ExecuteProjectActions(InvocationContext invocationContext, IFileManagementClient fileManagementClient) : AppInvocable(invocationContext)
 {
-    [Action("Execute project", Description = "Executes the Batch Configuration on the uploaded input files, returns the output files")]
+    [Action("Execute project", Description = "Executes the batch configuration on the uploaded input files, returns the output files")]
     public async Task<ExecuteProjectResponse> ExecuteTasks([ActionParameter] GetProjectRequest projectRequest, [ActionParameter]ExecuteTasksRequest request, [ActionParameter, Display("Delete project")] bool? deleteProject)
     {
         ValidateRequest(request);
@@ -46,12 +46,12 @@ public class ExecuteProjectActions(InvocationContext invocationContext, IFileMan
         bool delete = deleteProject ?? true;
         if (delete)
         {
-            await DeleteProject(projectRequest);
+            await DeleteProject(projectRequest.ProjectId);
         }
         
         return new ExecuteProjectResponse()
         {
-            OutputFiles = outputFiles.Files
+            OutputFiles = outputFiles
         };
     }
     
@@ -73,7 +73,7 @@ public class ExecuteProjectActions(InvocationContext invocationContext, IFileMan
         }
     }
     
-    private async Task<DownloadFilesResponse> DownloadAllOutputFiles(string projectId)
+    private async Task<List<FileReference>> DownloadAllOutputFiles(string projectId)
     {
         var fileNames = await GetOutputFiles(projectId);
         
@@ -84,7 +84,7 @@ public class ExecuteProjectActions(InvocationContext invocationContext, IFileMan
             downloadFilesResponse.Files.Add(fileReference);
         }
         
-        return downloadFilesResponse;
+        return downloadFilesResponse.Files;
     }
     
     private async Task<GetFilesResponse> GetOutputFiles(string projectId)
@@ -106,9 +106,9 @@ public class ExecuteProjectActions(InvocationContext invocationContext, IFileMan
         return await fileManagementClient.UploadAsync(stream, ContentType.Binary, fileName);
     }
     
-    private async Task DeleteProject([ActionParameter] GetProjectRequest request)
+    private async Task DeleteProject(string projectId)
     {
-        var response = await Client.Execute(ApiEndpoints.Projects + $"/{request.ProjectId}", Method.Delete, null, Creds);
+        var response = await Client.Execute(ApiEndpoints.Projects + $"/{projectId}", Method.Delete, null, Creds);
         if (!response.IsSuccessStatusCode)
         {
             throw new($"Status code: {response.StatusCode}, Content: {response.Content}");
