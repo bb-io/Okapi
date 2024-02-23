@@ -30,7 +30,7 @@ Longhorn is a server application that allows you to execute Batch Configurations
 
 ## Example
 
-![okapi-example-bird](images/okapi-example-bird.png)
+![okapi-example-bird](image/README/okapi-example-bird.png)
 
 ## Feedback
 
