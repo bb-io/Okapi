@@ -64,6 +64,7 @@ namespace Apps.Okapi.Actions
                     }
                 }
 
+                memoryStream.Seek(0, SeekOrigin.Begin);
                 var packageFileReference = await fileManagementClient.UploadAsync(memoryStream, MimeTypes.GetMimeType(".zip"), "package.zip");
 
                 await DeleteProject(projectId);
