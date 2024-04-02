@@ -26,7 +26,7 @@ namespace Apps.Okapi.Actions
         {
             var projectId = await CreateNewProject();
 
-            var xliffCreation = LoadBatchConfig("xliff_creation");
+            var xliffCreation = await LoadBatchConfig("xliff_creation");
             await AddBatchConfig(projectId, xliffCreation);
 
             var fileStream = await fileManagementClient.DownloadAsync(fileRequest.File);
@@ -82,7 +82,7 @@ namespace Apps.Okapi.Actions
         {
             var projectId = await CreateNewProject();
 
-            var xliffCreation = LoadBatchConfig("xliff_merging");
+            var xliffCreation = await LoadBatchConfig("xliff_merging");
             await AddBatchConfig(projectId, xliffCreation);
 
             using var xliffStream = await fileManagementClient.DownloadAsync(input.Xliff);
@@ -121,10 +121,11 @@ namespace Apps.Okapi.Actions
             }
         }
 
-        internal byte[] LoadBatchConfig(string configName)
+        internal async Task<byte[]> LoadBatchConfig(string configName)
         {
-            var path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @$"Batchconfigs\{configName}.bconf");
-            return File.ReadAllBytes(path);
+            var asm = Assembly.GetExecutingAssembly();
+            Stream stream = asm.GetManifestResourceStream("Apps.Okapi.Batchconfigs." + $"{configName}.bconf");
+            return await stream.GetByteData();
         }
     }
 }
