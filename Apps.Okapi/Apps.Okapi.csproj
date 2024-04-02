@@ -6,11 +6,16 @@
         <Nullable>enable</Nullable>
         <Product>Okapi longhorn</Product>
         <Description>Longhorn is a server application that allows you to execute Batch Configurations remotely on any set of input files. Batch Configurations which include pre-defined pipelines and filter configurations, can be exported from Rainbow.</Description>
-        <Version>1.0.7</Version>
+        <Version>1.1.0</Version>
         <PackageId>Apps.Okapi</PackageId>
         <RootNamespace>Apps.Okapi</RootNamespace>
         <AssemblyName>Apps.Okapi</AssemblyName>
     </PropertyGroup>
+
+    <ItemGroup>
+      <None Remove="Batchconfigs\xliff_creation.bconf" />
+      <None Remove="Batchconfigs\xliff_merging.bconf" />
+    </ItemGroup>
 
     <ItemGroup>
         <PackageReference Include="Blackbird.Applications.Sdk.Common" Version="2.4.0-alpha2" />
@@ -22,7 +27,13 @@
     </ItemGroup>
 
     <ItemGroup>
-        <EmbeddedResource CopyToOutputDirectory="Always" Include="image\icon.png"/>
+        <EmbeddedResource Include="Batchconfigs\xliff_creation.bconf">
+          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </EmbeddedResource>
+        <EmbeddedResource Include="Batchconfigs\xliff_merging.bconf">
+          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </EmbeddedResource>
+        <EmbeddedResource CopyToOutputDirectory="Always" Include="image\icon.png" />
     </ItemGroup>
 
 </Project>

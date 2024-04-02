@@ -4,7 +4,7 @@ Blackbird is the new automation backbone for the language technology industry. B
 
 ## Introduction
 
-<!-- begin docs -->  
+<!-- begin docs -->
 
 Longhorn is a server application that allows you to execute Batch Configurations remotely on any set of input files. Batch Configurations which include pre-defined pipelines and filter configurations, can be exported from Rainbow.
 
@@ -21,11 +21,19 @@ Longhorn is a server application that allows you to execute Batch Configurations
 
 ## Actions
 
-#### Upload files
-- **Upload files**: Uploads files to a specific project. This action will upload each file provided in the request, handling them based on their file types, including special handling for ZIP files.
+### XLIFF conversion actions
 
-#### Projects
-- **Create project**: Creates a new project within the system, returns the ID of the newly created project, and uploads a batch configuration file. 
+This combination of actions allows you to convert any Okapi-compatible file to XLIFF and back. Use it in combination with other Blackbird apps that take or modify XLIFF files.
+
+- **Convert file to XLIFF** takes any Okapi-compatible file format and converts it to an XLIFF file. It outputs both an XLIFF and a 'package' file.
+- **Convert XLIFF to file** takes a (modified) XLIFF file and a package file, it returns the original file.
+
+### Manual batchconfig actions
+
+Use the following actions to have full control of batchconfig executions on one or multiple files
+
+- **Upload files**: Uploads files to a specific project. This action will upload each file provided in the request, handling them based on their file types, including special handling for ZIP files.
+- **Create project**: Creates a new project within the system, returns the ID of the newly created project, and uploads a batch configuration file.
 - **Execute project** Executes the batch configuration on the uploaded input files, returns the output files
 
 ## Example

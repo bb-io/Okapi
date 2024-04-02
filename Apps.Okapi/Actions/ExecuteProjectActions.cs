@@ -17,30 +17,28 @@ public class ExecuteProjectActions(InvocationContext invocationContext, IFileMan
     [Action("Execute project", Description = "Executes the batch configuration on the uploaded input files, returns the output files")]
     public async Task<ExecuteProjectResponse> ExecuteTasks([ActionParameter] GetProjectRequest projectRequest, [ActionParameter]ExecuteTasksRequest request, [ActionParameter, Display("Delete project")] bool? deleteProject)
     {
-        ValidateRequest(request);
-        
-        string endpoint = ApiEndpoints.Projects + $"/{projectRequest.ProjectId}" + ApiEndpoints.Tasks + ApiEndpoints.Execute;
-        if(request.SourceLanguage != null)
+        if (request.SourceLanguage != null)
         {
-            endpoint += $"/{request.SourceLanguage}";
+            if (request.TargetLanguage != null && request.TargetLanguages != null)
+            {
+                throw new("Both Target language and Target languages are set. Only one of them should be set.");
+            }
+
+            if (request.TargetLanguage == null && request.TargetLanguages == null)
+            {
+                throw new("Source language is set, but neither target language nor Target languages are set. One of them should be set.");
+            }
         }
-        
-        if (request.TargetLanguage != null)
+        else
         {
-            endpoint += $"/{request.TargetLanguage}";
+            if (request.TargetLanguage != null || request.TargetLanguages != null)
+            {
+                throw new("Source language is not set, but Target language or Target languages are set. Source language should be set.");
+            }
         }
-        else if (request.TargetLanguages != null)
-        {
-            var targetLanguagesQuery = string.Join("&", request.TargetLanguages.Select(lang => $"targets={lang}"));
-            endpoint += $"?{targetLanguagesQuery}";
-        }
-        
-        var response = await Client.Execute(endpoint, Method.Post, null, Creds);
-        if (!response.IsSuccessStatusCode)
-        {
-            throw new($"Status code: {response.StatusCode}, Content: {response.Content}");
-        }
-        
+
+        await Execute(projectRequest.ProjectId, request.SourceLanguage, request.TargetLanguage, request.TargetLanguages);
+
         var outputFiles = await DownloadAllOutputFiles(projectRequest.ProjectId);
         
         var delete = deleteProject ?? true;
@@ -53,71 +51,23 @@ public class ExecuteProjectActions(InvocationContext invocationContext, IFileMan
         {
             OutputFiles = outputFiles
         };
-    }
-    
-    private void ValidateRequest(ExecuteTasksRequest request)
-    {
-        if (request.SourceLanguage != null)
-        {
-            if (request.TargetLanguage != null && request.TargetLanguages != null)
-            {
-                throw new("Both Target language and Target languages are set. Only one of them should be set.");
-            }
-            
-            if(request.TargetLanguage == null && request.TargetLanguages == null)
-            {
-                throw new("Source language is set, but neither target language nor Target languages are set. One of them should be set.");
-            }
-        }
-        else
-        {
-            if (request.TargetLanguage != null || request.TargetLanguages != null)
-            {
-                throw new("Source language is not set, but Target language or Target languages are set. Source language should be set.");
-            }
-        }
-    }
+    }  
     
     private async Task<List<FileReference>> DownloadAllOutputFiles(string projectId)
     {
         var fileNames = await GetOutputFiles(projectId);
         
         var downloadedFiles = new List<FileReference>();
-        foreach (var fileName in fileNames.FileNames)
+        foreach (var fileName in fileNames)
         {
-            var fileReference = await DownloadOutputFile(projectId, fileName);
+            var stream = await DownloadOutputFileAsStream(projectId, fileName);
+            string mimeType = MimeTypes.GetMimeType(fileName);
+            var fileReference = await fileManagementClient.UploadAsync(stream, mimeType, fileName);
+
             downloadedFiles.Add(fileReference);
         }
 
         return downloadedFiles;
-    }
-    
-    private async Task<GetFilesResponse> GetOutputFiles(string projectId)
-    {
-        return await Client.ExecuteWithXml<GetFilesResponse>(ApiEndpoints.Projects + $"/{projectId}" + ApiEndpoints.OutputFiles, Method.Get, null, Creds);
-    }
-    
-    private async Task<FileReference> DownloadOutputFile(string projectId, string fileName)
-    {
-        var response = await Client.Execute(ApiEndpoints.Projects + $"/{projectId}" + ApiEndpoints.OutputFiles + $"/{fileName}", Method.Get, null, Creds);
-        if (!response.IsSuccessStatusCode)
-        {
-            throw new($"Status code: {response.StatusCode}, Content: {response.Content}");
-        }
-        
-        var stream = new MemoryStream(response.RawBytes);
-        stream.Seek(0, SeekOrigin.Begin);
+    }   
 
-        string mimeType = MimeTypes.GetMimeType(fileName);
-        return await fileManagementClient.UploadAsync(stream, mimeType, fileName);
-    }
-    
-    private async Task DeleteProject(string projectId)
-    {
-        var response = await Client.Execute(ApiEndpoints.Projects + $"/{projectId}", Method.Delete, null, Creds);
-        if (!response.IsSuccessStatusCode)
-        {
-            throw new($"Status code: {response.StatusCode}, Content: {response.Content}");
-        }
-    }
 }
