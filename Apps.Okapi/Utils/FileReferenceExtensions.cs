@@ -9,13 +9,13 @@ public static class FileReferenceExtensions
         return RemoveInappropriateCharacters(fileReference.Name);
     }
     
+    public static string RestoreInappropriateCharacters(string fileName)
+    {
+        return fileName.Replace("|", @"\");
+    }
+    
     private static string RemoveInappropriateCharacters(string fileName)
     {
-        if (fileName.StartsWith(@"\") || fileName.StartsWith(@"/"))
-        {
-            fileName = fileName.Remove(0, 1);
-        }
-        
-        return fileName.Replace(@"\", "-").Replace(@"/", "-");
+        return fileName.Replace(@"\", "|");
     }
 }

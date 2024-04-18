@@ -112,7 +112,7 @@ namespace Apps.Okapi.Actions
 
                 var stream = await DownloadOutputFileAsStream(projectId, outputFile);
                 string mimeType = MimeTypes.GetMimeType(outputFile);
-                var fileReference = await fileManagementClient.UploadAsync(stream, mimeType, outputFile);
+                var fileReference = await fileManagementClient.UploadAsync(stream, mimeType, FileReferenceExtensions.RestoreInappropriateCharacters(outputFile));
 
                 await DeleteProject(projectId);
 
