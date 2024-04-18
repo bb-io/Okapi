@@ -3,26 +3,22 @@ using Apps.Okapi.Models.Requests;
 using Apps.Okapi.Models.Responses;
 using Blackbird.Applications.Sdk.Common;
 using Blackbird.Applications.Sdk.Common.Actions;
-using Blackbird.Applications.Sdk.Common.Files;
 using Blackbird.Applications.Sdk.Common.Invocation;
 using Blackbird.Applications.Sdk.Utils.Extensions.Files;
 using Blackbird.Applications.SDK.Extensions.FileManagement.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.IO;
 using System.IO.Compression;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+using Apps.Okapi.Utils;
 
 namespace Apps.Okapi.Actions
 {
     [ActionList]
-    public class CombinedActions(InvocationContext invocationContext, IFileManagementClient fileManagementClient) : AppInvocable(invocationContext)
+    public class CombinedActions(InvocationContext invocationContext, IFileManagementClient fileManagementClient)
+        : AppInvocable(invocationContext)
     {
         [Action("Convert file to XLIFF", Description = "Convert any Okapi-compatible file format into an XLIFF file.")]
-        public async Task<CreateXliffResponse> ConvertFileToXliff([ActionParameter] UploadFileRequest fileRequest, [ActionParameter] ExecuteSingleLanguageTaskRequest request)
+        public async Task<CreateXliffResponse> ConvertFileToXliff([ActionParameter] UploadFileRequest fileRequest,
+            [ActionParameter] ExecuteSingleLanguageTaskRequest request)
         {
             var projectId = await CreateNewProject();
 
@@ -32,7 +28,7 @@ namespace Apps.Okapi.Actions
             var fileStream = await fileManagementClient.DownloadAsync(fileRequest.File);
             var fileBytes = await fileStream.GetByteData();
 
-            await UploadFile(projectId, fileBytes, fileRequest.File.Name, fileRequest.File.ContentType);
+            await UploadFile(projectId, fileBytes, fileRequest.File.GetFileName(), fileRequest.File.ContentType);
 
             await Execute(projectId, request.SourceLanguage, request.TargetLanguage);
 
@@ -41,13 +37,14 @@ namespace Apps.Okapi.Actions
             var xliff = outputFiles.Find(x => x.Contains("work/"));
 
             if (xliff == null) throw new Exception("No XLIFF file was created by Okapi.");
-            
+
             // XLIFF file reference
             var xliffStream = await DownloadOutputFileAsStream(projectId, xliff);
-            var xliffFileReference = await fileManagementClient.UploadAsync(xliffStream, MimeTypes.GetMimeType(xliff), xliff.Remove(0, 10));
+            var xliffFileReference =
+                await fileManagementClient.UploadAsync(xliffStream, MimeTypes.GetMimeType(xliff), xliff.Remove(0, 10));
 
             // Package file reference
-            using (var memoryStream = new MemoryStream()) 
+            using (var memoryStream = new MemoryStream())
             {
                 using (var archive = new ZipArchive(memoryStream, ZipArchiveMode.Create, true))
                 {
@@ -60,12 +57,12 @@ namespace Apps.Okapi.Actions
                         {
                             await downloadedFileStream.CopyToAsync(entryStream);
                         }
-                        
                     }
                 }
 
                 memoryStream.Seek(0, SeekOrigin.Begin);
-                var packageFileReference = await fileManagementClient.UploadAsync(memoryStream, MimeTypes.GetMimeType(".zip"), "package.zip");
+                var packageFileReference =
+                    await fileManagementClient.UploadAsync(memoryStream, MimeTypes.GetMimeType(".zip"), "package.zip");
 
                 await DeleteProject(projectId);
 
@@ -75,10 +72,11 @@ namespace Apps.Okapi.Actions
                     Package = packageFileReference,
                 };
             }
-            
         }
 
-        [Action("Convert XLIFF to file", Description = "Convert any XLIFF file after operations back to its original. Use in conjunctions with 'Convert file to XLIFF'")]
+        [Action("Convert XLIFF to file",
+            Description =
+                "Convert any XLIFF file after operations back to its original. Use in conjunctions with 'Convert file to XLIFF'")]
         public async Task<DownloadFileResponse> ConvertXliffToFile([ActionParameter] CreateXliffResponse input)
         {
             var projectId = await CreateNewProject();
@@ -104,7 +102,7 @@ namespace Apps.Okapi.Actions
 
                 var fileBytes = memoryStream.ToArray();
 
-                await UploadFile(projectId, fileBytes, input.Package.Name, input.Package.ContentType);
+                await UploadFile(projectId, fileBytes, input.Package.GetFileName(), input.Package.ContentType);
 
                 await Execute(projectId);
 
@@ -114,7 +112,7 @@ namespace Apps.Okapi.Actions
 
                 var stream = await DownloadOutputFileAsStream(projectId, outputFile);
                 string mimeType = MimeTypes.GetMimeType(outputFile);
-                var fileReference = await fileManagementClient.UploadAsync(stream, mimeType, outputFile);
+                var fileReference = await fileManagementClient.UploadAsync(stream, mimeType, FileReferenceExtensions.RestoreInappropriateCharacters(outputFile));
 
                 await DeleteProject(projectId);
 
