@@ -11,11 +11,11 @@ public static class FileReferenceExtensions
     
     public static string RestoreInappropriateCharacters(string fileName)
     {
-        return fileName.Replace("|", @"\");
+        return fileName.Replace("{", @"\");
     }
     
     private static string RemoveInappropriateCharacters(string fileName)
     {
-        return fileName.Replace(@"\", "|");
+        return fileName.Replace(@"\", "{");
     }
 }
