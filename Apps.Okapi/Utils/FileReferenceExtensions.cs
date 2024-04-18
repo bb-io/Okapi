@@ -4,18 +4,22 @@ namespace Apps.Okapi.Utils;
 
 public static class FileReferenceExtensions
 {
-    public static string GetFileName(this FileReference fileReference)
+    private const string StringToReplace = "{s}";
+
+    public static string GetFileName(this FileReference fileReference, bool removeInappropriateCharacters)
     {
-        return RemoveInappropriateCharacters(fileReference.Name);
+        return removeInappropriateCharacters
+            ? ReplaceInappropriateCharacters(fileReference.Name)
+            : fileReference.Name;
     }
     
     public static string RestoreInappropriateCharacters(string fileName)
     {
-        return fileName.Replace("{", @"\");
+        return fileName.Replace(StringToReplace, @"\");
     }
     
-    private static string RemoveInappropriateCharacters(string fileName)
+    private static string ReplaceInappropriateCharacters(string fileName)
     {
-        return fileName.Replace(@"\", "{");
+        return fileName.Replace(@"\", StringToReplace);
     }
 }
