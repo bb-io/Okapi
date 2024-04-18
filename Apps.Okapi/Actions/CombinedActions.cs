@@ -18,7 +18,8 @@ namespace Apps.Okapi.Actions
     {
         [Action("Convert file to XLIFF", Description = "Convert any Okapi-compatible file format into an XLIFF file.")]
         public async Task<CreateXliffResponse> ConvertFileToXliff([ActionParameter] UploadFileRequest fileRequest,
-            [ActionParameter] ExecuteSingleLanguageTaskRequest request)
+            [ActionParameter] ExecuteSingleLanguageTaskRequest request,
+            [ActionParameter] FileConversionRequest conversionRequest)
         {
             var projectId = await CreateNewProject();
 
@@ -28,7 +29,7 @@ namespace Apps.Okapi.Actions
             var fileStream = await fileManagementClient.DownloadAsync(fileRequest.File);
             var fileBytes = await fileStream.GetByteData();
 
-            await UploadFile(projectId, fileBytes, fileRequest.File.GetFileName(), fileRequest.File.ContentType);
+            await UploadFile(projectId, fileBytes, fileRequest.File.GetFileName(conversionRequest.RemoveInappropriateCharactersInFileName ?? true), fileRequest.File.ContentType);
 
             await Execute(projectId, request.SourceLanguage, request.TargetLanguage);
 
@@ -102,7 +103,7 @@ namespace Apps.Okapi.Actions
 
                 var fileBytes = memoryStream.ToArray();
 
-                await UploadFile(projectId, fileBytes, input.Package.GetFileName(), input.Package.ContentType);
+                await UploadFile(projectId, fileBytes, input.Package.Name, input.Package.ContentType);
 
                 await Execute(projectId);
 
