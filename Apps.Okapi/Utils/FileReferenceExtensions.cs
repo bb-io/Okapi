@@ -11,11 +11,11 @@ public static class FileReferenceExtensions
     
     private static string RemoveInappropriateCharacters(string fileName)
     {
-        if (fileName.StartsWith(@"\"))
+        if (fileName.StartsWith(@"\") || fileName.StartsWith(@"/"))
         {
             fileName = fileName.Remove(0, 1);
         }
         
-        return fileName.Replace(@"\", "-");
+        return fileName.Replace(@"\", "-").Replace(@"/", "-");
     }
 }
