@@ -8,6 +8,7 @@ using Blackbird.Applications.Sdk.Utils.Extensions.Files;
 using Blackbird.Applications.SDK.Extensions.FileManagement.Interfaces;
 using System.IO.Compression;
 using System.Reflection;
+using System.Text;
 using Apps.Okapi.Utils;
 
 namespace Apps.Okapi.Actions
@@ -113,6 +114,11 @@ namespace Apps.Okapi.Actions
 
                 var stream = await DownloadOutputFileAsStream(projectId, outputFile);
                 string mimeType = MimeTypes.GetMimeType(outputFile);
+                if (outputFile.EndsWith(".html"))
+                {
+                    stream = ReplaceInappropriateStrings(stream);
+                }
+                
                 var fileReference = await fileManagementClient.UploadAsync(stream, mimeType, FileReferenceExtensions.RestoreInappropriateCharacters(outputFile));
 
                 await DeleteProject(projectId);
@@ -126,6 +132,32 @@ namespace Apps.Okapi.Actions
             var asm = Assembly.GetExecutingAssembly();
             Stream stream = asm.GetManifestResourceStream("Apps.Okapi.Batchconfigs." + $"{configName}.bconf");
             return await stream.GetByteData();
+        }
+        
+        private Stream ReplaceInappropriateStrings(Stream stream)
+        {
+            using var memoryStream = new MemoryStream();
+            stream.CopyTo(memoryStream);
+            memoryStream.Seek(0, SeekOrigin.Begin);
+            
+            using var reader = new StreamReader(memoryStream);
+            var content = reader.ReadToEnd();
+            
+            var inappropriateStrings = new Dictionary<string, string>
+            {
+                { "&lt;", "<" },
+                { "&gt;", ">" },
+            };
+            
+            foreach (var (key, value) in inappropriateStrings)
+            {
+                content = content.Replace(key, value);
+            }
+            
+            var ms = new MemoryStream(Encoding.UTF8.GetBytes(content));
+            ms.Seek(0, SeekOrigin.Begin);
+            
+            return ms;
         }
     }
 }
