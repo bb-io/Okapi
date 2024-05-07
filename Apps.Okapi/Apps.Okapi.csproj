@@ -24,6 +24,7 @@
           <PrivateAssets>all</PrivateAssets>
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
+        <PackageReference Include="Spire.PDF" Version="10.4.7" />
     </ItemGroup>
 
     <ItemGroup>
