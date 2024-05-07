@@ -125,10 +125,6 @@ namespace Apps.Okapi.Actions
                 }
 
                 outputFile = FileReferenceExtensions.RestoreInappropriateCharacters(outputFile);
-                if(outputFile.EndsWith("[pdf].docx"))
-                {
-                    outputFile = outputFile.Replace(".doc", ".pdf");
-                }
                 
                 var fileReference = await fileManagementClient.UploadAsync(stream, mimeType, FileReferenceExtensions.RestoreInappropriateCharacters(outputFile));
 
