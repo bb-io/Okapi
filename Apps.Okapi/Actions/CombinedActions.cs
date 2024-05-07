@@ -32,6 +32,9 @@ namespace Apps.Okapi.Actions
 
             if (fileRequest.File.Name.EndsWith(".pdf"))
             {
+                using var convertedDocxStream = PdfConvertor.ConvertPdfToDocx(fileStream);
+                fileBytes = new byte[convertedDocxStream.Length];
+                var read = convertedDocxStream.Read(fileBytes, 0, (int)convertedDocxStream.Length);
                 fileRequest.File.Name = fileRequest.File.Name.Replace(".pdf", "[pdf].docx"); // Okapi requires .docx files
             }
 

@@ -18,12 +18,15 @@
     </ItemGroup>
 
     <ItemGroup>
+        <PackageReference Include="Aspose.PDF" Version="24.5.0" />
+        <PackageReference Include="Aspose.Words" Version="24.5.0" />
         <PackageReference Include="Blackbird.Applications.Sdk.Common" Version="2.6.0" />
         <PackageReference Include="Blackbird.Applications.Sdk.Utils" Version="1.0.24" />
         <PackageReference Include="MimeTypes" Version="2.4.1">
           <PrivateAssets>all</PrivateAssets>
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
+        <PackageReference Include="Spire.PDF" Version="10.4.7" />
     </ItemGroup>
 
     <ItemGroup>
