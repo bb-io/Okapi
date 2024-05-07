@@ -10,7 +10,6 @@ using System.IO.Compression;
 using System.Reflection;
 using System.Text;
 using Apps.Okapi.Utils;
-using Spire.Pdf;
 
 namespace Apps.Okapi.Actions
 {
@@ -33,15 +32,6 @@ namespace Apps.Okapi.Actions
 
             if (fileRequest.File.Name.EndsWith(".pdf"))
             {
-                var pdf = new PdfDocument();
-                pdf.LoadFromBytes(fileBytes);
-                
-                var memoryStream = new MemoryStream();
-                pdf.SaveToStream(memoryStream, FileFormat.DOCX);
-                
-                memoryStream.Seek(0, SeekOrigin.Begin);
-                fileBytes = memoryStream.ToArray();
-                
                 fileRequest.File.Name = fileRequest.File.Name.Replace(".pdf", "[pdf].docx");
             }
 
