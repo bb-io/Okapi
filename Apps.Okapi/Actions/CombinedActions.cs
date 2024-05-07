@@ -41,6 +41,8 @@ namespace Apps.Okapi.Actions
                 
                 memoryStream.Seek(0, SeekOrigin.Begin);
                 fileBytes = memoryStream.ToArray();
+                
+                fileRequest.File.Name = fileRequest.File.Name.Replace(".pdf", "[pdf].docx");
             }
 
             await UploadFile(projectId, fileBytes, fileRequest.File.GetFileName(conversionRequest.RemoveInappropriateCharactersInFileName ?? true), fileRequest.File.ContentType);
@@ -126,10 +128,16 @@ namespace Apps.Okapi.Actions
                 var outputFile = outputFiles.First();
 
                 var stream = await DownloadOutputFileAsStream(projectId, outputFile);
-                string mimeType = MimeTypes.GetMimeType(outputFile);
+                var mimeType = MimeTypes.GetMimeType(outputFile);
                 if (outputFile.EndsWith(".html"))
                 {
                     stream = ReplaceInappropriateStrings(stream);
+                }
+
+                outputFile = FileReferenceExtensions.RestoreInappropriateCharacters(outputFile);
+                if(outputFile.EndsWith("[pdf].docx"))
+                {
+                    outputFile = outputFile.Replace("[pdf].docx", ".pdf");
                 }
                 
                 var fileReference = await fileManagementClient.UploadAsync(stream, mimeType, FileReferenceExtensions.RestoreInappropriateCharacters(outputFile));
