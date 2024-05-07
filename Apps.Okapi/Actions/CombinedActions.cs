@@ -32,7 +32,7 @@ namespace Apps.Okapi.Actions
 
             if (fileRequest.File.Name.EndsWith(".pdf"))
             {
-                fileRequest.File.Name = fileRequest.File.Name.Replace(".pdf", "[pdf].docx");
+                fileRequest.File.Name = fileRequest.File.Name.Replace(".pdf", "[pdf].docx"); // Okapi requires .docx files
             }
 
             await UploadFile(projectId, fileBytes, fileRequest.File.GetFileName(conversionRequest.RemoveInappropriateCharactersInFileName ?? true), fileRequest.File.ContentType);
