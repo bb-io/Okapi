@@ -32,10 +32,7 @@ namespace Apps.Okapi.Actions
 
             if (fileRequest.File.Name.EndsWith(".pdf"))
             {
-                using var convertedDocxStream = PdfConvertor.ConvertPdfToDocx(fileStream);
-                fileBytes = new byte[convertedDocxStream.Length];
-                var read = convertedDocxStream.Read(fileBytes, 0, (int)convertedDocxStream.Length);
-                fileRequest.File.Name = fileRequest.File.Name.Replace(".pdf", "[pdf].docx"); // Okapi requires .docx files
+                fileRequest.File.Name = fileRequest.File.Name.Replace(".pdf", ".doc"); // Okapi requires .docx files
             }
 
             await UploadFile(projectId, fileBytes, fileRequest.File.GetFileName(conversionRequest.RemoveInappropriateCharactersInFileName ?? true), fileRequest.File.ContentType);
@@ -130,7 +127,7 @@ namespace Apps.Okapi.Actions
                 outputFile = FileReferenceExtensions.RestoreInappropriateCharacters(outputFile);
                 if(outputFile.EndsWith("[pdf].docx"))
                 {
-                    outputFile = outputFile.Replace("[pdf].docx", ".pdf");
+                    outputFile = outputFile.Replace(".doc", ".pdf");
                 }
                 
                 var fileReference = await fileManagementClient.UploadAsync(stream, mimeType, FileReferenceExtensions.RestoreInappropriateCharacters(outputFile));
