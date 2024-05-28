@@ -29,12 +29,6 @@ namespace Apps.Okapi.Actions
 
             var fileStream = await fileManagementClient.DownloadAsync(fileRequest.File);
             var fileBytes = await fileStream.GetByteData();
-
-            if (fileRequest.File.Name.EndsWith(".pdf"))
-            {
-                fileRequest.File.Name = fileRequest.File.Name.Replace(".pdf", ".doc"); // Okapi requires .docx files
-            }
-
             await UploadFile(projectId, fileBytes, fileRequest.File.GetFileName(conversionRequest.RemoveInappropriateCharactersInFileName ?? true), fileRequest.File.ContentType);
 
             await Execute(projectId, request.SourceLanguage, request.TargetLanguage);
