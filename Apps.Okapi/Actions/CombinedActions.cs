@@ -29,7 +29,6 @@ namespace Apps.Okapi.Actions
 
             var fileStream = await fileManagementClient.DownloadAsync(fileRequest.File);
             var fileBytes = await fileStream.GetByteData();
-
             await UploadFile(projectId, fileBytes, fileRequest.File.GetFileName(conversionRequest.RemoveInappropriateCharactersInFileName ?? true), fileRequest.File.ContentType);
 
             await Execute(projectId, request.SourceLanguage, request.TargetLanguage);
@@ -113,11 +112,13 @@ namespace Apps.Okapi.Actions
                 var outputFile = outputFiles.First();
 
                 var stream = await DownloadOutputFileAsStream(projectId, outputFile);
-                string mimeType = MimeTypes.GetMimeType(outputFile);
+                var mimeType = MimeTypes.GetMimeType(outputFile);
                 if (outputFile.EndsWith(".html"))
                 {
                     stream = ReplaceInappropriateStrings(stream);
                 }
+
+                outputFile = FileReferenceExtensions.RestoreInappropriateCharacters(outputFile);
                 
                 var fileReference = await fileManagementClient.UploadAsync(stream, mimeType, FileReferenceExtensions.RestoreInappropriateCharacters(outputFile));
 

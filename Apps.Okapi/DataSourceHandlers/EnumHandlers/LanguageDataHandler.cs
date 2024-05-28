@@ -1,10 +1,10 @@
-﻿using Blackbird.Applications.Sdk.Utils.Sdk.DataSourceHandlers;
+﻿using Blackbird.Applications.Sdk.Common.Dictionaries;
 
 namespace Apps.Okapi.DataSourceHandlers.EnumHandlers;
 
-public class LanguageDataHandler : EnumDataHandler
+public class LanguageDataHandler : IStaticDataSourceHandler
 {
-    protected override Dictionary<string, string> EnumValues => new()
+    private static Dictionary<string, string> EnumValues => new()
     {
         { "ab", "Abkhazian" },
         { "ab-GE", "Abkhazian (*Georgia)" },
@@ -398,4 +398,9 @@ public class LanguageDataHandler : EnumDataHandler
         { "zu", "Zulu" },
         { "zu-ZA", "Zulu (*south Africa)" },
     };
+
+    public Dictionary<string, string> GetData()
+    {
+        return EnumValues;
+    }
 }

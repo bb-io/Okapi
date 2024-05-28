@@ -22,8 +22,9 @@ public class OkapiClient : RestClient
     public async Task<RestResponse> Execute(string endpoint, Method method, object? bodyObj,
         AuthenticationCredentialsProvider[] creds)
     {
-        var baseUrl  = creds.Get(CredsNames.Url).Value;
-
+        var baseUrl = creds.Get(CredsNames.Url).Value
+            .TrimEnd('/');
+        
         var request = new OkapiRequest(new()
         {
             Url = baseUrl + endpoint,
