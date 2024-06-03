@@ -42,7 +42,7 @@ namespace Apps.Okapi.Actions
             // XLIFF file reference
             var xliffStream = await DownloadOutputFileAsStream(projectId, xliff);
             var xliffFileReference =
-                await fileManagementClient.UploadAsync(xliffStream, MimeTypes.GetMimeType(xliff), xliff.Remove(0, 10));
+                await fileManagementClient.UploadAsync(xliffStream, MimeTypes.GetMimeType(xliff), xliff.Substring(xliff.LastIndexOf('/') + 1));
 
             // Package file reference
             using (var memoryStream = new MemoryStream())
