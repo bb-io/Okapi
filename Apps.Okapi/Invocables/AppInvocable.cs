@@ -3,6 +3,7 @@ using Apps.Okapi.Constants;
 using Apps.Okapi.Models.Responses;
 using Blackbird.Applications.Sdk.Common;
 using Blackbird.Applications.Sdk.Common.Authentication;
+using Blackbird.Applications.Sdk.Common.Exceptions;
 using Blackbird.Applications.Sdk.Common.Invocation;
 using Blackbird.Applications.Sdk.Utils.Extensions.Sdk;
 using RestSharp;
@@ -26,13 +27,13 @@ public class AppInvocable : BaseInvocable
         var response = await Client.Execute(ApiEndpoints.Projects + "/new", Method.Post, null, Creds);
         if (!response.IsSuccessStatusCode)
         {
-            throw new($"Status code: {response.StatusCode}, Content: {response.Content}");
+            throw new PluginApplicationException($"Status code: {response.StatusCode}, Content: {response.Content}");
         }
 
         var locationHeader = response.Headers.FirstOrDefault(h => h.Name.Equals("Location", StringComparison.OrdinalIgnoreCase))?.Value?.ToString();
         if (locationHeader == null)
         {
-            throw new Exception("Location header is missing in the response.");
+            throw new PluginApplicationException("Location header is missing in the response.");
         }
 
         var uri = new Uri(locationHeader);
@@ -53,7 +54,7 @@ public class AppInvocable : BaseInvocable
         var response = await Client.ExecuteAsync(uploadFileRequest);
         if (!response.IsSuccessStatusCode)
         {
-            throw new ApplicationException($"Could not upload your batch configuration file; Code: {response.StatusCode}; Message: {response.Content}");
+            throw new PluginApplicationException($"Could not upload your batch configuration file; Code: {response.StatusCode}; Message: {response.Content}");
         }
     }
 
@@ -78,7 +79,7 @@ public class AppInvocable : BaseInvocable
         var response = await Client.ExecuteAsync(uploadFileRequest);
         if (!response.IsSuccessStatusCode)
         {
-            throw new ApplicationException($"Could not upload your file; Code: {response.StatusCode}; Message: {response.Content}");
+            throw new PluginApplicationException($"Could not upload your file; Code: {response.StatusCode}; Message: {response.Content}");
         }
     }
 
@@ -93,7 +94,7 @@ public class AppInvocable : BaseInvocable
         var response = await Client.Execute(ApiEndpoints.Projects + $"/{projectId}", Method.Delete, null, Creds);
         if (!response.IsSuccessStatusCode)
         {
-            throw new($"Status code: {response.StatusCode}, Content: {response.Content}");
+            throw new PluginApplicationException($"Status code: {response.StatusCode}, Content: {response.Content}");
         }
     }
 
@@ -102,7 +103,7 @@ public class AppInvocable : BaseInvocable
         var response = await Client.Execute(ApiEndpoints.Projects + $"/{projectId}" + ApiEndpoints.OutputFiles + $"/{fileName}", Method.Get, null, Creds);
         if (!response.IsSuccessStatusCode)
         {
-            throw new($"Status code: {response.StatusCode}, Content: {response.Content}");
+            throw new PluginApplicationException($"Status code: {response.StatusCode}, Content: {response.Content}");
         }
 
         return response.RawBytes;
@@ -138,7 +139,7 @@ public class AppInvocable : BaseInvocable
         var response = await Client.Execute(endpoint, Method.Post, null, Creds);
         if (!response.IsSuccessStatusCode)
         {
-            throw new($"Status code: {response.StatusCode}, Content: {response.Content}");
+            throw new PluginApplicationException($"Status code: {response.StatusCode}, Content: {response.Content}");
         }
     }    
 }

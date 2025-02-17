@@ -1,6 +1,7 @@
 using System.Xml.Serialization;
 using Apps.Okapi.Constants;
 using Blackbird.Applications.Sdk.Common.Authentication;
+using Blackbird.Applications.Sdk.Common.Exceptions;
 using Blackbird.Applications.Sdk.Utils.Extensions.Sdk;
 using RestSharp;
 
@@ -46,13 +47,6 @@ public class OkapiClient : RestClient
     
     private Exception GetError(RestResponse response)
     {
-        try
-        {
-            return new($"Status code: {response.StatusCode}, Content: {response.Content}");
-        }
-        catch (Exception e)
-        {
-            return new Exception($"Status code: {response.StatusCode}, Message: {response.Content}");
-        }
+          throw new PluginApplicationException($"Status code: {response.StatusCode}, Content: {response.Content}");
     }
 }
