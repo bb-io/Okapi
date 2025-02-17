@@ -10,6 +10,7 @@ using System.IO.Compression;
 using System.Reflection;
 using System.Text;
 using Apps.Okapi.Utils;
+using Blackbird.Applications.Sdk.Common.Exceptions;
 
 namespace Apps.Okapi.Actions
 {
@@ -37,7 +38,7 @@ namespace Apps.Okapi.Actions
 
             var xliff = outputFiles.Find(x => x.Contains("work/"));
 
-            if (xliff == null) throw new Exception("No XLIFF file was created by Okapi.");
+            if (xliff == null) throw new PluginApplicationException("No XLIFF file was created by Okapi. Please try again");
 
             // XLIFF file reference
             var xliffStream = await DownloadOutputFileAsStream(projectId, xliff);
@@ -93,7 +94,7 @@ namespace Apps.Okapi.Actions
                 using (var archive = new ZipArchive(memoryStream, ZipArchiveMode.Update))
                 {
                     var xliffEntry = archive.Entries.FirstOrDefault(x => x.Name.Contains(".xlf"));
-                    if (xliffEntry == null) throw new Exception("The package did not contain any XLIFF files");
+                    if (xliffEntry == null) throw new PluginApplicationException("The package did not contain any XLIFF files");
                     xliffEntry.Delete();
                     xliffEntry = archive.CreateEntry($"work/{xliffEntry.Name}");
 
@@ -108,7 +109,7 @@ namespace Apps.Okapi.Actions
                 await Execute(projectId);
 
                 var outputFiles = await GetOutputFiles(projectId);
-                if (outputFiles.Count == 0) throw new Exception("No files were converted");
+                if (outputFiles.Count == 0) throw new PluginApplicationException("No files were converted");
                 var outputFile = outputFiles.First();
 
                 var stream = await DownloadOutputFileAsStream(projectId, outputFile);

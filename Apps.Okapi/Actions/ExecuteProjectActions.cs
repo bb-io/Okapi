@@ -8,6 +8,7 @@ using Blackbird.Applications.Sdk.Common.Actions;
 using Blackbird.Applications.Sdk.Common.Files;
 using Blackbird.Applications.Sdk.Common.Invocation;
 using Blackbird.Applications.SDK.Extensions.FileManagement.Interfaces;
+using Blackbird.Applications.Sdk.Common.Exceptions;
 
 namespace Apps.Okapi.Actions;
 
@@ -21,19 +22,19 @@ public class ExecuteProjectActions(InvocationContext invocationContext, IFileMan
         {
             if (request.TargetLanguage != null && request.TargetLanguages != null)
             {
-                throw new("Both Target language and Target languages are set. Only one of them should be set.");
+                throw new PluginMisconfigurationException("Both Target language and Target languages are set. Only one of them should be set.");
             }
 
             if (request.TargetLanguage == null && request.TargetLanguages == null)
             {
-                throw new("Source language is set, but neither target language nor Target languages are set. One of them should be set.");
+                throw new PluginMisconfigurationException("Source language is set, but neither target language nor Target languages are set. One of them should be set.");
             }
         }
         else
         {
             if (request.TargetLanguage != null || request.TargetLanguages != null)
             {
-                throw new("Source language is not set, but Target language or Target languages are set. Source language should be set.");
+                throw new PluginMisconfigurationException("Source language is not set, but Target language or Target languages are set. Source language should be set.");
             }
         }
 
