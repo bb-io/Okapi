@@ -4,12 +4,12 @@
         <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <Product>Okapi longhorn</Product>
+        <Product>Okapi longhorn by terales</Product>
         <Description>Longhorn is a server application that allows you to execute Batch Configurations remotely on any set of input files. Batch Configurations which include pre-defined pipelines and filter configurations, can be exported from Rainbow.</Description>
         <Version>1.2.2</Version>
-        <PackageId>Apps.Okapi</PackageId>
+        <PackageId>Apps.OkapiByTerales</PackageId>
         <RootNamespace>Apps.Okapi</RootNamespace>
-        <AssemblyName>Apps.Okapi</AssemblyName>
+        <AssemblyName>Apps.OkapiByTerales</AssemblyName>
     </PropertyGroup>
 
     <ItemGroup>
