@@ -16,7 +16,7 @@ public class AppInvocable : BaseInvocable
         InvocationContext.AuthenticationCredentialsProviders.ToArray();
 
     protected OkapiClient Client { get; }
-    
+
     public AppInvocable(InvocationContext invocationContext) : base(invocationContext)
     {
         Client = new();
@@ -129,5 +129,5 @@ public class AppInvocable : BaseInvocable
         {
             throw new PluginApplicationException($"Status code: {response.StatusCode}, Content: {response.Content}");
         }
-    }    
+    }
 }
