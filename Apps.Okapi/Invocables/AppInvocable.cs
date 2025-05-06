@@ -45,9 +45,12 @@ public class AppInvocable : BaseInvocable
         string endpoint = ApiEndpoints.Projects + $"/{projectId}" + ApiEndpoints.BatchConfiguration;
         var fileParam = FileParameter.Create("batchConfiguration", fileBytes, name, contentType);
 
-        try {
+        try
+        {
             var response = await Client.UploadFile(endpoint, Method.Post, fileParam, Creds);
-        } catch (PluginApplicationException e) {
+        }
+        catch (PluginApplicationException e)
+        {
             throw new PluginApplicationException("Could not upload your batch configuration file; " + e.Message);
         }
     }
@@ -64,9 +67,12 @@ public class AppInvocable : BaseInvocable
 
         var method = isZip ? Method.Post : Method.Put;
 
-        try {
+        try
+        {
             var response = await Client.UploadFile(endpoint, method, fileParam, Creds);
-        } catch (PluginApplicationException e) {
+        }
+        catch (PluginApplicationException e)
+        {
             throw new PluginApplicationException("Could not upload an input file; " + e.Message);
         }
     }
