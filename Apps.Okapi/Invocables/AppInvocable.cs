@@ -16,7 +16,7 @@ public class AppInvocable : BaseInvocable
         InvocationContext.AuthenticationCredentialsProviders.ToArray();
 
     protected OkapiClient Client { get; }
-    
+
     public AppInvocable(InvocationContext invocationContext) : base(invocationContext)
     {
         Client = new();
@@ -43,18 +43,15 @@ public class AppInvocable : BaseInvocable
     protected async Task AddBatchConfig(string projectId, byte[] fileBytes, string name = "batch.bconf", string contentType = "application/octet-stream")
     {
         string endpoint = ApiEndpoints.Projects + $"/{projectId}" + ApiEndpoints.BatchConfiguration;
+        var fileParam = FileParameter.Create("batchConfiguration", fileBytes, name, contentType);
 
-        var baseUrl = Creds.Get(CredsNames.Url).Value;
-        var uploadFileRequest = new OkapiRequest(new OkapiRequestParameters
+        try
         {
-            Method = Method.Post,
-            Url = baseUrl + endpoint
-        }).AddFile("batchConfiguration", fileBytes, name, contentType);
-
-        var response = await Client.ExecuteAsync(uploadFileRequest);
-        if (!response.IsSuccessStatusCode)
+            var response = await Client.UploadFile(endpoint, Method.Post, fileParam, Creds);
+        }
+        catch (PluginApplicationException e)
         {
-            throw new PluginApplicationException($"Could not upload your batch configuration file; Code: {response.StatusCode}; Message: {response.Content}");
+            throw new PluginApplicationException("Could not upload your batch configuration file; " + e.Message);
         }
     }
 
@@ -62,6 +59,7 @@ public class AppInvocable : BaseInvocable
     {
         if (string.IsNullOrEmpty(fileName)) throw new("File name is required.");
 
+        var fileParam = FileParameter.Create("inputFile", fileBytes, fileName, contentType);
         var isZip = fileName.EndsWith(".zip");
 
         var endpoint = ApiEndpoints.Projects + $"/{projectId}" + ApiEndpoints.InputFiles;
@@ -69,17 +67,13 @@ public class AppInvocable : BaseInvocable
 
         var method = isZip ? Method.Post : Method.Put;
 
-        var baseUrl = Creds.Get(CredsNames.Url).Value;
-        var uploadFileRequest = new OkapiRequest(new OkapiRequestParameters
+        try
         {
-            Method = method,
-            Url = baseUrl + endpoint
-        }).AddFile("inputFile", fileBytes, fileName, contentType);
-
-        var response = await Client.ExecuteAsync(uploadFileRequest);
-        if (!response.IsSuccessStatusCode)
+            var response = await Client.UploadFile(endpoint, method, fileParam, Creds);
+        }
+        catch (PluginApplicationException e)
         {
-            throw new PluginApplicationException($"Could not upload your file; Code: {response.StatusCode}; Message: {response.Content}");
+            throw new PluginApplicationException("Could not upload an input file; " + e.Message);
         }
     }
 
@@ -141,5 +135,5 @@ public class AppInvocable : BaseInvocable
         {
             throw new PluginApplicationException($"Status code: {response.StatusCode}, Content: {response.Content}");
         }
-    }    
+    }
 }

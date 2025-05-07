@@ -16,16 +16,16 @@ public class OkapiClient : RestClient
         var serializer = new XmlSerializer(typeof(T));
         using var reader = new StringReader(response.Content);
         var result = (T)serializer.Deserialize(reader)!;
-        
+
         return result;
     }
-    
+
     public async Task<RestResponse> Execute(string endpoint, Method method, object? bodyObj,
         AuthenticationCredentialsProvider[] creds)
     {
         var baseUrl = creds.Get(CredsNames.Url).Value
             .TrimEnd('/');
-        
+
         var request = new OkapiRequest(new()
         {
             Url = baseUrl + endpoint,
@@ -34,7 +34,24 @@ public class OkapiClient : RestClient
 
         return await ExecuteRequest(request);
     }
-    
+
+    public async Task<RestResponse> UploadFile(string endpoint, Method method, FileParameter fileParam,
+        AuthenticationCredentialsProvider[] creds)
+    {
+        var baseUrl = creds.Get(CredsNames.Url).Value
+            .TrimEnd('/');
+
+        var request = new OkapiRequest(new()
+        {
+            Url = baseUrl + endpoint,
+            Method = method
+        });
+
+        request.AddFile(fileParam.Name, () => fileParam.GetFile(), fileParam.FileName, fileParam.ContentType);
+
+        return await ExecuteRequest(request);
+    }
+
     public async Task<RestResponse> ExecuteRequest(OkapiRequest request)
     {
         var response = await ExecuteAsync(request);
@@ -44,7 +61,7 @@ public class OkapiClient : RestClient
 
         return response;
     }
-    
+
     private Exception GetError(RestResponse response)
     {
           throw new PluginApplicationException($"Status code: {response.StatusCode}, Content: {response.Content}");
