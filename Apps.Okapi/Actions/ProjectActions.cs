@@ -1,17 +1,11 @@
-using RestSharp;
-using Apps.Okapi.Api;
-using Apps.Okapi.Constants;
 using Apps.Okapi.Invocables;
 using Apps.Okapi.Models.Requests;
 using Apps.Okapi.Models.Responses;
 using Blackbird.Applications.Sdk.Common;
 using Blackbird.Applications.Sdk.Common.Actions;
-using Blackbird.Applications.Sdk.Common.Files;
 using Blackbird.Applications.Sdk.Common.Invocation;
 using Blackbird.Applications.SDK.Extensions.FileManagement.Interfaces;
 using Blackbird.Applications.Sdk.Utils.Extensions.Files;
-using Blackbird.Applications.Sdk.Utils.Extensions.Sdk;
-using System.Net;
 
 namespace Apps.Okapi.Actions;
 

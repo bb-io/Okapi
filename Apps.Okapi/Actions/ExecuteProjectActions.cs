@@ -1,6 +1,4 @@
-﻿using RestSharp;
-using Apps.Okapi.Constants;
-using Apps.Okapi.Invocables;
+﻿using Apps.Okapi.Invocables;
 using Apps.Okapi.Models.Requests;
 using Apps.Okapi.Models.Responses;
 using Blackbird.Applications.Sdk.Common;
