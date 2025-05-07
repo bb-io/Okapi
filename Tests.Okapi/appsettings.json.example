@@ -1,0 +1,6 @@
+{
+  "ConnectionDefinition": {
+    "url": "http://localhost:8080/okapi-longhorn/"
+  },
+  "TestFolder": "C:\\Users\\...\\Tests.Okapi"
+}
