@@ -40,4 +40,91 @@ public class CombinedActionsTests : TestBase
         // then
         Assert.IsNotNull(result);
     }
+
+    [TestMethod]
+    public async Task UploadTranslationAssets_WithTmxAndSrx_ReturnsUploadedFileNames()
+    {
+        // given
+        var request = new UploadTranslationAssetsRequest
+        {
+            LonghornWorkDir = LonghornWorkDir,
+            Tmx = new FileReference
+            {
+                Name = "sample.tmx",
+                ContentType = "application/xml"
+            },
+            Srx = new FileReference
+            {
+                Name = "sample.srx",
+                ContentType = "application/xml"
+            }
+        };
+
+        // when
+        var combinedActions = new CombinedActions(InvocationContext, FileManagementClient);
+        var result = await combinedActions.UploadTranslationAssets(request);
+
+        // then
+        Assert.IsTrue(result.TMX.StartsWith(LonghornWorkDir));
+        Assert.IsTrue(result.TMX.EndsWith("/input/sample.tmx"));
+
+        Assert.IsTrue(result.SRX?.StartsWith(LonghornWorkDir));
+        Assert.IsTrue(result.SRX?.EndsWith("/input/sample.srx"));
+    }
+
+    [TestMethod]
+    public async Task UploadTranslationAssets_WithTmxAndSrxOnWindowsServer_ReturnsWindowsFilepaths()
+    {
+        // given
+        var fakeLonghornWorkDir = "C:\\Users\\TestUser\\Documents\\Okapi-Longhorn-Files";
+        var request = new UploadTranslationAssetsRequest
+        {
+            LonghornWorkDir = fakeLonghornWorkDir,
+            Tmx = new FileReference
+            {
+                Name = "sample.tmx",
+                ContentType = "application/xml"
+            },
+            Srx = new FileReference
+            {
+                Name = "sample.srx",
+                ContentType = "application/xml"
+            }
+        };
+
+        // when
+        var combinedActions = new CombinedActions(InvocationContext, FileManagementClient);
+        var result = await combinedActions.UploadTranslationAssets(request);
+
+        // then
+        Assert.IsTrue(result.TMX.StartsWith(fakeLonghornWorkDir));
+        Assert.IsTrue(result.TMX.EndsWith("\\input\\sample.tmx"));
+
+        Assert.IsTrue(result.SRX?.StartsWith(fakeLonghornWorkDir));
+        Assert.IsTrue(result.SRX?.EndsWith("\\input\\sample.srx"));
+    }
+
+    [TestMethod]
+    public async Task UploadTranslationAssets_WithOnlyTmx_ReturnsUploadedFileName()
+    {
+        // given
+        var request = new UploadTranslationAssetsRequest
+        {
+            LonghornWorkDir = LonghornWorkDir,
+            Tmx = new FileReference
+            {
+                Name = "sample.tmx",
+                ContentType = "application/xml"
+            }
+        };
+
+        // when
+        var combinedActions = new CombinedActions(InvocationContext, FileManagementClient);
+        var result = await combinedActions.UploadTranslationAssets(request);
+
+        // then
+        Assert.IsTrue(result.TMX.StartsWith(LonghornWorkDir));
+        Assert.IsTrue(result.TMX.EndsWith("/input/sample.tmx"));
+        Assert.IsNull(result.SRX);
+    }
 }

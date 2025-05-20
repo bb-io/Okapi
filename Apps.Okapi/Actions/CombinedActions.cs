@@ -129,6 +129,31 @@ public class CombinedActions(InvocationContext invocationContext, IFileManagemen
         }
     }
 
+    [Action("Upload translation assets", Description = "Uploads TMX and optional SRX files to a new Okapi project and returns the names of the uploaded files.")]
+    public async Task<UploadTranslationAssetsResponse> UploadTranslationAssets([ActionParameter] UploadTranslationAssetsRequest request)
+    {
+        var projectId = await CreateNewProject();
+        var longhornFileSeparator = request.LonghornWorkDir.Contains('\\') ? '\\' : '/';
+        var longhornWorkDir = request.LonghornWorkDir.TrimEnd(longhornFileSeparator);
+        var projectInputDir = string.Join(longhornFileSeparator, longhornWorkDir, projectId, "input");
+
+        var tmxStream = await fileManagementClient.DownloadAsync(request.Tmx);
+        var tmxBytes = await tmxStream.GetByteData();
+        await UploadFile(projectId, tmxBytes, request.Tmx.Name, request.Tmx.ContentType);
+        var response = new UploadTranslationAssetsResponse
+        {
+            TMX = string.Join(longhornFileSeparator, projectInputDir, request.Tmx.Name)
+        };
+
+        if (request.Srx != null)
+        {
+            var srxStream = await fileManagementClient.DownloadAsync(request.Srx);
+            var srxBytes = await srxStream.GetByteData();
+            await UploadFile(projectId, srxBytes, request.Srx.Name, request.Srx.ContentType);
+            response.SRX = string.Join(longhornFileSeparator, projectInputDir, request.Srx.Name);
+        }
+
+        return response;
     internal async Task<byte[]> LoadBatchConfig(string configName)
     {
         var asm = Assembly.GetExecutingAssembly();

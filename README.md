@@ -36,6 +36,12 @@ Use the following actions to have full control of batchconfig executions on one 
 - **Create project**: Creates a new project within the system, returns the ID of the newly created project, and uploads a batch configuration file.
 - **Execute project** Executes the batch configuration on the uploaded input files, returns the output files
 
+### Pre-translate actions
+
+Use the following actions to reuse existing translations from translation memory (also known as "pre-translate"):
+
+- **Upload translation assets**: Uploads translation memory (TMX) and segmentation rules (SRX) to a new project, returns a path to files local to OKAPI server so these assets could be later linked in batch configurations.
+
 ## Example
 
 ![okapi-example-bird](image/README/okapi-example-bird.png)

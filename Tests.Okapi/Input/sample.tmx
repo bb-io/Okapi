@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tmx SYSTEM "tmx14.dtd">
+<tmx version="1.4">
+  <header
+    creationtool="AI Assistant"
+    creationtoolversion="1.0"
+    segtype="sentence"
+    o-tmf="XML"
+    adminlang="en"
+    srclang="en"
+    datatype="plaintext"
+    creationdate="20240514T120000Z">
+  </header>
+  <body>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Welcome to our new product launch event.</seg>
+      </tuv>
+      <tuv xml:lang="es">
+        <seg>Bienvenidos a nuestro evento de lanzamiento de producto.</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Please contact customer support if you need assistance.</seg>
+      </tuv>
+      <tuv xml:lang="es">
+        <seg>Por favor, contacte con atención al cliente si necesita ayuda.</seg>
+      </tuv>
+    </tu>
+  </body>
+</tmx>
