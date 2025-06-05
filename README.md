@@ -41,6 +41,7 @@ Use the following actions to have full control of batchconfig executions on one 
 Use the following actions to reuse existing translations from translation memory (also known as "pre-translate"):
 
 - **Upload translation assets**: Uploads translation memory (TMX) and segmentation rules (SRX) to a new project, returns a path to files local to OKAPI server so these assets could be later linked in batch configurations.
+- **Pre-translate with previous translations**: Takes any Okapi-compatible file format and converts it to an XLIFF file, including segmentation to sentences supporting custom rules in SRX format and reusing existing translations (pre-translation) from a TMX file. It outputs a 'package' file and an XLIFF v2.1 with explicit segment states ('reviewed' for segments with translations reused from TM and 'initial' for new segments).
 
 ## Example
 
