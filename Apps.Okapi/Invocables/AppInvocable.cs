@@ -1,3 +1,4 @@
+using System.IO.Compression;
 using Apps.Okapi.Api;
 using Apps.Okapi.Constants;
 using Apps.Okapi.Models.Responses;
@@ -40,14 +41,21 @@ public class AppInvocable : BaseInvocable
         return uri.Segments.Last();
     }
 
-    protected async Task AddBatchConfig(string projectId, byte[] fileBytes, string name = "batch.bconf", string contentType = "application/octet-stream")
+    protected async Task AddBatchConfig(string projectId, byte[] fileBytes, string name = "batch.bconf"
+        , string contentType = "application/octet-stream", string? configOverride = null)
     {
         string endpoint = ApiEndpoints.Projects + $"/{projectId}" + ApiEndpoints.BatchConfiguration;
         var fileParam = FileParameter.Create("batchConfiguration", fileBytes, name, contentType);
 
         try
         {
-            var response = await Client.UploadFile(endpoint, Method.Post, fileParam, Creds);
+            List<Parameter> formParams = [];
+            if (!string.IsNullOrEmpty(configOverride))
+            {
+                formParams.Add(Parameter.CreateParameter("overrideStepParams", configOverride, ParameterType.GetOrPost));
+            }
+
+            await Client.UploadFile(endpoint, Method.Post, fileParam, Creds, formParams);
         }
         catch (PluginApplicationException e)
         {
@@ -110,6 +118,65 @@ public class AppInvocable : BaseInvocable
         var stream = new MemoryStream(fileBytes);
         stream.Seek(0, SeekOrigin.Begin);
         return stream;
+    }
+
+    protected async Task<Stream> DownloadOutputArchiveAsStream(string projectId)
+    {
+        var response = await Client.Execute(ApiEndpoints.Projects + $"/{projectId}" + ApiEndpoints.OutputArchive, Method.Get, null, Creds);
+        if (!response.IsSuccessStatusCode)
+        {
+            throw new PluginApplicationException($"Status code: {response.StatusCode}, Content: {response.Content}");
+        }
+
+        if (response.RawBytes == null)
+        {
+            throw new PluginApplicationException("OKAPI server has returned no data for an output archive.");
+        }
+
+        var zipStream = new MemoryStream(response.RawBytes);
+        zipStream.Seek(0, SeekOrigin.Begin);
+
+        using (var archive = new ZipArchive(zipStream, ZipArchiveMode.Update, leaveOpen: true))
+        {
+            var entriesToMove = archive.Entries
+                .Where(e => !string.IsNullOrEmpty(e.Name))
+                .Where(e => e.FullName.Count(c => c == '/') >= 1)
+                .ToList();
+
+            var topFolders = entriesToMove
+                .Select(e => e.FullName.Split('/')[0])
+                .Distinct()
+                .ToList();
+
+            // move entries from subfolder to one more level
+            foreach (var entry in entriesToMove)
+            {
+                var parts = entry.FullName.Split('/');
+
+                var newPath = string.Join('/', parts.Skip(1));
+                if (archive.GetEntry(newPath) != null)
+                {
+                    throw new PluginApplicationException("Can't remove subfolder from the package archive.");
+                }
+
+                var newEntry = archive.CreateEntry(newPath);
+                using (var oldEntryStream = entry.Open())
+                using (var newEntryStream = newEntry.Open())
+                {
+                    oldEntryStream.CopyTo(newEntryStream);
+                }
+                entry.Delete();
+            }
+
+            // remove empty directory entries for the top-level folders
+            foreach (var folder in topFolders)
+            {
+                archive.GetEntry(folder + "/")?.Delete();
+            }
+        }
+
+        zipStream.Seek(0, SeekOrigin.Begin);
+        return zipStream;
     }
 
     protected async Task Execute(string projectId, string? sourceLanguage = null, string? targetLanguage = null, IEnumerable<string>? targetLanguages = null)

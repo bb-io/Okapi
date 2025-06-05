@@ -129,6 +129,75 @@ public class CombinedActions(InvocationContext invocationContext, IFileManagemen
         }
     }
 
+    [Action("Upload translation assets", Description = "Uploads TMX and optional SRX files to a new Okapi project and returns the names of the uploaded files.")]
+    public async Task<UploadTranslationAssetsResponse> UploadTranslationAssets([ActionParameter] UploadTranslationAssetsRequest request)
+    {
+        var projectId = await CreateNewProject();
+        var longhornFileSeparator = request.LonghornWorkDir.Contains('\\') ? '\\' : '/';
+        var longhornWorkDir = request.LonghornWorkDir.TrimEnd(longhornFileSeparator);
+        var projectInputDir = string.Join(longhornFileSeparator, longhornWorkDir, projectId, "input");
+
+        var tmxStream = await fileManagementClient.DownloadAsync(request.Tmx);
+        var tmxBytes = await tmxStream.GetByteData();
+        await UploadFile(projectId, tmxBytes, request.Tmx.Name, request.Tmx.ContentType);
+        var response = new UploadTranslationAssetsResponse
+        {
+            TMX = string.Join(longhornFileSeparator, projectInputDir, request.Tmx.Name)
+        };
+
+        if (request.Srx != null)
+        {
+            var srxStream = await fileManagementClient.DownloadAsync(request.Srx);
+            var srxBytes = await srxStream.GetByteData();
+            await UploadFile(projectId, srxBytes, request.Srx.Name, request.Srx.ContentType);
+            response.SRX = string.Join(longhornFileSeparator, projectInputDir, request.Srx.Name);
+        }
+
+        return response;
+    }
+
+    [Action("Pre-translate with previous translations",
+        Description = "Parse and segment incoming files, then insert previous translations from translation memory. Returns XLIFF v2.1.")]
+    public async Task<PretranslateResponse> Pretranslate(
+        [ActionParameter] PretranslateRequest pretranslateRequest,
+        [ActionParameter] ExecuteSingleLanguageTaskRequest languageTaskRequest,
+        [ActionParameter] FileConversionRequest conversionRequest)
+    {
+        var projectId = await CreateNewProject();
+
+        var pretranslationConfig = await LoadBatchConfig("pretranslation");
+        var configOverride = BatchConfig.OverridePretranslateConfig(pretranslateRequest.TmxPath, pretranslateRequest.SrxPath);
+        await AddBatchConfig(projectId, pretranslationConfig, configOverride: configOverride);
+
+        var fileStream = await fileManagementClient.DownloadAsync(pretranslateRequest.SourceFile);
+        var fileBytes = await fileStream.GetByteData();
+        var fileName = pretranslateRequest.SourceFile.GetFileName(conversionRequest.RemoveInappropriateCharactersInFileName ?? true);
+        await UploadFile(projectId, fileBytes, fileName, pretranslateRequest.SourceFile.ContentType);
+
+        await Execute(projectId, languageTaskRequest.SourceLanguage, languageTaskRequest.TargetLanguage);
+
+        var outputFiles = await GetOutputFiles(projectId);
+
+        // XLIFF file reference
+        var xliff = outputFiles.Find(x => x.Contains("work/")) ?? throw new PluginApplicationException("No XLIFF file was created by Okapi.");
+        var xliffStream = await DownloadOutputFileAsStream(projectId, xliff);
+        var xliffFileReference =
+            await fileManagementClient.UploadAsync(xliffStream, MimeTypes.GetMimeType(xliff), xliff.Substring(xliff.LastIndexOf('/') + 1));
+
+        // Package file reference
+        var packageStream = await DownloadOutputArchiveAsStream(projectId);
+        var packageFileReference = await fileManagementClient.UploadAsync(packageStream, MimeTypes.GetMimeType(".zip"), "package.zip");
+
+        await DeleteProject(projectId);
+
+        return new PretranslateResponse
+        {
+            Xliff = xliffFileReference,
+            Package = packageFileReference,
+            ProjectId = projectId,
+        };
+    }
+
     internal async Task<byte[]> LoadBatchConfig(string configName)
     {
         var asm = Assembly.GetExecutingAssembly();

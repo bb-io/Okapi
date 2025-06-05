@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?><xliff xmlns="urn:oasis:names:tc:xliff:document:2.0" xmlns:its="http://www.w3.org/2005/11/its" xmlns:itsxlf="http://www.w3.org/ns/its-xliff/" srcLang="en" trgLang="es" its:version="2.0" version="2.1">
+ <file id="f1" original="/Users/terales/Okapi-Longhorn-Files/46/input/sample.html">
+  <unit id="1">
+   <mtc:matches xmlns:mtc="urn:oasis:names:tc:xliff:matches:2.0">
+   <mtc:match ref="#1" type="tm" subType="okp:EXACT" similarity="100.0" matchSuitability="100.0" origin="okapi-connector-bitext3604983894006660952">
+   <source>Translation Extraction Smoke Test</source>
+   <target>Prueba de extracción de humo (de TM)</target>
+   </mtc:match>
+</mtc:matches>
+   <segment state="reviewed">
+    <source><mrk id="1" type="mtc:match">Translation Extraction Smoke Test</mrk></source>
+    <target>Prueba de extracción de humo (de TM)</target>
+   </segment>
+  </unit>
+  <unit id="2">
+   <segment state="initial">
+    <source>Translation Extraction Test Page</source>
+    <target/>
+   </segment>
+  </unit>
+  <unit id="3">
+   <segment state="initial">
+    <source>Basic Text Elements</source>
+    <target/>
+   </segment>
+  </unit>
+  <unit id="4">
+   <segment state="initial">
+    <source>This is a simple paragraph that should be translated.</source>
+    <target/>
+   </segment>
+   <segment state="initial">
+    <source> But it has two sentences.</source>
+    <target/>
+   </segment>
+  </unit>
+  <unit id="5">
+   <originalData>
+    <data id="d1">&lt;strong&gt;</data>
+    <data id="d2">&lt;/strong&gt;</data>
+    <data id="d3">&lt;em&gt;</data>
+    <data id="d4">&lt;/em&gt;</data>
+   </originalData>
+   <segment state="initial">
+    <source>This paragraph contains <pc id="1" dataRefEnd="d2" dataRefStart="d1">formatting</pc> and <pc id="2" dataRefEnd="d4" dataRefStart="d3">styled text</pc> that should be preserved.</source>
+    <target/>
+   </segment>
+  </unit>
+  <unit id="6">
+   <originalData>
+    <data id="d1">&lt;a href="#"&gt;</data>
+    <data id="d2">&lt;/a&gt;</data>
+   </originalData>
+   <segment state="initial">
+    <source>This includes a <pc id="1" dataRefEnd="d2" dataRefStart="d1">link</pc> that should be handled properly.</source>
+    <target/>
+   </segment>
+  </unit>
+  <unit id="7">
+   <segment state="initial">
+    <source>Elements with Attributes</source>
+    <target/>
+   </segment>
+  </unit>
+  <unit id="8" type="okp:x-alt">
+   <segment state="initial">
+    <source>This alt text should be translated</source>
+    <target/>
+   </segment>
+  </unit>
+  <unit id="9" type="okp:x-title">
+   <segment state="initial">
+    <source>This tooltip should be translated</source>
+    <target/>
+   </segment>
+  </unit>
+  <unit id="10" type="okp:x-placeholder">
+   <segment state="initial">
+    <source>This placeholder should be translated</source>
+    <target/>
+   </segment>
+  </unit>
+  <unit id="11">
+   <originalData>
+    <data id="d1">&lt;img alt="[#$8]" src="placeholder.jpg"&gt;</data>
+    <data id="d2">&lt;button title="[#$9]"&gt;</data>
+    <data id="d3">&lt;/button&gt;</data>
+    <data id="d4">&lt;input placeholder="[#$10]" type="text"&gt;</data>
+   </originalData>
+   <segment state="initial">
+    <source> <ph id="1" subFlows="8" dataRef="d1"/> <pc id="2" subFlowsStart="9" dataRefEnd="d3" dataRefStart="d2">Hover me</pc> <ph id="3" subFlows="10" dataRef="d4"/> </source>
+    <target/>
+   </segment>
+  </unit>
+  <unit id="12">
+   <segment state="initial">
+    <source>Nested Elements</source>
+    <target/>
+   </segment>
+  </unit>
+  <unit id="13">
+   <originalData>
+    <data id="d1">&lt;span&gt;</data>
+    <data id="d2">&lt;em&gt;</data>
+    <data id="d3">&lt;/em&gt;</data>
+    <data id="d4">&lt;/span&gt;</data>
+   </originalData>
+   <segment state="initial">
+    <source>This is a <pc id="1" dataRefEnd="d4" dataRefStart="d1">nested <pc id="2" dataRefEnd="d3" dataRefStart="d2">content structure</pc> with</pc> multiple levels.</source>
+    <target/>
+   </segment>
+  </unit>
+  <unit id="14">
+   <segment state="initial">
+    <source>List item one</source>
+    <target/>
+   </segment>
+  </unit>
+  <unit id="15">
+   <originalData>
+    <data id="d1">&lt;strong&gt;</data>
+    <data id="d2">&lt;/strong&gt;</data>
+   </originalData>
+   <segment state="initial">
+    <source>List item <pc id="1" dataRefEnd="d2" dataRefStart="d1">two</pc></source>
+    <target/>
+   </segment>
+  </unit>
+  <unit id="16">
+   <originalData>
+    <data id="d1">&lt;a href="#"&gt;</data>
+    <data id="d2">&lt;/a&gt;</data>
+   </originalData>
+   <segment state="initial">
+    <source>List item <pc id="1" dataRefEnd="d2" dataRefStart="d1">three with link</pc></source>
+    <target/>
+   </segment>
+  </unit>
+  <unit id="17">
+   <segment state="initial">
+    <source>Special Content</source>
+    <target/>
+   </segment>
+  </unit>
+  <unit id="18">
+   <segment state="initial">
+    <source>Text with special characters: © ® € —</source>
+    <target/>
+   </segment>
+  </unit>
+  <unit id="19">
+   <segment state="initial">
+    <source>Text with emoji: 🚀 🌍 🎉</source>
+    <target/>
+   </segment>
+  </unit>
+  <unit id="20">
+   <segment state="initial">
+    <source xml:space="preserve">This is preformatted text
+                 that should maintain spacing</source>
+    <target xml:space="preserve"/>
+   </segment>
+  </unit>
+  <unit id="21">
+   <segment state="initial">
+    <source>Dynamic Content</source>
+    <target/>
+   </segment>
+  </unit>
+  <unit id="22">
+   <segment state="initial">
+    <source>Hello, {username}! You have {count} new messages.</source>
+    <target/>
+   </segment>
+  </unit>
+  <unit id="23">
+   <segment state="initial">
+    <source>Your order #{orderId} will arrive on {deliveryDate}.</source>
+    <target/>
+   </segment>
+  </unit>
+ </file>
+</xliff>
