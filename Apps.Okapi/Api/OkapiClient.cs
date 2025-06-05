@@ -36,7 +36,7 @@ public class OkapiClient : RestClient
     }
 
     public async Task<RestResponse> UploadFile(string endpoint, Method method, FileParameter fileParam,
-        AuthenticationCredentialsProvider[] creds)
+        AuthenticationCredentialsProvider[] creds, List<Parameter>? formParameters = null)
     {
         var baseUrl = creds.Get(CredsNames.Url).Value
             .TrimEnd('/');
@@ -48,6 +48,8 @@ public class OkapiClient : RestClient
         });
 
         request.AddFile(fileParam.Name, () => fileParam.GetFile(), fileParam.FileName, fileParam.ContentType);
+
+        formParameters?.ForEach(parameter => request.AddParameter(parameter));
 
         return await ExecuteRequest(request);
     }

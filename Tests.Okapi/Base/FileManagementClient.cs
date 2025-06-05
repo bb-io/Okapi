@@ -40,4 +40,20 @@ public class FileManagementClient : IFileManagementClient
 
         return new FileReference { Name = fileName };
     }
+
+    /// <summary>
+    /// Utility method to grab files from Input/Output folders for test assertions.
+    /// </summary>
+    /// <param name="subfolder">Input or Output are expected to be used.</param>
+    /// <param name="filename">Filename including extension</param>
+    public async Task<Byte[]> GetFileFromTestSubfolder(string subfolder, string filename)
+    {
+        if (string.IsNullOrWhiteSpace(subfolder) || string.IsNullOrWhiteSpace(filename))
+        {
+            throw new ArgumentNullException("Subfolder and Filename are expected.");
+        }
+
+        var path = Path.Combine(_folderLocation, subfolder, filename);
+        return await File.ReadAllBytesAsync(path);
+    }
 }

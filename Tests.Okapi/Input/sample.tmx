@@ -28,5 +28,13 @@
         <seg>Por favor, contacte con atención al cliente si necesita ayuda.</seg>
       </tuv>
     </tu>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>Translation Extraction Smoke Test</seg>
+      </tuv>
+      <tuv xml:lang="es">
+        <seg>Prueba de extracción de humo (de TM)</seg>
+      </tuv>
+    </tu>
   </body>
 </tmx>
