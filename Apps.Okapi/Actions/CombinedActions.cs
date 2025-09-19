@@ -197,13 +197,6 @@ public class CombinedActions(InvocationContext invocationContext, IFileManagemen
             ProjectId = projectId,
         };
     }
-
-    internal async Task<byte[]> LoadBatchConfig(string configName)
-    {
-        var asm = Assembly.GetExecutingAssembly();
-        Stream stream = asm.GetManifestResourceStream("Apps.Okapi.Batchconfigs." + $"{configName}.bconf");
-        return await stream.GetByteData();
-    }
     
     private Stream ReplaceInappropriateStrings(Stream stream)
     {

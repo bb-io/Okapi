@@ -1,4 +1,6 @@
+using Apps.Okapi.Models.Dtos;
 using System.Xml.Linq;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Apps.Okapi.Utils;
 
@@ -44,6 +46,23 @@ public static class BatchConfig
             ));
         }
 
+        return overwrite.ToString();
+    }
+
+    public static string OverrideTmImportConfig(string tmPath, bool overwriteSameSource = true)
+    {
+        var stepParams = new List<string>
+        {
+            $"tmDirectory={tmPath}",
+            $"overwriteSameSource.b={overwriteSameSource}",
+        };
+
+        var overwrite = new XElement("l",
+            new XElement("e",
+                new XElement("stepClassName", "net.sf.okapi.steps.tmimport.TMImportStep"),
+                new XElement("stepParams", string.Join('\n', stepParams))
+            )
+        );
         return overwrite.ToString();
     }
 }

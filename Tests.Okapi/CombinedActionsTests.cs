@@ -1,9 +1,3 @@
-using Apps.Okapi.Actions;
-using Apps.Okapi.Models.Requests;
-using Blackbird.Applications.Sdk.Common.Files;
-using Tests.Okapi.Base;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
 namespace Tests.Okapi;
 
 [TestClass]

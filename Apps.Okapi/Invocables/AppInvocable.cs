@@ -1,4 +1,3 @@
-using System.IO.Compression;
 using Apps.Okapi.Api;
 using Apps.Okapi.Constants;
 using Apps.Okapi.Models.Responses;
@@ -6,8 +5,11 @@ using Blackbird.Applications.Sdk.Common;
 using Blackbird.Applications.Sdk.Common.Authentication;
 using Blackbird.Applications.Sdk.Common.Exceptions;
 using Blackbird.Applications.Sdk.Common.Invocation;
+using Blackbird.Applications.Sdk.Utils.Extensions.Files;
 using Blackbird.Applications.Sdk.Utils.Extensions.Sdk;
 using RestSharp;
+using System.IO.Compression;
+using System.Reflection;
 
 namespace Apps.Okapi.Invocables;
 
@@ -202,5 +204,47 @@ public class AppInvocable : BaseInvocable
         {
             throw new PluginApplicationException($"Status code: {response.StatusCode}, Content: {response.Content}");
         }
+    }
+
+    protected async Task UploadFile(string projectId, FileParameter file)
+    {
+        var isZip = file.FileName.EndsWith(".zip", StringComparison.OrdinalIgnoreCase);
+
+        var inputEndpoint = ApiEndpoints.Projects + $"/{projectId}" + ApiEndpoints.InputFiles;
+        var uploadEndpoint = isZip ? $"{inputEndpoint}.zip" : $"{inputEndpoint}/{file.FileName}";
+        var uploadMethod = isZip ? Method.Post : Method.Put;
+
+        await Client.UploadFile(uploadEndpoint, uploadMethod, file, Creds);
+    }
+
+    protected static async Task<byte[]> LoadBatchConfig(string configName)
+    {
+        var asm = Assembly.GetExecutingAssembly();
+        Stream? stream = asm.GetManifestResourceStream("Apps.Okapi.Batchconfigs." + $"{configName}.bconf")
+            ?? throw new PluginApplicationException($"Embedded batch config '{configName}.bconf' not found.");
+        return await stream.GetByteData();
+    }
+
+    protected async Task<string> CreateProject()
+    {
+        var newProjectResponse = await Client.Execute(ApiEndpoints.Projects + "/new", Method.Post, null, Creds);
+
+        var locationHeader = (newProjectResponse?.Headers?.FirstOrDefault(h => h.Name?.Equals("Location", StringComparison.OrdinalIgnoreCase) == true)?.Value?.ToString())
+            ?? throw new PluginApplicationException("Cound't get a location header for a created project.");
+
+        var projectId = new Uri(locationHeader).Segments.Last()
+            ?? throw new PluginApplicationException("Cound't get a created project from the location header value.");
+
+        return projectId;
+    }
+
+    protected async Task<string> CreateProjectWithBatchConfig(string configName, string? configOverride = null)
+    {
+        var projectId = await CreateProject();
+
+        var config = await LoadBatchConfig(configName);
+        await AddBatchConfig(projectId, config, configOverride: configOverride);
+
+        return projectId;
     }
 }

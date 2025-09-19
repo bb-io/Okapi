@@ -14,12 +14,10 @@ public class FileManagementClient : IFileManagementClient
 
     public async Task<Stream> DownloadAsync(FileReference reference)
     {
-        if (reference == null) throw new ArgumentNullException(nameof(reference));
+        ArgumentNullException.ThrowIfNull(reference);
 
         var path = Path.Combine(_folderLocation, "Input", reference.Name);
-        var bytes = await File.ReadAllBytesAsync(path);
-
-        return new MemoryStream(bytes);
+        return await Task.FromResult(File.OpenRead(path)); // to keep method signature same as in SDK
     }
 
     public async Task<FileReference> UploadAsync(Stream stream, string contentType, string fileName)
