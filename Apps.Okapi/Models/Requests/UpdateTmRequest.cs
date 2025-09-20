@@ -11,7 +11,7 @@ public class UpdateTmRequest
     public FileReference BilingualFile { get; set; } = new();
 
     [Display("Translation memory path", Description = "Absolute path to the translation memory on the OKAPI Longhorn server.")]
-    public string TMPath { get; set; } = string.Empty;
+    public string TmPath { get; set; } = string.Empty;
 
     [Display("Segment state to import", Description = "State of the segments to be imported into the translation memory, by default all existing translations will be sent to TM.")]
     [StaticDataSource(typeof(XliffStateDataSourceHandler))]

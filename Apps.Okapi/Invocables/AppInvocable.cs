@@ -8,7 +8,9 @@ using Blackbird.Applications.Sdk.Common.Invocation;
 using Blackbird.Applications.Sdk.Utils.Extensions.Files;
 using Blackbird.Applications.Sdk.Utils.Extensions.Sdk;
 using RestSharp;
+using System;
 using System.IO.Compression;
+using System.Net;
 using System.Reflection;
 
 namespace Apps.Okapi.Invocables;
@@ -87,6 +89,28 @@ public class AppInvocable : BaseInvocable
         }
     }
 
+    protected async Task UploadFile(string projectId, Func<Stream> getFile, string fileName, string contentType)
+    {
+        if (string.IsNullOrEmpty(fileName)) throw new("File name is required.");
+
+        var fileParam = FileParameter.Create("inputFile", getFile, fileName, contentType);
+        var isZip = fileName.EndsWith(".zip");
+
+        var endpoint = ApiEndpoints.Projects + $"/{projectId}" + ApiEndpoints.InputFiles;
+        endpoint = isZip ? $"{endpoint}.zip" : $"{endpoint}/{fileName}";
+
+        var method = isZip ? Method.Post : Method.Put;
+
+        try
+        {
+            var response = await Client.UploadFile(endpoint, method, fileParam, Creds);
+        }
+        catch (PluginApplicationException e)
+        {
+            throw new PluginApplicationException("Could not upload an input file; " + e.Message);
+        }
+    }
+
     protected async Task<List<string>> GetOutputFiles(string projectId)
     {
         var response = await Client.ExecuteWithXml<GetFilesResponse>(ApiEndpoints.Projects + $"/{projectId}" + ApiEndpoints.OutputFiles, Method.Get, null, Creds);
@@ -109,8 +133,7 @@ public class AppInvocable : BaseInvocable
         {
             throw new PluginApplicationException($"Status code: {response.StatusCode}, Content: {response.Content}");
         }
-
-        return response.RawBytes;
+        return response.RawBytes ?? [];
     }
 
     protected async Task<Stream> DownloadOutputFileAsStream(string projectId, string fileName)

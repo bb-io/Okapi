@@ -1,3 +1,5 @@
+using System.Xml.Linq;
+
 namespace Tests.Okapi;
 
 [TestClass]
@@ -123,7 +125,7 @@ public class CombinedActionsTests : TestBase
     }
 
     [TestMethod]
-    public async Task Pretranslate_XliffWithAssets_ProducesExpectedOutput()
+    public async Task Pretranslate_WithTMX_WithSegmentation_ProducesExpectedOutput()
     {
         // given
         var longhornWorkDir = LonghornWorkDir;
@@ -152,22 +154,73 @@ public class CombinedActionsTests : TestBase
 
         var pretranslateRequest = new PretranslateRequest
         {
-            SourceFile = htmlFile,
-            TmxPath = assetsResponse.TMX,
+            File = htmlFile,
+            TmPath = assetsResponse.TMX,
             SrxPath = assetsResponse.SRX
         };
 
         // when
         await combinedActions.Pretranslate(pretranslateRequest, taskRequest, conversionRequest);
 
-        var resultingFile = await FileManagementClient.GetFileFromTestSubfolder("Output", "sample.html.xlf");
-        var expectedFile = await FileManagementClient.GetFileFromTestSubfolder("Input", "expected-sample.html.xlf");
-
         // then
-        Assert.AreEqual(
-            resultingFile.ToString(),
-            expectedFile.ToString(),
+        var resultingFile = XDocument.Parse(await FileManagementClient.GetFileFromTestSubfolder("Output", "sample.html.xlf"));
+        var expectedFile = XDocument.Parse(await FileManagementClient.GetFileFromTestSubfolder("Input", "expected-sample.html.xlf"));
+
+        RemoveFlackyXliffAttributes(resultingFile);
+        RemoveFlackyXliffAttributes(expectedFile);
+
+        Assert.IsTrue(
+            XNode.DeepEquals(resultingFile, expectedFile),
             "Pretranslated XLIFF does not match expected output."
         );
+    }
+
+    [TestMethod]
+    public async Task Pretranslate_WithExistingPensieveTM_NoSegmentation_ProducesExpectedOutput()
+    {
+        // given
+        var taskRequest = new ExecuteSingleLanguageTaskRequest
+        {
+            SourceLanguage = "en",
+            TargetLanguage = "es" // should match languages in the sample.tmx
+        };
+
+        var conversionRequest = new FileConversionRequest { RemoveInappropriateCharactersInFileName = false };
+
+        var pretranslateRequest = new PretranslateRequest
+        {
+            File = new FileReference { Name = "sample-untranslated.html", ContentType = "text/html" },
+            TmPath = "C:\\Users\\alex-\\Okapi-Longhorn-Files\\52\\output\\tm.pentm", // see TmActionsTests
+        };
+
+        // when
+        var combinedActions = new CombinedActions(InvocationContext, FileManagementClient);
+        await combinedActions.Pretranslate(pretranslateRequest, taskRequest, conversionRequest);
+
+        // then
+        var resultingFile = XDocument.Parse(await FileManagementClient.GetFileFromTestSubfolder("Output", "sample.html.xlf"));
+        var expectedFile = XDocument.Parse(await FileManagementClient.GetFileFromTestSubfolder("Input", "expected-sample.html.xlf"));
+
+        RemoveFlackyXliffAttributes(resultingFile);
+        RemoveFlackyXliffAttributes(expectedFile);
+
+        // then
+        Assert.IsTrue(
+            XNode.DeepEquals(resultingFile, expectedFile),
+            "Pretranslated XLIFF does not match expected output."
+        );
+    }
+
+    private static void RemoveFlackyXliffAttributes(XDocument xliff)
+    {
+        xliff.Descendants()
+              .Where(e => e.Name.LocalName == "file")
+              .Attributes("original")
+              .Remove();
+
+        xliff.Descendants()
+              .Where(e => e.Name.LocalName == "match")
+              .Attributes("origin")
+              .Remove();
     }
 }

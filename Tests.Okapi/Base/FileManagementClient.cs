@@ -44,14 +44,13 @@ public class FileManagementClient : IFileManagementClient
     /// </summary>
     /// <param name="subfolder">Input or Output are expected to be used.</param>
     /// <param name="filename">Filename including extension</param>
-    public async Task<Byte[]> GetFileFromTestSubfolder(string subfolder, string filename)
+    public async Task<string> GetFileFromTestSubfolder(string subfolder, string filename)
     {
         if (string.IsNullOrWhiteSpace(subfolder) || string.IsNullOrWhiteSpace(filename))
-        {
-            throw new ArgumentNullException("Subfolder and Filename are expected.");
-        }
+            throw new ArgumentException("Subfolder and Filename are expected.");
 
         var path = Path.Combine(_folderLocation, subfolder, filename);
-        return await File.ReadAllBytesAsync(path);
+        var bytes = await File.ReadAllBytesAsync(path);
+        return System.Text.Encoding.UTF8.GetString(bytes);
     }
 }

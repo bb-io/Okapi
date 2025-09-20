@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?><xliff xmlns="urn:oasis:names:tc:xliff:document:2.0" xmlns:its="http://www.w3.org/2005/11/its" xmlns:itsxlf="http://www.w3.org/ns/its-xliff/" version="2.0" srcLang="en" trgLang="es" its:version="2.0">
+ <file id="f1">
+  <unit id="1">
+   <mtc:matches xmlns:mtc="urn:oasis:names:tc:xliff:matches:2.0">
+   <mtc:match ref="#1" type="tm" subType="okp:EXACT" similarity="100.0" matchSuitability="100.0" origin="tm.pentm">
+   <source>Welcome to our new product launch event.</source>
+   <target>Bienvenidos a nuestro evento de lanzamiento de producto.</target>
+   </mtc:match>
+</mtc:matches>
+   <segment state="final">
+    <source><mrk id="1" type="mtc:match">Welcome to our new product launch event.</mrk></source>
+    <target>Bienvenidos a nuestro evento de lanzamiento de producto.</target>
+   </segment>
+  </unit>
+ </file>
+</xliff>
