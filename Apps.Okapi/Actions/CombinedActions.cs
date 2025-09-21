@@ -10,7 +10,6 @@ using Blackbird.Applications.SDK.Extensions.FileManagement.Interfaces;
 using Blackbird.Filters.Enums;
 using Blackbird.Filters.Transformations;
 using Blackbird.Filters.Xliff.Xliff2;
-using System.Data;
 using System.IO.Compression;
 using System.Text;
 
