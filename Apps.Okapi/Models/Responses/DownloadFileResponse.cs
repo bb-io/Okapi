@@ -2,4 +2,7 @@
 
 namespace Apps.Okapi.Models.Responses;
 
-public record DownloadFileResponse(FileReference File);
+public class DownloadFileResponse()
+{
+    public FileReference File { get; set; } = new();
+}

@@ -1,4 +1,3 @@
-using System.IO.Compression;
 using Apps.Okapi.Api;
 using Apps.Okapi.Constants;
 using Apps.Okapi.Models.Responses;
@@ -6,8 +5,10 @@ using Blackbird.Applications.Sdk.Common;
 using Blackbird.Applications.Sdk.Common.Authentication;
 using Blackbird.Applications.Sdk.Common.Exceptions;
 using Blackbird.Applications.Sdk.Common.Invocation;
-using Blackbird.Applications.Sdk.Utils.Extensions.Sdk;
+using Blackbird.Applications.Sdk.Utils.Extensions.Files;
 using RestSharp;
+using System.IO.Compression;
+using System.Reflection;
 
 namespace Apps.Okapi.Invocables;
 
@@ -23,7 +24,7 @@ public class AppInvocable : BaseInvocable
         Client = new();
     }
 
-    protected async Task<string?> CreateNewProject()
+    protected async Task<string> CreateNewProject()
     {
         var response = await Client.Execute(ApiEndpoints.Projects + "/new", Method.Post, null, Creds);
         if (!response.IsSuccessStatusCode)
@@ -31,18 +32,17 @@ public class AppInvocable : BaseInvocable
             throw new PluginApplicationException($"Status code: {response.StatusCode}, Content: {response.Content}");
         }
 
-        var locationHeader = response.Headers.FirstOrDefault(h => h.Name.Equals("Location", StringComparison.OrdinalIgnoreCase))?.Value?.ToString();
-        if (locationHeader == null)
-        {
-            throw new PluginApplicationException("Location header is missing in the response.");
-        }
+        var locationHeader = (response.Headers?.FirstOrDefault(h => h.Name?.Equals("Location", StringComparison.OrdinalIgnoreCase) == true)?.Value?.ToString())
+            ?? throw new PluginApplicationException("Location header is missing in the response.");
 
         var uri = new Uri(locationHeader);
-        return uri.Segments.Last();
+        var projectId = uri.Segments.LastOrDefault();
+
+        return projectId ?? throw new PluginApplicationException("Can't create a new OKAPI Longhorn project.");
     }
 
     protected async Task AddBatchConfig(string projectId, byte[] fileBytes, string name = "batch.bconf"
-        , string contentType = "application/octet-stream", string? configOverride = null)
+        , string contentType = "application/octet-stream", string? configOverwrite = null)
     {
         string endpoint = ApiEndpoints.Projects + $"/{projectId}" + ApiEndpoints.BatchConfiguration;
         var fileParam = FileParameter.Create("batchConfiguration", fileBytes, name, contentType);
@@ -50,9 +50,9 @@ public class AppInvocable : BaseInvocable
         try
         {
             List<Parameter> formParams = [];
-            if (!string.IsNullOrEmpty(configOverride))
+            if (!string.IsNullOrEmpty(configOverwrite))
             {
-                formParams.Add(Parameter.CreateParameter("overrideStepParams", configOverride, ParameterType.GetOrPost));
+                formParams.Add(Parameter.CreateParameter("OverwriteStepParams", configOverwrite, ParameterType.GetOrPost));
             }
 
             await Client.UploadFile(endpoint, Method.Post, fileParam, Creds, formParams);
@@ -68,6 +68,28 @@ public class AppInvocable : BaseInvocable
         if (string.IsNullOrEmpty(fileName)) throw new("File name is required.");
 
         var fileParam = FileParameter.Create("inputFile", fileBytes, fileName, contentType);
+        var isZip = fileName.EndsWith(".zip");
+
+        var endpoint = ApiEndpoints.Projects + $"/{projectId}" + ApiEndpoints.InputFiles;
+        endpoint = isZip ? $"{endpoint}.zip" : $"{endpoint}/{fileName}";
+
+        var method = isZip ? Method.Post : Method.Put;
+
+        try
+        {
+            var response = await Client.UploadFile(endpoint, method, fileParam, Creds);
+        }
+        catch (PluginApplicationException e)
+        {
+            throw new PluginApplicationException("Could not upload an input file; " + e.Message);
+        }
+    }
+
+    protected async Task UploadFile(string projectId, Func<Stream> getFile, string fileName, string contentType)
+    {
+        if (string.IsNullOrEmpty(fileName)) throw new("File name is required.");
+
+        var fileParam = FileParameter.Create("inputFile", getFile, fileName, contentType);
         var isZip = fileName.EndsWith(".zip");
 
         var endpoint = ApiEndpoints.Projects + $"/{projectId}" + ApiEndpoints.InputFiles;
@@ -107,8 +129,7 @@ public class AppInvocable : BaseInvocable
         {
             throw new PluginApplicationException($"Status code: {response.StatusCode}, Content: {response.Content}");
         }
-
-        return response.RawBytes;
+        return response.RawBytes ?? [];
     }
 
     protected async Task<Stream> DownloadOutputFileAsStream(string projectId, string fileName)
@@ -202,5 +223,47 @@ public class AppInvocable : BaseInvocable
         {
             throw new PluginApplicationException($"Status code: {response.StatusCode}, Content: {response.Content}");
         }
+    }
+
+    protected async Task UploadFile(string projectId, FileParameter file)
+    {
+        var isZip = file.FileName.EndsWith(".zip", StringComparison.OrdinalIgnoreCase);
+
+        var inputEndpoint = ApiEndpoints.Projects + $"/{projectId}" + ApiEndpoints.InputFiles;
+        var uploadEndpoint = isZip ? $"{inputEndpoint}.zip" : $"{inputEndpoint}/{file.FileName}";
+        var uploadMethod = isZip ? Method.Post : Method.Put;
+
+        await Client.UploadFile(uploadEndpoint, uploadMethod, file, Creds);
+    }
+
+    protected static async Task<byte[]> LoadBatchConfig(string configName)
+    {
+        var asm = Assembly.GetExecutingAssembly();
+        Stream? stream = asm.GetManifestResourceStream("Apps.Okapi.Batchconfigs." + $"{configName}.bconf")
+            ?? throw new PluginApplicationException($"Embedded batch config '{configName}.bconf' not found.");
+        return await stream.GetByteData();
+    }
+
+    protected async Task<string> CreateProject()
+    {
+        var newProjectResponse = await Client.Execute(ApiEndpoints.Projects + "/new", Method.Post, null, Creds);
+
+        var locationHeader = (newProjectResponse?.Headers?.FirstOrDefault(h => h.Name?.Equals("Location", StringComparison.OrdinalIgnoreCase) == true)?.Value?.ToString())
+            ?? throw new PluginApplicationException("Cound't get a location header for a created project.");
+
+        var projectId = new Uri(locationHeader).Segments.Last()
+            ?? throw new PluginApplicationException("Cound't get a created project from the location header value.");
+
+        return projectId;
+    }
+
+    protected async Task<string> CreateProjectWithBatchConfig(string configName, string? configOverwrite = null)
+    {
+        var projectId = await CreateProject();
+
+        var config = await LoadBatchConfig(configName);
+        await AddBatchConfig(projectId, config, configOverwrite: configOverwrite);
+
+        return projectId;
     }
 }

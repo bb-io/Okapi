@@ -1,6 +1,7 @@
 using Blackbird.Applications.Sdk.Common.Authentication;
 using Blackbird.Applications.Sdk.Common.Invocation;
 using Microsoft.Extensions.Configuration;
+using System.Text.Json;
 
 namespace Tests.Okapi.Base;
 
@@ -17,7 +18,7 @@ public class TestBase
 
         Creds = config.GetSection("ConnectionDefinition")
                      .GetChildren()
-                     .Select(x => new AuthenticationCredentialsProvider(x.Key, x.Value))
+                     .Select(x => new AuthenticationCredentialsProvider(x.Key, x.Value ?? string.Empty))
                      .ToList();
 
         InvocationContext = new InvocationContext
@@ -28,5 +29,12 @@ public class TestBase
         FileManagementClient = new FileManagementClient(config.GetSection("TestFolder").Value!);
 
         LonghornWorkDir = config.GetSection("LonghornWorkDir").Value!;
+    }
+
+    private readonly JsonSerializerOptions _printOptions = new() { WriteIndented = true };
+
+    public void Print(object result)
+    {
+        Console.WriteLine(JsonSerializer.Serialize(result, _printOptions));
     }
 }

@@ -8,9 +8,9 @@ using RestSharp;
 namespace Apps.Okapi.DataSourceHandlers;
 
 public class ProjectDataHandler(InvocationContext invocationContext)
-    : AppInvocable(invocationContext), IAsyncDataSourceHandler
+    : AppInvocable(invocationContext), IAsyncDataSourceItemHandler
 {
-    public async Task<Dictionary<string, string>> GetDataAsync(DataSourceContext context, CancellationToken cancellationToken)
+    public async Task<IEnumerable<DataSourceItem>> GetDataAsync(DataSourceContext context, CancellationToken cancellationToken)
     {
         var projects = await Client.ExecuteWithXml<GetProjectsResponse>(ApiEndpoints.Projects, Method.Get, null, Creds);
 
@@ -18,6 +18,6 @@ public class ProjectDataHandler(InvocationContext invocationContext)
             .Where(x => context.SearchString == null ||
                         x.Contains(context.SearchString, StringComparison.OrdinalIgnoreCase))
             .Take(20)
-            .ToDictionary(x => x, x => x);
+            .Select(x => new DataSourceItem(x, x));
     }
 }

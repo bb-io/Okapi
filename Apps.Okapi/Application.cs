@@ -10,12 +10,6 @@ public class Application : IApplication, ICategoryProvider
         get => [ApplicationCategory.CatAndTms, ApplicationCategory.Utilities];
         set { }
     }
-    
-    public string Name
-    {
-        get => "App";
-        set { }
-    }
 
     public T GetInstance<T>()
     {

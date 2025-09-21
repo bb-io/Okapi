@@ -1,0 +1,552 @@
+<xliff srcLang="en" trgLang="es" version="2.2" xmlns:its="http://www.w3.org/2005/11/its" xmlns:itsxlf="http://www.w3.org/ns/its-xliff/" its:version="2.0" xmlns="urn:oasis:names:tc:xliff:document:2.2">
+  <file id="f1" original="/C:/Users/alex-/Okapi-Longhorn-Files/77/input/__content__wknd__language-masters__en__faqs.html">
+    <unit id="1" its:locQualityRatingScore="100" its:locQualityRatingScoreThreshold="99">
+      <originalData>
+        <data id="d1">&lt;span data-json-path="jcr:content.jcr:title"&gt;</data>
+        <data id="d2">&lt;/span&gt;</data>
+        <data id="d3">&lt;span data-json-path="jcr:content.jcr:description"&gt;</data>
+        <data id="d4">&lt;/span&gt;&lt;span data-json-path="jcr:content.root.container.container.text.text"&gt;</data>
+      </originalData>
+      <segment state="reviewed">
+        <source>
+          <pc id="1" dataRefStart="d1" dataRefEnd="d2">FAQs</pc>
+          <pc id="2" dataRefStart="d3" dataRefEnd="d4">Here we answer some of the questions that we hear most often from the community.</pc>
+        </source>
+        <target>&lt;span data-json-path="jcr:content.jcr:title"&gt;Preguntas frecuentes&lt;/span&gt; &lt;span data-json-path="jcr:content.jcr:description"&gt;Aquí respondemos algunas de las preguntas que escuchamos con más frecuencia de la comunidad.&lt;/span&gt;&lt;span data-json-path="jcr:content.root.container.container.text.text"&gt;</target>
+      </segment>
+    </unit>
+    <unit id="2" its:locQualityRatingScore="100" its:locQualityRatingScoreThreshold="99">
+      <segment state="reviewed">
+        <source>WKND is a collective of outdoors, music, crafts, adventure sports, and travel enthusiasts that want to share our experiences, connections, and expertise with the world. Our objective is create a community to help like-minded adventure seekers find fun, engaging, and responsible ways to to enjoy life and create lasting memories.</source>
+        <target>WKND es un colectivo de entusiastas de la vida al aire libre, la música, la artesanía, los deportes de aventura y los viajes que desean compartir sus experiencias, conexiones y conocimientos con el mundo. Nuestro objetivo es crear una comunidad que ayude a personas aventureras con ideas afines a encontrar maneras divertidas, atractivas y responsables de disfrutar la vida y crear recuerdos inolvidables.</target>
+      </segment>
+    </unit>
+    <unit id="3" its:locQualityRatingScore="100" its:locQualityRatingScoreThreshold="99">
+      <originalData>
+        <data id="d1">&lt;/span&gt;&lt;span data-json-path="jcr:content.root.container.container.accordion.item_1571070731882.cq:panelTitle"&gt;</data>
+        <data id="d2">&lt;/span&gt;&lt;span data-json-path="jcr:content.root.container.container.accordion.item_1571070731882.text.text"&gt;</data>
+      </originalData>
+      <segment state="reviewed">
+        <source>
+          <pc id="1" dataRefStart="d1" dataRefEnd="d2">Who is WKND's intended audience?</pc>
+        </source>
+        <target>&lt;span data-json-path="jcr:content.root.container.container.accordion.item_1571070731882.cq:panelTitle"&gt;¿A quién se dirige WKND?&lt;/span&gt;&lt;span data-json-path="jcr:content.root.container.container.accordion.item_1571070731882.text.text"&gt;</target>
+      </segment>
+    </unit>
+    <unit id="4" its:locQualityRatingScore="95" its:locQualityRatingScoreThreshold="99">
+      <segment state="translated">
+        <source>We believe the best adventures and activities are those that are accessible to everyone. WKND is designed to be inclusive of all age ranges, abilities, and budget-levels. We strive to cater to the thrill-seeking adrenaline junkie BASE-jumpers as well as novices that have a spare weekend and interest in trying something new.</source>
+        <target>Creemos que las mejores aventuras y actividades son accesibles para todos. WKND está diseñado para personas de todas las edades, habilidades y presupuestos. Nos esforzamos por satisfacer tanto a los amantes de la adrenalina como a los principiantes que tienen un fin de semana libre y les interesa probar algo nuevo.</target>
+      </segment>
+    </unit>
+    <unit id="5" its:locQualityRatingScore="100" its:locQualityRatingScoreThreshold="99">
+      <originalData>
+        <data id="d1">&lt;/span&gt;&lt;span data-json-path="jcr:content.root.container.container.accordion.item_1.jcr:title"&gt;</data>
+        <data id="d2">&lt;/span&gt;</data>
+        <data id="d3">&lt;span data-json-path="jcr:content.root.container.container.accordion.item_1.cq:panelTitle"&gt;</data>
+        <data id="d4">&lt;/span&gt;&lt;span data-json-path="jcr:content.root.container.container.accordion.item_1.text.text"&gt;</data>
+      </originalData>
+      <segment state="reviewed">
+        <source>
+          <pc id="1" dataRefStart="d1" dataRefEnd="d2">Item 1</pc>
+          <pc id="2" dataRefStart="d3" dataRefEnd="d4">How does WKND pay for itself?</pc>
+        </source>
+        <target>&lt;span data-json-path="jcr:content.root.container.container.accordion.item_1.jcr:title"&gt;Punto 1&lt;/span&gt; &lt;span data-json-path="jcr:content.root.container.container.accordion.item_1.cq:panelTitle"&gt;¿Cómo se financia WKND?&lt;/span&gt;&lt;span data-json-path="jcr:content.root.container.container.accordion.item_1.text.text"&gt;</target>
+      </segment>
+    </unit>
+    <unit id="6" its:locQualityRatingScore="100" its:locQualityRatingScoreThreshold="99">
+      <segment state="reviewed">
+        <source>WKND charges a small fee for local promoters that want to sponsor their adventures and events on the WKND site.  Sponsored Adventures may get sorted to more prominent positions in our Adventures listings pages.</source>
+        <target>WKND cobra una pequeña tarifa a los promotores locales que desean patrocinar sus aventuras y eventos en el sitio web de WKND. Las aventuras patrocinadas pueden aparecer en posiciones más destacadas en nuestras páginas de anuncios de aventuras.</target>
+      </segment>
+    </unit>
+    <unit id="7">
+      <segment state="initial">
+        <source />
+      </segment>
+    </unit>
+    <unit id="8" its:locQualityRatingScore="98" its:locQualityRatingScoreThreshold="99">
+      <originalData>
+        <data id="d1">&lt;/span&gt;&lt;span data-json-path="jcr:content.root.container.container.accordion.item_2.jcr:title"&gt;</data>
+        <data id="d2">&lt;/span&gt;</data>
+        <data id="d3">&lt;span data-json-path="jcr:content.root.container.container.accordion.item_2.cq:panelTitle"&gt;</data>
+        <data id="d4">&lt;/span&gt;&lt;span data-json-path="jcr:content.root.container.container.accordion.item_2.text.text"&gt;</data>
+      </originalData>
+      <segment state="translated">
+        <source>
+          <pc id="1" dataRefStart="d1" dataRefEnd="d2">Item 2</pc>
+          <pc id="2" dataRefStart="d3" dataRefEnd="d4">Can I contribute to WKND?</pc>
+        </source>
+        <target>&lt;span data-json-path="jcr:content.root.container.container.accordion.item_2.jcr:title"&gt;Artículo 2&lt;/span&gt; &lt;span data-json-path="jcr:content.root.container.container.accordion.item_2.cq:panelTitle"&gt;¿Puedo contribuir a WKND?&lt;/span&gt;&lt;span data-json-path="jcr:content.root.container.container.accordion.item_2.text.text"&gt;</target>
+      </segment>
+    </unit>
+    <unit id="9" its:locQualityRatingScore="100" its:locQualityRatingScoreThreshold="99">
+      <segment state="reviewed">
+        <source>Yes!  If you have the expertise and experiences to share, we’ll provide the platform to spread it.  As a Guest Writer, you will play an integral role in helping people find fun and cool things to do in your community.</source>
+        <target>¡Sí! Si tienes la experiencia y los conocimientos que quieres compartir, te brindaremos la plataforma para difundirlos. Como escritor invitado, desempeñarás un papel fundamental para ayudar a la gente a encontrar actividades divertidas y geniales en tu comunidad.</target>
+      </segment>
+    </unit>
+    <unit id="10" its:locQualityRatingScore="100" its:locQualityRatingScoreThreshold="99">
+      <originalData>
+        <data id="d1">&lt;/span&gt;&lt;span data-json-path="jcr:content.root.container.container.accordion.item_1571070705187.cq:panelTitle"&gt;</data>
+        <data id="d2">&lt;/span&gt;&lt;span data-json-path="jcr:content.root.container.container.accordion.item_1571070705187.text.text"&gt;</data>
+      </originalData>
+      <segment state="reviewed">
+        <source>
+          <pc id="1" dataRefStart="d1" dataRefEnd="d2">How often is WKDN updated?</pc>
+        </source>
+        <target>&lt;span data-json-path="jcr:content.root.container.container.accordion.item_1571070705187.cq:panelTitle"&gt;¿Con qué frecuencia se actualiza WKDN?&lt;/span&gt;&lt;span data-json-path="jcr:content.root.container.container.accordion.item_1571070705187.text.text"&gt;</target>
+      </segment>
+    </unit>
+    <unit id="11" its:locQualityRatingScore="100" its:locQualityRatingScoreThreshold="99">
+      <segment state="reviewed">
+        <source>WKND is updated daily to provide you with the latest in-depth articles on fun activities that we’ve recently exploring and new adventures that are available for you to discover.  Come back often to see the latest or subscribe to our social feeds.</source>
+        <target>WKND se actualiza diariamente para ofrecerte los últimos artículos detallados sobre las actividades divertidas que hemos explorado recientemente y las nuevas aventuras que te esperan. Vuelve a menudo para ver las últimas novedades o suscríbete a nuestras redes sociales.</target>
+      </segment>
+    </unit>
+    <unit id="12" its:locQualityRatingScore="100" its:locQualityRatingScoreThreshold="99">
+      <originalData>
+        <data id="d1">&lt;/span&gt;&lt;span data-json-path="jcr:content.root.container.container.accordion.item_1571070718887.cq:panelTitle"&gt;</data>
+        <data id="d2">&lt;/span&gt;&lt;span data-json-path="jcr:content.root.container.container.accordion.item_1571070718887.text.text"&gt;</data>
+      </originalData>
+      <segment state="reviewed">
+        <source>
+          <pc id="1" dataRefStart="d1" dataRefEnd="d2">When was WKND founded?</pc>
+        </source>
+        <target>&lt;span data-json-path="jcr:content.root.container.container.accordion.item_1571070718887.cq:panelTitle"&gt;¿Cuándo se fundó WKND?&lt;/span&gt;&lt;span data-json-path="jcr:content.root.container.container.accordion.item_1571070718887.text.text"&gt;</target>
+      </segment>
+    </unit>
+    <unit id="13" its:locQualityRatingScore="100" its:locQualityRatingScoreThreshold="99">
+      <segment state="reviewed">
+        <source>WKND was created in 2015 when our founders, Daniel and Kilian, realized that their friends and family were constantly using them as resources to find fun things to do while they were in Los Angeles. They loved sharing ideas about fun events and activities they knew of, but wanted to be able to do it at larger scale across communities.  They decided to start WKND as a way to share their insights and experiences with as many people as possible.</source>
+        <target>WKND se creó en 2015 cuando nuestros fundadores, Daniel y Kilian, se dieron cuenta de que sus amigos y familiares los usaban constantemente como recursos para encontrar actividades divertidas durante su estancia en Los Ángeles. Les encantaba compartir ideas sobre eventos y actividades divertidas que conocían, pero querían hacerlo a mayor escala en todas las comunidades. Decidieron fundar WKND para compartir sus ideas y experiencias con el mayor número de personas posible.</target>
+      </segment>
+    </unit>
+    <unit id="14" its:locQualityRatingScore="100" its:locQualityRatingScoreThreshold="99">
+      <originalData>
+        <data id="d1">&lt;/span&gt;&lt;span data-json-path="jcr:content.root.container.container.accordion.item_1572027287775.cq:panelTitle"&gt;</data>
+        <data id="d2">&lt;/span&gt;&lt;span data-json-path="jcr:content.root.container.container.accordion.item_1572027287775.text.text"&gt;</data>
+      </originalData>
+      <segment state="reviewed">
+        <source>
+          <pc id="1" dataRefStart="d1" dataRefEnd="d2">Is a hot dog a sandwich?</pc>
+        </source>
+        <target>&lt;span data-json-path="jcr:content.root.container.container.accordion.item_1572027287775.cq:panelTitle"&gt;¿Un hot dog es un sándwich?&lt;/span&gt;&lt;span data-json-path="jcr:content.root.container.container.accordion.item_1572027287775.text.text"&gt;</target>
+      </segment>
+    </unit>
+    <unit id="15" its:locQualityRatingScore="85" its:locQualityRatingScoreThreshold="99">
+      <segment state="translated">
+        <source>While it may be described as meat between two pieces of bread, a hot dog is just a sandwich in the same way Michael Jordan was just a basketball player or William Shakespeare was just a playwright.  Technically true, but vastly understated.</source>
+        <target>Aunque podría describirse como carne entre dos rebanadas de pan, un hot dog es solo un sándwich, de la misma manera que Michael Jordan era solo un jugador de baloncesto o William Shakespeare era solo un dramaturgo. Técnicamente cierto, pero muy discreto.</target>
+      </segment>
+    </unit>
+    <unit id="16" its:locQualityRatingScore="100" its:locQualityRatingScoreThreshold="99">
+      <originalData>
+        <data id="d1">&lt;/span&gt;&lt;span data-json-path="jcr:content.root.container.container.accordion.item_1572027298182.cq:panelTitle"&gt;</data>
+        <data id="d2">&lt;/span&gt;&lt;span data-json-path="jcr:content.root.container.container.accordion.item_1572027298182.text.text"&gt;</data>
+      </originalData>
+      <segment state="reviewed">
+        <source>
+          <pc id="1" dataRefStart="d1" dataRefEnd="d2">Is WKND a real company?</pc>
+        </source>
+        <target>&lt;span data-json-path="jcr:content.root.container.container.accordion.item_1572027298182.cq:panelTitle"&gt;¿Es WKND una empresa real?&lt;/span&gt;&lt;span data-json-path="jcr:content.root.container.container.accordion.item_1572027298182.text.text"&gt;</target>
+      </segment>
+    </unit>
+    <unit id="17" its:locQualityRatingScore="100" its:locQualityRatingScoreThreshold="99">
+      <originalData>
+        <data id="d1">&lt;b&gt;</data>
+        <data id="d2">&lt;/b&gt;</data>
+      </originalData>
+      <segment state="reviewed">
+        <source>No. The WKND is a fictional online magazine and adventure company that focuses on outdoor activities and trips across the globe. The WKND site is designed to demonstrate functionality for Adobe Experience Manager. There is also a corresponding tutorial that walks a developer through the development.  Special thanks to <pc id="1" dataRefStart="d1" dataRefEnd="d2">Lorenzo Buosi</pc>and<pc id="2" dataRefStart="d1" dataRefEnd="d2">Kilian Amendola</pc>who created the beautiful design for the WKND site.</source>
+        <target>No. WKND es una revista online ficticia y una empresa de aventuras que se centra en actividades al aire libre y viajes por todo el mundo. El sitio de WKND está diseñado para demostrar la funcionalidad de Adobe Experience Manager. También incluye un tutorial que guía al desarrollador durante el desarrollo. Agradecemos especialmente a &lt;b&gt;Lorenzo Buosi&lt;/b&gt; y &lt;b&gt;Kilian Amendola,&lt;/b&gt; quienes crearon el atractivo diseño del sitio de WKND.</target>
+      </segment>
+    </unit>
+    <unit id="18" its:locQualityRatingScore="100" its:locQualityRatingScoreThreshold="99">
+      <originalData>
+        <data id="d1">&lt;/span&gt;&lt;span data-json-path="jcr:content.root.container.container_293505757.title.jcr:title"&gt;</data>
+        <data id="d2">&lt;/span&gt;&lt;span data-json-path="jcr:content.root.container.container_293505757.text.text"&gt;</data>
+      </originalData>
+      <segment state="reviewed">
+        <source>
+          <pc id="1" dataRefStart="d1" dataRefEnd="d2">Need more help?</pc>
+        </source>
+        <target>&lt;span data-json-path="jcr:content.root.container.container_293505757.title.jcr:title"&gt;¿Necesitas más ayuda?&lt;/span&gt;&lt;span data-json-path="jcr:content.root.container.container_293505757.text.text"&gt;</target>
+      </segment>
+    </unit>
+    <unit id="19" its:locQualityRatingScore="100" its:locQualityRatingScoreThreshold="99">
+      <originalData>
+        <data id="d1">&lt;a href="#"&gt;</data>
+        <data id="d2">&lt;/a&gt;</data>
+        <data id="d3">&lt;br&gt;</data>
+        <data id="d4">&lt;/a&gt;&lt;br&gt;</data>
+      </originalData>
+      <segment state="reviewed">
+        <source>Give us a call at <pc id="1" dataRefStart="d1" dataRefEnd="d2">1-800-800-0000</pc>.<ph id="2" dataRef="d3" /> E-mail us at info<pc id="3" dataRefStart="d1" dataRefEnd="d4">@wknd.com</pc> We love to talk adventures!</source>
+        <target>Llámenos al &lt;a href="#"&gt;1-800-800-0000&lt;/a&gt; .&lt;br&gt; Envíenos un correo electrónico a &lt;a href="#"&gt;info@wknd.com&lt;/a&gt;&lt;br&gt; ¡Nos encanta hablar de aventuras!</target>
+      </segment>
+    </unit>
+    <unit id="20">
+      <segment state="initial">
+        <source />
+      </segment>
+    </unit>
+    <unit id="21" its:locQualityRatingScore="40" its:locQualityRatingScoreThreshold="99">
+      <originalData>
+        <data id="d1">&lt;span data-json-path="references.jcr:content.metadata.dc:rights"&gt;</data>
+        <data id="d2">&lt;/span&gt;</data>
+        <data id="d3">&lt;span data-json-path="references.jcr:content.metadata.jcr:title"&gt;</data>
+        <data id="d4">&lt;span data-json-path="references.jcr:content.metadata.dc:description"&gt;</data>
+        <data id="d5">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[0]"&gt;</data>
+        <data id="d6">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[1]"&gt;</data>
+        <data id="d7">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[2]"&gt;</data>
+        <data id="d8">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[3]"&gt;</data>
+        <data id="d9">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[4]"&gt;</data>
+        <data id="d10">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[5]"&gt;</data>
+        <data id="d11">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[6]"&gt;</data>
+        <data id="d12">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[7]"&gt;</data>
+        <data id="d13">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[8]"&gt;</data>
+        <data id="d14">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[9]"&gt;</data>
+        <data id="d15">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[10]"&gt;</data>
+        <data id="d16">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[11]"&gt;</data>
+        <data id="d17">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[12]"&gt;</data>
+        <data id="d18">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[13]"&gt;</data>
+        <data id="d19">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[14]"&gt;</data>
+        <data id="d20">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[15]"&gt;</data>
+        <data id="d21">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[16]"&gt;</data>
+        <data id="d22">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[17]"&gt;</data>
+        <data id="d23">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[18]"&gt;</data>
+        <data id="d24">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[19]"&gt;</data>
+        <data id="d25">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[20]"&gt;</data>
+        <data id="d26">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[21]"&gt;</data>
+        <data id="d27">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[22]"&gt;</data>
+        <data id="d28">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[23]"&gt;</data>
+        <data id="d29">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[24]"&gt;</data>
+        <data id="d30">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[25]"&gt;</data>
+        <data id="d31">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[26]"&gt;</data>
+        <data id="d32">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[27]"&gt;</data>
+        <data id="d33">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[28]"&gt;</data>
+        <data id="d34">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[29]"&gt;</data>
+        <data id="d35">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[30]"&gt;</data>
+        <data id="d36">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[31]"&gt;</data>
+        <data id="d37">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[32]"&gt;</data>
+        <data id="d38">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[33]"&gt;</data>
+        <data id="d39">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[34]"&gt;</data>
+        <data id="d40">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[35]"&gt;</data>
+        <data id="d41">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[36]"&gt;</data>
+        <data id="d42">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[37]"&gt;</data>
+        <data id="d43">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[38]"&gt;</data>
+        <data id="d44">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[39]"&gt;</data>
+        <data id="d45">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[40]"&gt;</data>
+        <data id="d46">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[41]"&gt;</data>
+        <data id="d47">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[42]"&gt;</data>
+        <data id="d48">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[43]"&gt;</data>
+        <data id="d49">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[44]"&gt;</data>
+        <data id="d50">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[45]"&gt;</data>
+        <data id="d51">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[46]"&gt;</data>
+        <data id="d52">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[47]"&gt;</data>
+        <data id="d53">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[48]"&gt;</data>
+        <data id="d54">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[49]"&gt;</data>
+        <data id="d55">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[50]"&gt;</data>
+        <data id="d56">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[51]"&gt;</data>
+        <data id="d57">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[52]"&gt;</data>
+        <data id="d58">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[53]"&gt;</data>
+        <data id="d59">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[54]"&gt;</data>
+        <data id="d60">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[55]"&gt;</data>
+        <data id="d61">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[56]"&gt;</data>
+        <data id="d62">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[57]"&gt;</data>
+        <data id="d63">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[58]"&gt;</data>
+        <data id="d64">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[59]"&gt;</data>
+        <data id="d65">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[60]"&gt;</data>
+        <data id="d66">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[61]"&gt;</data>
+        <data id="d67">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[62]"&gt;</data>
+        <data id="d68">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[63]"&gt;</data>
+        <data id="d69">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[64]"&gt;</data>
+        <data id="d70">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[65]"&gt;</data>
+        <data id="d71">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[66]"&gt;</data>
+        <data id="d72">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[67]"&gt;</data>
+        <data id="d73">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[68]"&gt;</data>
+        <data id="d74">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[69]"&gt;</data>
+        <data id="d75">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[70]"&gt;</data>
+        <data id="d76">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[71]"&gt;</data>
+        <data id="d77">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[72]"&gt;</data>
+        <data id="d78">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[73]"&gt;</data>
+        <data id="d79">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[74]"&gt;</data>
+        <data id="d80">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[75]"&gt;</data>
+        <data id="d81">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[76]"&gt;</data>
+        <data id="d82">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[77]"&gt;</data>
+        <data id="d83">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[78]"&gt;</data>
+        <data id="d84">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[79]"&gt;</data>
+        <data id="d85">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[80]"&gt;</data>
+        <data id="d86">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[81]"&gt;</data>
+        <data id="d87">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[82]"&gt;</data>
+        <data id="d88">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[83]"&gt;</data>
+        <data id="d89">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[84]"&gt;</data>
+        <data id="d90">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[85]"&gt;</data>
+        <data id="d91">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[86]"&gt;</data>
+        <data id="d92">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[87]"&gt;</data>
+        <data id="d93">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[88]"&gt;</data>
+        <data id="d94">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[89]"&gt;</data>
+        <data id="d95">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[90]"&gt;</data>
+        <data id="d96">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[91]"&gt;</data>
+        <data id="d97">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[92]"&gt;</data>
+        <data id="d98">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[93]"&gt;</data>
+        <data id="d99">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[94]"&gt;</data>
+        <data id="d100">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[95]"&gt;</data>
+        <data id="d101">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[96]"&gt;</data>
+        <data id="d102">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[97]"&gt;</data>
+        <data id="d103">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[98]"&gt;</data>
+        <data id="d104">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[99]"&gt;</data>
+        <data id="d105">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[100]"&gt;</data>
+        <data id="d106">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[101]"&gt;</data>
+        <data id="d107">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[102]"&gt;</data>
+        <data id="d108">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[103]"&gt;</data>
+        <data id="d109">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[104]"&gt;</data>
+        <data id="d110">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[105]"&gt;</data>
+        <data id="d111">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[106]"&gt;</data>
+        <data id="d112">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[107]"&gt;</data>
+        <data id="d113">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[108]"&gt;</data>
+        <data id="d114">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[109]"&gt;</data>
+        <data id="d115">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[110]"&gt;</data>
+        <data id="d116">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[111]"&gt;</data>
+        <data id="d117">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[112]"&gt;</data>
+        <data id="d118">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[113]"&gt;</data>
+        <data id="d119">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[114]"&gt;</data>
+        <data id="d120">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[115]"&gt;</data>
+        <data id="d121">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[116]"&gt;</data>
+        <data id="d122">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[117]"&gt;</data>
+        <data id="d123">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[118]"&gt;</data>
+        <data id="d124">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[119]"&gt;</data>
+        <data id="d125">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[120]"&gt;</data>
+        <data id="d126">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[121]"&gt;</data>
+        <data id="d127">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[122]"&gt;</data>
+        <data id="d128">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[123]"&gt;</data>
+        <data id="d129">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[124]"&gt;</data>
+        <data id="d130">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[125]"&gt;</data>
+        <data id="d131">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[126]"&gt;</data>
+        <data id="d132">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[127]"&gt;</data>
+        <data id="d133">&lt;span data-json-path="references.jcr:content.metadata.dc:subject[128]"&gt;</data>
+        <data id="d134">&lt;span data-json-path="references.jcr:content.metadata.dc:title"&gt;</data>
+        <data id="d135">&lt;span data-json-path="references.jcr:content.metadata.xmpRights:UsageTerms[0]"&gt;</data>
+      </originalData>
+      <segment state="translated">
+        <source>
+          <pc id="1" dataRefStart="d1" dataRefEnd="d2">Fran Mares</pc>
+          <pc id="2" dataRefStart="d3" dataRefEnd="d2">Woman with hands apart against mountain valley</pc>
+          <pc id="3" dataRefStart="d4" dataRefEnd="d2">Back view of woman in hat and coat standing on high peak holding hands apart against majestic terrain with lake and mountains</pc>
+          <pc id="4" dataRefStart="d5" dataRefEnd="d2">woman</pc>
+          <pc id="5" dataRefStart="d6" dataRefEnd="d2">mountain</pc>
+          <pc id="6" dataRefStart="d7" dataRefEnd="d2">freedom</pc>
+          <pc id="7" dataRefStart="d8" dataRefEnd="d2">peak</pc>
+          <pc id="8" dataRefStart="d9" dataRefEnd="d2">hands apart</pc>
+          <pc id="9" dataRefStart="d10" dataRefEnd="d2">travel</pc>
+          <pc id="10" dataRefStart="d11" dataRefEnd="d2">trekking</pc>
+          <pc id="11" dataRefStart="d12" dataRefEnd="d2">sky</pc>
+          <pc id="12" dataRefStart="d13" dataRefEnd="d2">adventure</pc>
+          <pc id="13" dataRefStart="d14" dataRefEnd="d2">nature</pc>
+          <pc id="14" dataRefStart="d15" dataRefEnd="d2">landscape</pc>
+          <pc id="15" dataRefStart="d16" dataRefEnd="d2">posture</pc>
+          <pc id="16" dataRefStart="d17" dataRefEnd="d2">explore</pc>
+          <pc id="17" dataRefStart="d18" dataRefEnd="d2">happy</pc>
+          <pc id="18" dataRefStart="d19" dataRefEnd="d2">rock</pc>
+          <pc id="19" dataRefStart="d20" dataRefEnd="d2">tourist</pc>
+          <pc id="20" dataRefStart="d21" dataRefEnd="d2">view</pc>
+          <pc id="21" dataRefStart="d22" dataRefEnd="d2">hat</pc>
+          <pc id="22" dataRefStart="d23" dataRefEnd="d2">activity</pc>
+          <pc id="23" dataRefStart="d24" dataRefEnd="d2">peace</pc>
+          <pc id="24" dataRefStart="d25" dataRefEnd="d2">vacation</pc>
+          <pc id="25" dataRefStart="d26" dataRefEnd="d2">height</pc>
+          <pc id="26" dataRefStart="d27" dataRefEnd="d2">altitude</pc>
+          <pc id="27" dataRefStart="d28" dataRefEnd="d2">achievement</pc>
+          <pc id="28" dataRefStart="d29" dataRefEnd="d2">coat</pc>
+          <pc id="29" dataRefStart="d30" dataRefEnd="d2">top</pc>
+          <pc id="30" dataRefStart="d31" dataRefEnd="d2">climb</pc>
+          <pc id="31" dataRefStart="d32" dataRefEnd="d2">hike</pc>
+          <pc id="32" dataRefStart="d33" dataRefEnd="d2">journey</pc>
+          <pc id="33" dataRefStart="d34" dataRefEnd="d2">tourism</pc>
+          <pc id="34" dataRefStart="d35" dataRefEnd="d2">destination</pc>
+          <pc id="35" dataRefStart="d36" dataRefEnd="d2">valley</pc>
+          <pc id="36" dataRefStart="d37" dataRefEnd="d2">gesture</pc>
+          <pc id="37" dataRefStart="d38" dataRefEnd="d2">standing</pc>
+          <pc id="38" dataRefStart="d39" dataRefEnd="d2">back view</pc>
+          <pc id="39" dataRefStart="d40" dataRefEnd="d2">copy space</pc>
+          <pc id="40" dataRefStart="d41" dataRefEnd="d2">anonymous</pc>
+          <pc id="41" dataRefStart="d42" dataRefEnd="d2">unrecognizable</pc>
+          <pc id="42" dataRefStart="d43" dataRefEnd="d2">blurred background</pc>
+          <pc id="43" dataRefStart="d44" dataRefEnd="d2">horizontal</pc>
+          <pc id="44" dataRefStart="d45" dataRefEnd="d2">new zealand</pc>
+          <pc id="45" dataRefStart="d46" dataRefEnd="d2">rosy peak</pc>
+          <pc id="46" dataRefStart="d47" dataRefEnd="d2">fm</pc>
+          <pc id="47" dataRefStart="d48" dataRefEnd="d2">woman</pc>
+          <pc id="48" dataRefStart="d49" dataRefEnd="d2">mountain</pc>
+          <pc id="49" dataRefStart="d50" dataRefEnd="d2">freedom</pc>
+          <pc id="50" dataRefStart="d51" dataRefEnd="d2">peak</pc>
+          <pc id="51" dataRefStart="d52" dataRefEnd="d2">hands apart</pc>
+          <pc id="52" dataRefStart="d53" dataRefEnd="d2">travel</pc>
+          <pc id="53" dataRefStart="d54" dataRefEnd="d2">trekking</pc>
+          <pc id="54" dataRefStart="d55" dataRefEnd="d2">sky</pc>
+          <pc id="55" dataRefStart="d56" dataRefEnd="d2">adventure</pc>
+          <pc id="56" dataRefStart="d57" dataRefEnd="d2">nature</pc>
+          <pc id="57" dataRefStart="d58" dataRefEnd="d2">landscape</pc>
+          <pc id="58" dataRefStart="d59" dataRefEnd="d2">posture</pc>
+          <pc id="59" dataRefStart="d60" dataRefEnd="d2">explore</pc>
+          <pc id="60" dataRefStart="d61" dataRefEnd="d2">happy</pc>
+          <pc id="61" dataRefStart="d62" dataRefEnd="d2">rock</pc>
+          <pc id="62" dataRefStart="d63" dataRefEnd="d2">tourist</pc>
+          <pc id="63" dataRefStart="d64" dataRefEnd="d2">view</pc>
+          <pc id="64" dataRefStart="d65" dataRefEnd="d2">hat</pc>
+          <pc id="65" dataRefStart="d66" dataRefEnd="d2">activity</pc>
+          <pc id="66" dataRefStart="d67" dataRefEnd="d2">peace</pc>
+          <pc id="67" dataRefStart="d68" dataRefEnd="d2">vacation</pc>
+          <pc id="68" dataRefStart="d69" dataRefEnd="d2">height</pc>
+          <pc id="69" dataRefStart="d70" dataRefEnd="d2">altitude</pc>
+          <pc id="70" dataRefStart="d71" dataRefEnd="d2">achievement</pc>
+          <pc id="71" dataRefStart="d72" dataRefEnd="d2">coat</pc>
+          <pc id="72" dataRefStart="d73" dataRefEnd="d2">top</pc>
+          <pc id="73" dataRefStart="d74" dataRefEnd="d2">climb</pc>
+          <pc id="74" dataRefStart="d75" dataRefEnd="d2">hike</pc>
+          <pc id="75" dataRefStart="d76" dataRefEnd="d2">journey</pc>
+          <pc id="76" dataRefStart="d77" dataRefEnd="d2">tourism</pc>
+          <pc id="77" dataRefStart="d78" dataRefEnd="d2">destination</pc>
+          <pc id="78" dataRefStart="d79" dataRefEnd="d2">valley</pc>
+          <pc id="79" dataRefStart="d80" dataRefEnd="d2">gesture</pc>
+          <pc id="80" dataRefStart="d81" dataRefEnd="d2">standing</pc>
+          <pc id="81" dataRefStart="d82" dataRefEnd="d2">back view</pc>
+          <pc id="82" dataRefStart="d83" dataRefEnd="d2">copy space</pc>
+          <pc id="83" dataRefStart="d84" dataRefEnd="d2">anonymous</pc>
+          <pc id="84" dataRefStart="d85" dataRefEnd="d2">unrecognizable</pc>
+          <pc id="85" dataRefStart="d86" dataRefEnd="d2">blurred background</pc>
+          <pc id="86" dataRefStart="d87" dataRefEnd="d2">horizontal</pc>
+          <pc id="87" dataRefStart="d88" dataRefEnd="d2">new zealand</pc>
+          <pc id="88" dataRefStart="d89" dataRefEnd="d2">rosy peak</pc>
+          <pc id="89" dataRefStart="d90" dataRefEnd="d2">fm</pc>
+          <pc id="90" dataRefStart="d91" dataRefEnd="d2">woman</pc>
+          <pc id="91" dataRefStart="d92" dataRefEnd="d2">mountain</pc>
+          <pc id="92" dataRefStart="d93" dataRefEnd="d2">freedom</pc>
+          <pc id="93" dataRefStart="d94" dataRefEnd="d2">peak</pc>
+          <pc id="94" dataRefStart="d95" dataRefEnd="d2">hands apart</pc>
+          <pc id="95" dataRefStart="d96" dataRefEnd="d2">travel</pc>
+          <pc id="96" dataRefStart="d97" dataRefEnd="d2">trekking</pc>
+          <pc id="97" dataRefStart="d98" dataRefEnd="d2">sky</pc>
+          <pc id="98" dataRefStart="d99" dataRefEnd="d2">adventure</pc>
+          <pc id="99" dataRefStart="d100" dataRefEnd="d2">nature</pc>
+          <pc id="100" dataRefStart="d101" dataRefEnd="d2">landscape</pc>
+          <pc id="101" dataRefStart="d102" dataRefEnd="d2">posture</pc>
+          <pc id="102" dataRefStart="d103" dataRefEnd="d2">explore</pc>
+          <pc id="103" dataRefStart="d104" dataRefEnd="d2">happy</pc>
+          <pc id="104" dataRefStart="d105" dataRefEnd="d2">rock</pc>
+          <pc id="105" dataRefStart="d106" dataRefEnd="d2">tourist</pc>
+          <pc id="106" dataRefStart="d107" dataRefEnd="d2">view</pc>
+          <pc id="107" dataRefStart="d108" dataRefEnd="d2">hat</pc>
+          <pc id="108" dataRefStart="d109" dataRefEnd="d2">activity</pc>
+          <pc id="109" dataRefStart="d110" dataRefEnd="d2">peace</pc>
+          <pc id="110" dataRefStart="d111" dataRefEnd="d2">vacation</pc>
+          <pc id="111" dataRefStart="d112" dataRefEnd="d2">height</pc>
+          <pc id="112" dataRefStart="d113" dataRefEnd="d2">altitude</pc>
+          <pc id="113" dataRefStart="d114" dataRefEnd="d2">achievement</pc>
+          <pc id="114" dataRefStart="d115" dataRefEnd="d2">coat</pc>
+          <pc id="115" dataRefStart="d116" dataRefEnd="d2">top</pc>
+          <pc id="116" dataRefStart="d117" dataRefEnd="d2">climb</pc>
+          <pc id="117" dataRefStart="d118" dataRefEnd="d2">hike</pc>
+          <pc id="118" dataRefStart="d119" dataRefEnd="d2">journey</pc>
+          <pc id="119" dataRefStart="d120" dataRefEnd="d2">tourism</pc>
+          <pc id="120" dataRefStart="d121" dataRefEnd="d2">destination</pc>
+          <pc id="121" dataRefStart="d122" dataRefEnd="d2">valley</pc>
+          <pc id="122" dataRefStart="d123" dataRefEnd="d2">gesture</pc>
+          <pc id="123" dataRefStart="d124" dataRefEnd="d2">standing</pc>
+          <pc id="124" dataRefStart="d125" dataRefEnd="d2">back view</pc>
+          <pc id="125" dataRefStart="d126" dataRefEnd="d2">copy space</pc>
+          <pc id="126" dataRefStart="d127" dataRefEnd="d2">anonymous</pc>
+          <pc id="127" dataRefStart="d128" dataRefEnd="d2">unrecognizable</pc>
+          <pc id="128" dataRefStart="d129" dataRefEnd="d2">blurred background</pc>
+          <pc id="129" dataRefStart="d130" dataRefEnd="d2">horizontal</pc>
+          <pc id="130" dataRefStart="d131" dataRefEnd="d2">new zealand</pc>
+          <pc id="131" dataRefStart="d132" dataRefEnd="d2">rosy peak</pc>
+          <pc id="132" dataRefStart="d133" dataRefEnd="d2">fm</pc>
+          <pc id="133" dataRefStart="d134" dataRefEnd="d2">Woman with hands apart against mountain valley</pc>
+          <pc id="134" dataRefStart="d135" dataRefEnd="d2">Thank you for your interest in Adobe’s products and services! The images in this demo website are from Adobe Stock and are Third Party Material as defined in the Demo Asset Additional Terms at https://www.adobe.com/legal/terms.html.</pc>
+        </source>
+        <target>&lt;span data-json-path="references.jcr:content.metadata.dc:subject[122]"&gt;Mujer&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[123]"&gt;con&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[124]"&gt;las&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[125]"&gt;manos&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[126]"&gt;separadas&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.jcr:title"&gt;contra el valle de la montaña&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[127]"&gt;Vista&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[128]"&gt;posterior&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:title"&gt;de&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.xmpRights:UsageTerms[0]"&gt;una&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:description"&gt;mujer con sombrero y abrigo de pie en un pico alto tomados de la mano separados contra un terreno majestuoso con lago y montañas.&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:rights"&gt;Mujer&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[0]"&gt;montaña&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[1]"&gt;libertad&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[2]"&gt;pico&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[3]"&gt;manos&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[4]"&gt;separadas&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[5]"&gt;viaje&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[6]"&gt;trekking&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[7]"&gt;cielo&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[8]"&gt;aventura&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[9]"&gt;naturaleza&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[10]"&gt;paisaje&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[11]"&gt;postura&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[12]"&gt;explorar&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[13]"&gt;feliz&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[14]"&gt;roca&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[15]"&gt;turista&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[16]"&gt;vista&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[17]"&gt;sombrero&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[18]"&gt;actividad&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[19]"&gt;paz&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[20]"&gt;vacaciones&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[21]"&gt;altura&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[22]"&gt;altitud&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[23]"&gt;logro&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[24]"&gt;abrigo&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[25]"&gt;cima&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[26]"&gt;escalada&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[27]"&gt;caminata&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[28]"&gt;viaje&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[29]"&gt;turismo&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[30]"&gt;destino&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[31]"&gt;valle&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[32]"&gt;gesto&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[79]"&gt;de&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[33]"&gt;pie&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[34]"&gt;vista&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[80]"&gt;trasera&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[35]"&gt;copia&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[78]"&gt;espacio&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[36]"&gt;anónimo&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[37]"&gt;irreconocible&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[38]"&gt;fondo&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[81]"&gt;borroso&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[39]"&gt;horizontal&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[40]"&gt;nueva zelanda&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[41]"&gt;rosy&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[101]"&gt;peak&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[42]"&gt;fm&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[43]"&gt;mujer&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[44]"&gt;montaña&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[45]"&gt;libertad&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[46]"&gt;pico&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[95]"&gt;manos&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[47]"&gt;separadas&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[48]"&gt;viaje&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[49]"&gt;trekking&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[50]"&gt;cielo&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[51]"&gt;aventura&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[52]"&gt;naturaleza&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[53]"&gt;paisaje&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[54]"&gt;postura&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[55]"&gt;explorar&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[56]"&gt;feliz&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[57]"&gt;roca&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[58]"&gt;turista&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[59]"&gt;vista&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[60]"&gt;sombrero&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[61]"&gt;actividad&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[62]"&gt;paz&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[63]"&gt;vacaciones&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[64]"&gt;altura&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[65]"&gt;altitud&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[66]"&gt;logro&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[67]"&gt;abrigo&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[68]"&gt;cima&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[69]"&gt;escalada&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[70]"&gt;caminata&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[71]"&gt;viaje&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[72]"&gt;turismo&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[73]"&gt;destino&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[74]"&gt;valle&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[75]"&gt;gesto&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[82]"&gt;de&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[76]"&gt;pie&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[77]"&gt;vista&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[102]"&gt;trasera&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[118]"&gt;copia&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[105]"&gt;espacio&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[103]"&gt;anónimo&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[97]"&gt;irreconocible&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[96]"&gt;fondo&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[98]"&gt;borroso&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[100]"&gt;horizontal&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[116]"&gt;nueva&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[83]"&gt;zelanda&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[104]"&gt;rosy&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[84]"&gt;peak&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[85]"&gt;fm&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[86]"&gt;Mujer&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[88]"&gt;con&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[89]"&gt;las&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[99]"&gt;manos&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[90]"&gt;separadas&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[91]"&gt;contra&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[93]"&gt;el&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[87]"&gt;valle&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[92]"&gt;de&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[94]"&gt;la&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[109]"&gt;montaña&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[106]"&gt;¡&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[121]"&gt;Gracias&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[112]"&gt;por&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[115]"&gt;su&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[117]"&gt;interés&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[110]"&gt;en&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[111]"&gt;los&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[119]"&gt;productos&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[107]"&gt;y&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[120]"&gt;servicios&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[108]"&gt;de&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[114]"&gt;Adobe&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.dc:subject[113]"&gt;!&lt;/span&gt; &lt;span data-json-path="references.jcr:content.metadata.xmpRights:UsageTerms[0]"&gt;Las imágenes de este sitio web de demostración son de Adobe Stock y son material de terceros según se define en los Términos adicionales de los activos de demostración en https://www.adobe.com/legal/terms.html.&lt;/span&gt;</target>
+      </segment>
+    </unit>
+    <unit id="22" its:locQualityRatingScore="50" its:locQualityRatingScoreThreshold="99">
+      <originalData>
+        <data id="d1">&lt;span data-json-path="references.jcr:content.jcr:title"&gt;</data>
+        <data id="d2">&lt;/span&gt;</data>
+        <data id="d3">&lt;span data-json-path="references.jcr:content.root.container.container.sign-in-buttons.greetingLabel"&gt;</data>
+        <data id="d4">&lt;span data-json-path="references.jcr:content.root.container.container.sign-in-buttons.signOutLabel"&gt;</data>
+        <data id="d5">&lt;span data-json-path="references.jcr:content.root.container.container.sign-in-buttons.signInLabel"&gt;</data>
+        <data id="d6">&lt;span data-json-path="references.jcr:content.root.container.container_1195249223.image.alt"&gt;</data>
+      </originalData>
+      <segment state="translated">
+        <source>
+          <pc id="1" dataRefStart="d1" dataRefEnd="d2">Header</pc>
+          <pc id="2" dataRefStart="d3" dataRefEnd="d2">Welcome</pc>
+          <pc id="3" dataRefStart="d4" dataRefEnd="d2">Sign Out</pc>
+          <pc id="4" dataRefStart="d5" dataRefEnd="d2">Sign In</pc>
+          <pc id="5" dataRefStart="d6" dataRefEnd="d2">WKND Logo</pc>
+        </source>
+        <target>&lt;span data-json-path="references.jcr:content.jcr:title"&gt;Encabezado&lt;/span&gt; &lt;span data-json-path="references.jcr:content.root.container.container.sign-in-buttons.greetingLabel"&gt;Bienvenido&lt;/span&gt;&lt;span data-json-path="references.jcr:content.root.container.container.sign-in-buttons.signOutLabel"&gt;Cerrar sesión Iniciar&lt;/span&gt; &lt;span data-json-path="references.jcr:content.root.container.container.sign-in-buttons.signInLabel"&gt;sesión&lt;/span&gt; &lt;span data-json-path="references.jcr:content.root.container.container_1195249223.image.alt"&gt;Logotipo de WKND&lt;/span&gt;</target>
+      </segment>
+    </unit>
+    <unit id="23" its:locQualityRatingScore="98" its:locQualityRatingScoreThreshold="99">
+      <originalData>
+        <data id="d1">&lt;span data-json-path="references.jcr:content.jcr:title"&gt;</data>
+        <data id="d2">&lt;/span&gt;</data>
+        <data id="d3">&lt;span data-json-path="references.jcr:content.root.container.container.image.alt"&gt;</data>
+        <data id="d4">&lt;span data-json-path="references.jcr:content.root.container.container.title.jcr:title"&gt;</data>
+        <data id="d5">&lt;span data-json-path="references.jcr:content.root.container.container.button.jcr:title"&gt;</data>
+        <data id="d6">&lt;span data-json-path="references.jcr:content.root.container.container.button.button39381355678930.jcr:title"&gt;</data>
+        <data id="d7">&lt;span data-json-path="references.jcr:content.root.container.container.button.item39381356464486.jcr:title"&gt;</data>
+        <data id="d8">&lt;span data-json-path="references.jcr:content.root.container.container.button.item39381358237347.jcr:title"&gt;</data>
+        <data id="d9">&lt;/span&gt;&lt;span data-json-path="references.jcr:content.root.container.container.text.text"&gt;</data>
+      </originalData>
+      <segment state="translated">
+        <source>
+          <pc id="1" dataRefStart="d1" dataRefEnd="d2">Footer</pc>
+          <pc id="2" dataRefStart="d3" dataRefEnd="d2">WKND Logo</pc>
+          <pc id="3" dataRefStart="d4" dataRefEnd="d2">Follow Us</pc>
+          <pc id="4" dataRefStart="d5" dataRefEnd="d2">WKND Global Social Media</pc>
+          <pc id="5" dataRefStart="d6" dataRefEnd="d2">Facebook</pc>
+          <pc id="6" dataRefStart="d7" dataRefEnd="d2">Twitter</pc>
+          <pc id="7" dataRefStart="d8" dataRefEnd="d9">Instagram</pc>
+        </source>
+        <target>&lt;span data-json-path="references.jcr:content.jcr:title"&gt;Pie de página&lt;/span&gt; &lt;span data-json-path="references.jcr:content.root.container.container.image.alt"&gt;Logotipo de WKND&lt;/span&gt; &lt;span data-json-path="references.jcr:content.root.container.container.title.jcr:title"&gt;Síguenos&lt;/span&gt; &lt;span data-json-path="references.jcr:content.root.container.container.button.jcr:title"&gt;WKND Global Redes sociales&lt;/span&gt; &lt;span data-json-path="references.jcr:content.root.container.container.button.button39381355678930.jcr:title"&gt;Facebook&lt;/span&gt; &lt;span data-json-path="references.jcr:content.root.container.container.button.item39381356464486.jcr:title"&gt;Twitter&lt;/span&gt; &lt;span data-json-path="references.jcr:content.root.container.container.button.item39381358237347.jcr:title"&gt;Instagram&lt;/span&gt;&lt;span data-json-path="references.jcr:content.root.container.container.text.text"&gt;</target>
+      </segment>
+    </unit>
+    <unit id="24" its:locQualityRatingScore="100" its:locQualityRatingScoreThreshold="99">
+      <segment state="reviewed">
+        <source>Ⓒ 2019,  WKND Site.</source>
+        <target>Ⓒ 2019, Sitio WKND.</target>
+      </segment>
+    </unit>
+    <unit id="25" its:locQualityRatingScore="100" its:locQualityRatingScoreThreshold="99">
+      <originalData>
+        <data id="d1">&lt;a href="https://docs.adobe.com/content/help/en/experience-manager-core-components/using/introduction.html"&gt;</data>
+        <data id="d2">&lt;/a&gt;</data>
+        <data id="d3">&lt;a href="https://github.com/adobe/aem-project-archetype"&gt;</data>
+        <data id="d4">&lt;a href="https://github.com/adobe/aem-guides-wknd/"&gt;</data>
+        <data id="d5">&lt;a href="https://docs.adobe.com/content/help/en/experience-manager-learn/getting-started-wknd-tutorial-develop/overview.html"&gt;</data>
+      </originalData>
+      <segment state="reviewed">
+        <source>WKND is a fictitious adventure and travel website created by Adobe to demonstrate how anyone can use Adobe Experience Manager to build a beautiful, feature-rich website over a single weekend. This site is built entirely with Adobe Experience Manager <pc id="1" dataRefStart="d1" dataRefEnd="d2">Core Components</pc> and <pc id="2" dataRefStart="d3" dataRefEnd="d2">Archetype</pc> that are available as open source code to the public. The entire <pc id="3" dataRefStart="d4" dataRefEnd="d2">site source code</pc> is available as open source as well and is accompanied with a <pc id="4" dataRefStart="d5" dataRefEnd="d2">detailed tutorial</pc> on how to recreate the site.</source>
+        <target>WKND es un sitio web ficticio de aventuras y viajes creado por Adobe para demostrar cómo cualquiera puede usar Adobe Experience Manager para crear un sitio web atractivo y repleto de funciones en un solo fin de semana. Este sitio está desarrollado íntegramente con &lt;a href="https://docs.adobe.com/content/help/en/experience-manager-core-components/using/introduction.html"&gt;los componentes principales&lt;/a&gt; de Adobe Experience Manager y &lt;a href="https://github.com/adobe/aem-project-archetype"&gt;Archetype&lt;/a&gt; , disponibles públicamente como código abierto. El &lt;a href="https://github.com/adobe/aem-guides-wknd/"&gt;código fuente completo del sitio&lt;/a&gt; también está disponible como código abierto e incluye un &lt;a href="https://docs.adobe.com/content/help/en/experience-manager-learn/getting-started-wknd-tutorial-develop/overview.html"&gt;tutorial detallado&lt;/a&gt; sobre cómo recrearlo.</target>
+      </segment>
+    </unit>
+    <unit id="26" its:locQualityRatingScore="100" its:locQualityRatingScoreThreshold="99">
+      <originalData>
+        <data id="d1">&lt;a href="https://stock.adobe.com/"&gt;</data>
+        <data id="d2">&lt;/a&gt;</data>
+      </originalData>
+      <segment state="reviewed">
+        <source>Many of the beautiful images in the WKND site are available for purchase via <pc id="1" dataRefStart="d1" dataRefEnd="d2">Adobe Stock</pc>.</source>
+        <target>Muchas de las hermosas imágenes del sitio WKND están disponibles para su compra a través de &lt;a href="https://stock.adobe.com/"&gt;Adobe Stock&lt;/a&gt; .</target>
+      </segment>
+    </unit>
+    <unit id="27">
+      <segment state="initial">
+        <source />
+      </segment>
+    </unit>
+  </file>
+</xliff>

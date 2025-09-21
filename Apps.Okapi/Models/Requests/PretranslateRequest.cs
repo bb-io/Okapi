@@ -1,18 +1,16 @@
-using Apps.Okapi.DataSourceHandlers.EnumHandlers;
 using Blackbird.Applications.Sdk.Common;
-using Blackbird.Applications.Sdk.Common.Dictionaries;
 using Blackbird.Applications.Sdk.Common.Files;
 
 namespace Apps.Okapi.Models.Requests;
 
 public class PretranslateRequest
 {
-    [Display("Source file", Description = "File to be translated (source file).")]
-    public FileReference SourceFile { get; set; }
+    [Display("Content", Description = "File to be translated (source file).")]
+    public FileReference File { get; set; } = new();
 
-    [Display("Translation memory path (TMX file)", Description = "Path to TM local to OKAPI server, use \"Upload translation assets\" action to obtain this path.")]
-    public string TmxPath { get; set; }
+    [Display("TM path on OKAPI server to TMX file or Pensieve TM folder)", Description = "Path to TM local to OKAPI server, use \"Create TM from TMX\" or \"Upload translation assets\" action to obtain this path.")]
+    public string TmPath { get; set; } = string.Empty;
 
-    [Display("Segmentation rules path (SRX file)", Description = "Path to custom segmentation rules local to OKAPI server, use \"Upload translation assets\" action to obtain this path.")]
+    [Display("Segmentation rules path on OKAPI server (SRX file)", Description = "Path to custom segmentation rules local to OKAPI server, use \"Upload translation assets\" action to obtain this path.")]
     public string? SrxPath { get; set; }
 }

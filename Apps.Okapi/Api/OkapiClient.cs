@@ -14,7 +14,7 @@ public class OkapiClient : RestClient
         var response = await Execute(endpoint, method, bodyObj, creds);
 
         var serializer = new XmlSerializer(typeof(T));
-        using var reader = new StringReader(response.Content);
+        using var reader = new StringReader(response.Content ?? string.Empty);
         var result = (T)serializer.Deserialize(reader)!;
 
         return result;

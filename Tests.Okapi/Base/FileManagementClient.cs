@@ -1,25 +1,17 @@
-using Blackbird.Applications.Sdk.Common.Files;
 using Blackbird.Applications.SDK.Extensions.FileManagement.Interfaces;
 
 namespace Tests.Okapi.Base;
 
-public class FileManagementClient : IFileManagementClient
+public class FileManagementClient(string folderLocation) : IFileManagementClient
 {
-    private readonly string _folderLocation;
-
-    public FileManagementClient(string folderLocation)
-    {
-        _folderLocation = folderLocation ?? throw new ArgumentNullException(nameof(folderLocation));
-    }
+    private readonly string _folderLocation = folderLocation ?? throw new ArgumentNullException(nameof(folderLocation));
 
     public async Task<Stream> DownloadAsync(FileReference reference)
     {
-        if (reference == null) throw new ArgumentNullException(nameof(reference));
+        ArgumentNullException.ThrowIfNull(reference);
 
         var path = Path.Combine(_folderLocation, "Input", reference.Name);
-        var bytes = await File.ReadAllBytesAsync(path);
-
-        return new MemoryStream(bytes);
+        return await Task.FromResult(File.OpenRead(path)); // to keep method signature same as in SDK
     }
 
     public async Task<FileReference> UploadAsync(Stream stream, string contentType, string fileName)
@@ -38,7 +30,10 @@ public class FileManagementClient : IFileManagementClient
             await stream.CopyToAsync(fileStream);
         }
 
-        return new FileReference { Name = fileName };
+        return new FileReference {
+            Name = fileName,
+            ContentType = contentType,
+        };
     }
 
     /// <summary>
@@ -46,14 +41,13 @@ public class FileManagementClient : IFileManagementClient
     /// </summary>
     /// <param name="subfolder">Input or Output are expected to be used.</param>
     /// <param name="filename">Filename including extension</param>
-    public async Task<Byte[]> GetFileFromTestSubfolder(string subfolder, string filename)
+    public async Task<string> GetFileFromTestSubfolder(string subfolder, string filename)
     {
         if (string.IsNullOrWhiteSpace(subfolder) || string.IsNullOrWhiteSpace(filename))
-        {
-            throw new ArgumentNullException("Subfolder and Filename are expected.");
-        }
+            throw new ArgumentException("Subfolder and Filename are expected.");
 
         var path = Path.Combine(_folderLocation, subfolder, filename);
-        return await File.ReadAllBytesAsync(path);
+        var bytes = await File.ReadAllBytesAsync(path);
+        return System.Text.Encoding.UTF8.GetString(bytes);
     }
 }
