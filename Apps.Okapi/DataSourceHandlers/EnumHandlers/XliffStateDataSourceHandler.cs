@@ -6,11 +6,11 @@ namespace Apps.Okapi.DataSourceHandlers.EnumHandlers;
 
 public class XliffStateDataSourceHandler : IStaticDataSourceItemHandler
 {
-    public IEnumerable<DataSourceItem> GetData() => new List<DataSourceItem>
-    {
+    public IEnumerable<DataSourceItem> GetData() =>
+    [
         new(SegmentStateHelper.Serialize(SegmentState.Initial), "Initial or empty"),
         new(SegmentStateHelper.Serialize(SegmentState.Translated), "Translated"),
         new(SegmentStateHelper.Serialize(SegmentState.Reviewed), "Reviewed"),
         new(SegmentStateHelper.Serialize(SegmentState.Final), "Final"),
-    };
+    ];
 }
