@@ -6,11 +6,8 @@ using Blackbird.Applications.Sdk.Common.Authentication;
 using Blackbird.Applications.Sdk.Common.Exceptions;
 using Blackbird.Applications.Sdk.Common.Invocation;
 using Blackbird.Applications.Sdk.Utils.Extensions.Files;
-using Blackbird.Applications.Sdk.Utils.Extensions.Sdk;
 using RestSharp;
-using System;
 using System.IO.Compression;
-using System.Net;
 using System.Reflection;
 
 namespace Apps.Okapi.Invocables;
@@ -27,7 +24,7 @@ public class AppInvocable : BaseInvocable
         Client = new();
     }
 
-    protected async Task<string?> CreateNewProject()
+    protected async Task<string> CreateNewProject()
     {
         var response = await Client.Execute(ApiEndpoints.Projects + "/new", Method.Post, null, Creds);
         if (!response.IsSuccessStatusCode)
@@ -35,18 +32,17 @@ public class AppInvocable : BaseInvocable
             throw new PluginApplicationException($"Status code: {response.StatusCode}, Content: {response.Content}");
         }
 
-        var locationHeader = response.Headers.FirstOrDefault(h => h.Name.Equals("Location", StringComparison.OrdinalIgnoreCase))?.Value?.ToString();
-        if (locationHeader == null)
-        {
-            throw new PluginApplicationException("Location header is missing in the response.");
-        }
+        var locationHeader = (response.Headers?.FirstOrDefault(h => h.Name?.Equals("Location", StringComparison.OrdinalIgnoreCase) == true)?.Value?.ToString())
+            ?? throw new PluginApplicationException("Location header is missing in the response.");
 
         var uri = new Uri(locationHeader);
-        return uri.Segments.Last();
+        var projectId = uri.Segments.LastOrDefault();
+
+        return projectId ?? throw new PluginApplicationException("Can't create a new OKAPI Longhorn project.");
     }
 
     protected async Task AddBatchConfig(string projectId, byte[] fileBytes, string name = "batch.bconf"
-        , string contentType = "application/octet-stream", string? configOverride = null)
+        , string contentType = "application/octet-stream", string? configOverwrite = null)
     {
         string endpoint = ApiEndpoints.Projects + $"/{projectId}" + ApiEndpoints.BatchConfiguration;
         var fileParam = FileParameter.Create("batchConfiguration", fileBytes, name, contentType);
@@ -54,9 +50,9 @@ public class AppInvocable : BaseInvocable
         try
         {
             List<Parameter> formParams = [];
-            if (!string.IsNullOrEmpty(configOverride))
+            if (!string.IsNullOrEmpty(configOverwrite))
             {
-                formParams.Add(Parameter.CreateParameter("overrideStepParams", configOverride, ParameterType.GetOrPost));
+                formParams.Add(Parameter.CreateParameter("OverwriteStepParams", configOverwrite, ParameterType.GetOrPost));
             }
 
             await Client.UploadFile(endpoint, Method.Post, fileParam, Creds, formParams);
@@ -261,12 +257,12 @@ public class AppInvocable : BaseInvocable
         return projectId;
     }
 
-    protected async Task<string> CreateProjectWithBatchConfig(string configName, string? configOverride = null)
+    protected async Task<string> CreateProjectWithBatchConfig(string configName, string? configOverwrite = null)
     {
         var projectId = await CreateProject();
 
         var config = await LoadBatchConfig(configName);
-        await AddBatchConfig(projectId, config, configOverride: configOverride);
+        await AddBatchConfig(projectId, config, configOverwrite: configOverwrite);
 
         return projectId;
     }

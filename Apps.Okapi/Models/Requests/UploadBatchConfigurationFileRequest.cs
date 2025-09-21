@@ -6,5 +6,8 @@ namespace Apps.Okapi.Models.Requests;
 public class UploadBatchConfigurationFileRequest
 {
     [Display("Batch configuration file")]
-    public FileReference File { get; set; }
+    public FileReference File { get; set; } = new();
+
+    [Display("Batch configuration overwrite")]
+    public string BatchOverwrite { get; set; } = string.Empty;
 }

@@ -4,6 +4,7 @@
         <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
         <Product>Okapi Longhorn</Product>
         <Description>Longhorn is a server application that allows you to execute Batch Configurations remotely on any set of input files. Batch Configurations which include pre-defined pipelines and filter configurations, can be exported from Rainbow.</Description>
         <Version>1.2.5</Version>
@@ -13,13 +14,10 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Blackbird.Applications.Sdk.Common" Version="2.11.1" />
-        <PackageReference Include="Blackbird.Applications.Sdk.Utils" Version="1.0.24" />
-        <PackageReference Include="Blackbird.Filters" Version="1.1.22" />
-        <PackageReference Include="MimeTypes" Version="2.4.1">
-          <PrivateAssets>all</PrivateAssets>
-          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-        </PackageReference>
+        <PackageReference Include="Blackbird.Applications.SDK.Blueprints" Version="1.0.0" />
+        <PackageReference Include="Blackbird.Applications.Sdk.Utils" Version="1.0.26" />
+        <PackageReference Include="Blackbird.Filters" Version="1.1.24" />
+        <PackageReference Include="MimeTypes" Version="2.5.2" />
     </ItemGroup>
 
     <ItemGroup>

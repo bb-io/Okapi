@@ -1,6 +1,6 @@
 ﻿namespace Apps.Okapi.Models.Dtos;
 
-public record class TmExportConfigOverrideDto
+public record class TmExportConfigOverwriteDto
 {
     public required string OutputPath { get; init; }
 

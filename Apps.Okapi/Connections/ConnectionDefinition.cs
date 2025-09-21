@@ -6,33 +6,23 @@ namespace Apps.Okapi.Connections;
 
 public class ConnectionDefinition : IConnectionDefinition
 {
-    private static IEnumerable<ConnectionProperty> ConnectionProperties => new[]
-    {
-        new ConnectionProperty(CredsNames.Url)
-        {
-            DisplayName = "URL", Description = "Base URL of the Okapi API, f.e.: http://28.216.252.148:88/okapi-longhorn"
-        }
-    };
     
-    public IEnumerable<ConnectionPropertyGroup> ConnectionPropertyGroups => new List<ConnectionPropertyGroup>
-    {
+    public IEnumerable<ConnectionPropertyGroup> ConnectionPropertyGroups =>
+    [
         new()
         {
-            Name = "Developer API key",
+            Name = "Base URL",
             AuthenticationType = ConnectionAuthenticationType.Undefined,
-            ConnectionUsage = ConnectionUsage.Actions,
-            ConnectionProperties = ConnectionProperties
+            ConnectionProperties = [
+                new ConnectionProperty(CredsNames.Url) { DisplayName = "URL", Description = "Base URL of the Okapi Longhorn server, e.g. http://28.216.252.148:88/okapi-longhorn" }
+            ],
         }
-    };
+    ];
 
     public IEnumerable<AuthenticationCredentialsProvider> CreateAuthorizationCredentialsProviders(
         Dictionary<string, string> values)
     {
         var clientIdKeyValue = values.First(v => v.Key == CredsNames.Url);
-        yield return new AuthenticationCredentialsProvider(
-            AuthenticationCredentialsRequestLocation.None,
-            clientIdKeyValue.Key,
-            clientIdKeyValue.Value
-        );
+        yield return new AuthenticationCredentialsProvider( clientIdKeyValue.Key,clientIdKeyValue.Value);
     }
 }

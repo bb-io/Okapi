@@ -30,7 +30,7 @@ public static class BatchConfig
     /// </code>
     /// </example>
     /// </remarks>
-    public static string OverridePretranslateConfig(string tmPath, string? srxFilePath)
+    public static string OverwritePretranslateConfig(string tmPath, string? srxFilePath)
     {
         List<string> tmStepParams = Path.GetExtension(tmPath) switch
         {
@@ -63,7 +63,7 @@ public static class BatchConfig
         return overwrite.ToString();
     }
 
-    public static string OverrideTmImportConfig(string tmPath, bool overwriteSameSource = true)
+    public static string OverwriteTmImportConfig(string tmPath, bool overwriteSameSource = true)
     {
         var stepParams = new List<string>
         {

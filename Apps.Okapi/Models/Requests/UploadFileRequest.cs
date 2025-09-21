@@ -4,5 +4,5 @@ namespace Apps.Okapi.Models.Requests;
 
 public class UploadFileRequest
 {
-    public FileReference File { get; set; }
+    public FileReference File { get; set; } = new();
 }

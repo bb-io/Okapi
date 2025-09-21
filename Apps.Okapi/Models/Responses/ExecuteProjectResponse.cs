@@ -6,5 +6,5 @@ namespace Apps.Okapi.Models.Responses;
 public class ExecuteProjectResponse
 {
     [Display("Output files")]
-    public IEnumerable<FileReference> OutputFiles { get; set; }
+    public IEnumerable<FileReference> OutputFiles { get; set; } = [];
 }
