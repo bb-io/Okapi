@@ -1,8 +1,9 @@
 ﻿using Blackbird.Applications.Sdk.Common.Dictionaries;
+using Blackbird.Applications.Sdk.Common.Dynamic;
 
 namespace Apps.Okapi.DataSourceHandlers.EnumHandlers;
 
-public class LanguageDataHandler : IStaticDataSourceHandler
+public class LanguageDataHandler : IStaticDataSourceItemHandler
 {
     private static Dictionary<string, string> EnumValues => new()
     {
@@ -399,8 +400,6 @@ public class LanguageDataHandler : IStaticDataSourceHandler
         { "zu-ZA", "Zulu (*south Africa)" },
     };
 
-    public Dictionary<string, string> GetData()
-    {
-        return EnumValues;
-    }
+    public IEnumerable<DataSourceItem> GetData() => EnumValues
+        .Select(x => new DataSourceItem(x.Key, x.Value));
 }
