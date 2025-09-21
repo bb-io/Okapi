@@ -5,8 +5,8 @@ namespace Apps.Okapi.DataSourceHandlers.EnumHandlers;
 
 public class LanguageDataHandler : IStaticDataSourceItemHandler
 {
-    public IEnumerable<DataSourceItem> GetData() =>
-    [
+    public IEnumerable<DataSourceItem> GetData() => new List<DataSourceItem>
+    {
         new("ab", "Abkhazian"),
         new("ab", "Abkhazian"),
         new("ab-GE", "Abkhazian (*Georgia)"),
@@ -399,5 +399,5 @@ public class LanguageDataHandler : IStaticDataSourceItemHandler
         new("ug-CN", "Uighur (*China)"),
         new("zu", "Zulu"),
         new("zu-ZA", "Zulu (*south Africa)"),
-    ];
+    };
 }
