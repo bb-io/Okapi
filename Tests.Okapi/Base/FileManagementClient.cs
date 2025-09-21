@@ -1,16 +1,10 @@
-using Blackbird.Applications.Sdk.Common.Files;
 using Blackbird.Applications.SDK.Extensions.FileManagement.Interfaces;
 
 namespace Tests.Okapi.Base;
 
-public class FileManagementClient : IFileManagementClient
+public class FileManagementClient(string folderLocation) : IFileManagementClient
 {
-    private readonly string _folderLocation;
-
-    public FileManagementClient(string folderLocation)
-    {
-        _folderLocation = folderLocation ?? throw new ArgumentNullException(nameof(folderLocation));
-    }
+    private readonly string _folderLocation = folderLocation ?? throw new ArgumentNullException(nameof(folderLocation));
 
     public async Task<Stream> DownloadAsync(FileReference reference)
     {
@@ -36,7 +30,10 @@ public class FileManagementClient : IFileManagementClient
             await stream.CopyToAsync(fileStream);
         }
 
-        return new FileReference { Name = fileName };
+        return new FileReference {
+            Name = fileName,
+            ContentType = contentType,
+        };
     }
 
     /// <summary>

@@ -5,9 +5,10 @@ using Apps.Okapi.Utils;
 using Blackbird.Applications.Sdk.Common;
 using Blackbird.Applications.Sdk.Common.Actions;
 using Blackbird.Applications.Sdk.Common.Exceptions;
-using Blackbird.Applications.Sdk.Common.Files;
 using Blackbird.Applications.Sdk.Common.Invocation;
 using Blackbird.Applications.SDK.Extensions.FileManagement.Interfaces;
+using Blackbird.Filters.Enums;
+using Blackbird.Filters.Transformations;
 using Blackbird.Filters.Xliff.Xliff2;
 using System.IO.Compression;
 using System.Text;
@@ -79,54 +80,71 @@ public class CombinedActions(InvocationContext invocationContext, IFileManagemen
         Description = "Convert any XLIFF file after operations back to its original. Use in conjunctions with 'Convert file to XLIFF'")]
     public async Task<DownloadFileResponse> ConvertXliffToFile([ActionParameter] CreateXliffResponse input)
     {
-        var projectId = await CreateNewProject();
+        var projectId = await CreateNewProject()
+            ?? throw new PluginApplicationException("Can't create a new OKAPI Longhorn project");
 
         var xliffCreation = await LoadBatchConfig("xliff_merging");
         await AddBatchConfig(projectId, xliffCreation);
 
-        Xliff2Serializer.TryGetXliffVersion(input.Xliff.Name, out var xliffVersion);
-
         using var xliffStream = await fileManagementClient.DownloadAsync(input.Xliff);
-        using var packageStream = await fileManagementClient.DownloadAsync(input.Package);
-        using (var memoryStream = new MemoryStream())
+        var seekableXliffStream = new MemoryStream();
+        await xliffStream.CopyToAsync(seekableXliffStream);
+        var xliffContent = Encoding.UTF8.GetString(seekableXliffStream.ToArray());
+
+        var supportedXliffVersions = new[] { "1.2", "2.0" };
+        if (Xliff2Serializer.TryGetXliffVersion(xliffContent, out var xliffVersion)
+            && !supportedXliffVersions.Contains(xliffVersion) )
         {
-            await packageStream.CopyToAsync(memoryStream);
-            using (var archive = new ZipArchive(memoryStream, ZipArchiveMode.Update))
-            {
-                var xliffEntry = archive.Entries.FirstOrDefault(x => x.Name.Contains(".xlf"));
-                if (xliffEntry == null) throw new PluginApplicationException("The package did not contain any XLIFF files");
-                xliffEntry.Delete();
-                xliffEntry = archive.CreateEntry($"work/{xliffEntry.Name}");
-
-                using var entryStream = xliffEntry.Open();
-                await xliffStream.CopyToAsync(entryStream);
-            }
-
-            var fileBytes = memoryStream.ToArray();
-
-            await UploadFile(projectId, fileBytes, input.Package.Name, input.Package.ContentType);
-
-            await Execute(projectId);
-
-            var outputFiles = await GetOutputFiles(projectId);
-            if (outputFiles.Count == 0) throw new PluginApplicationException("No files were converted");
-            var outputFile = outputFiles.First();
-
-            var stream = await DownloadOutputFileAsStream(projectId, outputFile);
-            var mimeType = MimeTypes.GetMimeType(outputFile);
-            if (outputFile.EndsWith(".html"))
-            {
-                stream = ReplaceInappropriateStrings(stream);
-            }
-
-            outputFile = FileReferenceExtensions.RestoreInappropriateCharacters(outputFile);
-            
-            var fileReference = await fileManagementClient.UploadAsync(stream, mimeType, FileReferenceExtensions.RestoreInappropriateCharacters(outputFile));
-
-            await DeleteProject(projectId);
-
-            return new DownloadFileResponse(fileReference);
+            var transformation = Transformation.Parse(xliffContent, input.Xliff.Name);
+            var xliff20 = Xliff2Serializer.Serialize(transformation, Xliff2Version.Xliff20);
+            await seekableXliffStream.DisposeAsync();
+            seekableXliffStream = new MemoryStream(Encoding.UTF8.GetBytes(xliff20));
         }
+
+        using var packageStream = await fileManagementClient.DownloadAsync(input.Package);
+
+        using var memoryStream = new MemoryStream();
+
+        await packageStream.CopyToAsync(memoryStream);
+
+        memoryStream.Seek(0, SeekOrigin.Begin);
+        using (var archive = new ZipArchive(memoryStream, ZipArchiveMode.Update, leaveOpen: true))
+        {
+            var xliffEntry = archive.Entries.FirstOrDefault(x => x.Name.Contains(".xlf")) ?? throw new PluginApplicationException("The package did not contain any XLIFF files");
+            xliffEntry.Delete();
+            xliffEntry = archive.CreateEntry(xliffEntry.Name);
+
+            using var entryStream = xliffEntry.Open();
+            seekableXliffStream.Seek(0, SeekOrigin.Begin);
+            await seekableXliffStream.CopyToAsync(entryStream);
+        }
+
+        memoryStream.Seek(0, SeekOrigin.Begin);
+        await UploadFile(projectId, () => memoryStream, input.Package.Name, input.Package.ContentType);
+        
+        await Execute(projectId);
+
+        var outputFiles = await GetOutputFiles(projectId);
+
+        if (outputFiles.Count == 0)
+            throw new PluginApplicationException("No files were converted");
+
+        var outputFileName = outputFiles.First();
+
+        var stream = await DownloadOutputFileAsStream(projectId, outputFileName);
+        var mimeType = MimeTypes.GetMimeType(outputFileName);
+        if (outputFileName.EndsWith(".html"))
+        {
+            stream = ReplaceInappropriateStrings(stream);
+        }
+
+        outputFileName = FileReferenceExtensions.RestoreInappropriateCharacters(outputFileName);
+
+        var fileReference = await fileManagementClient.UploadAsync(stream, mimeType, FileReferenceExtensions.RestoreInappropriateCharacters(outputFileName));
+
+        await DeleteProject(projectId);
+
+        return new DownloadFileResponse() { File = fileReference };
     }
 
     [Action("Upload translation assets", Description = "Uploads TMX or SRX files to a new Okapi project and returns a local path to the uploaded files, so they could be used in Pre-translation action.")]

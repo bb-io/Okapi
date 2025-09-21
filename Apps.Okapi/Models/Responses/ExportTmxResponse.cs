@@ -5,6 +5,6 @@ namespace Apps.Okapi.Models.Responses;
 
 public class ExportTmxResponse
 {
-    [Display("TMX file")]
+    [Display("Archived Pensieve TM folder")]
     public FileReference TmxFile { get; set; } = new();
 }

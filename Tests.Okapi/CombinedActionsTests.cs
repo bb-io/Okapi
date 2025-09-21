@@ -38,6 +38,24 @@ public class CombinedActionsTests : TestBase
     }
 
     [TestMethod]
+    public async Task ConvertXliffToFile_InteroperableXliff_ReturnsConvertedFile()
+    {
+        // given
+        var request = new CreateXliffResponse
+        {
+            Package = new FileReference { Name = Path.Join("Interoperable", "package.zip"), ContentType = "application/zip" },
+            Xliff = new FileReference { Name = Path.Join("Interoperable", "__content__wknd__language-masters__en__faqs.html.xlf"), ContentType = "application/xliff+xml" }
+        };
+
+        // when
+        var combinedActions = new CombinedActions(InvocationContext, FileManagementClient);
+        var result = await combinedActions.ConvertXliffToFile(request);
+
+        // then
+        Assert.IsNotNull(result.File.Name.EndsWith(".html"));
+    }
+
+    [TestMethod]
     public async Task UploadTranslationAssets_WithTmxAndSrx_ReturnsUploadedFileNames()
     {
         // given

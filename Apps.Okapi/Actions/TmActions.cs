@@ -56,7 +56,7 @@ public class TmActions(InvocationContext invocationContext, IFileManagementClien
         };
     }
 
-    [Action("Download Pensieve TM", Description = "Export a translation memory content as archived Pensieve TM (could be locally exported to a TMX using OKAPI).")]
+    [Action("Download TM", Description = "Export a translation memory content as an archived Pensieve TM folder (could be locally exported to a TMX using OKAPI).")]
     public Task<ExportTmxResponse> DownloadTm([ActionParameter] ExportTmxRequest request)
     {
         // TM Path is expected to be located in output DIR
