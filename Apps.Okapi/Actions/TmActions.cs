@@ -20,7 +20,7 @@ namespace Apps.Okapi.Actions;
 public class TmActions(InvocationContext invocationContext, IFileManagementClient fileManagementClient)
     : AppInvocable(invocationContext)
 {
-    [Action("Upload translation assets", Description = "Uploads TMX or SRX files to a new Okapi project and returns a local path to the uploaded files, so they could be used in Pre-translation action.")]
+    [Action("Upload translation assets", Description = "Uploads TMX (up to 50mb) or SRX files to a new Okapi project and returns a local path to the uploaded files, so they could be used in Pre-translation action.")]
     public async Task<UploadTranslationAssetsResponse> UploadTranslationAssets([ActionParameter] UploadTranslationAssetsRequest request)
     {
         if (request.Tmx == null && request.Srx == null)
@@ -52,7 +52,7 @@ public class TmActions(InvocationContext invocationContext, IFileManagementClien
     }
 
     [Action("Pre-translate with previous translations",
-        Description = "Parse and segment incoming files, then insert previous translations from translation memory. Returns XLIFF v2.1.")]
+        Description = "Parse and segment incoming files, then insert previous translations from translation memory. Returns XLIFF v2.0.")]
     public async Task<PretranslateResponse> Pretranslate(
         [ActionParameter] PretranslateRequest pretranslateRequest,
         [ActionParameter] ExecuteSingleLanguageTaskRequest languageTaskRequest,
@@ -102,7 +102,7 @@ public class TmActions(InvocationContext invocationContext, IFileManagementClien
         }
     }
 
-    [Action("Create TM from TMX", Description = "Import TMX file to create or update a translation memory.")]
+    [Action("Create TM from TMX", Description = "Create a Pensieve TM from a TMX file.")]
     public async Task<CreateTmResponse> CreateTm([ActionParameter] CreateTmRequest request)
     {
         var projectId = await CreateProject();
@@ -171,7 +171,7 @@ public class TmActions(InvocationContext invocationContext, IFileManagementClien
         });
     }
 
-    [Action("Update TM", Description = "Add a bilingual file content to a translation memory.")]
+    [Action("Update TM", Description = "Add a bilingual file content to an existing Pensieve TM.")]
     public async Task<UpdateTmResponse> UpdateTm([ActionParameter] UpdateTmRequest request)
     {
         var longhornFileSeparator = request.TmPath.Contains('\\') ? '\\' : '/';
