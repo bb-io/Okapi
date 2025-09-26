@@ -1,4 +1,5 @@
-﻿using Apps.Okapi.Constants;
+﻿using System.Net;
+using Apps.Okapi.Constants;
 using Apps.Okapi.Invocables;
 using Apps.Okapi.Models.Requests;
 using Apps.Okapi.Models.Responses;
@@ -139,7 +140,7 @@ public class TmActions(InvocationContext invocationContext, IFileManagementClien
     }
 
     [Action("Download TM", Description = "Export a translation memory content as an archived Pensieve TM folder (could be locally exported to a TMX using OKAPI).")]
-    public Task<ExportTmxResponse> DownloadTm([ActionParameter] ExportTmxRequest request)
+    public async Task<ExportTmxResponse> DownloadTm([ActionParameter] ExportTmxRequest request)
     {
         // TM Path is expected to be located in output DIR
         // Pensieve TM can't be convered using OKAPI Longhorn as Longhord don't work with folders as inputs.
@@ -159,16 +160,19 @@ public class TmActions(InvocationContext invocationContext, IFileManagementClien
         var baseUrl = Creds.FirstOrDefault(c => c.KeyName == CredsNames.Url)?.Value.TrimEnd('/')
             ?? throw new PluginApplicationException("Can't get a base URL for an output file.");
 
+        var uri = new Uri(baseUrl + ApiEndpoints.Projects + $"/{projectId}" + ApiEndpoints.OutputArchive);
+        await ValidateUri(uri, projectId);
+        
         var zipRequest = new HttpRequestMessage
         {
-            RequestUri = new Uri(baseUrl + ApiEndpoints.Projects + $"/{projectId}" + ApiEndpoints.OutputArchive),
+            RequestUri = uri,
             Method = HttpMethod.Get
         };
 
-        return Task.FromResult(new ExportTmxResponse
+        return new ExportTmxResponse
         {
             TmxFile = new FileReference(zipRequest, "tm-export.zip", "application/zip"),
-        });
+        };
     }
 
     [Action("Update TM", Description = "Add a bilingual file content to an existing Pensieve TM.")]
@@ -232,5 +236,37 @@ public class TmActions(InvocationContext invocationContext, IFileManagementClien
             TotalSegmentsInFile = totalSegmentsInFile,
             SegmentsSent = transformation.GetUnits().Sum(u => u.Segments.Count)
         };
+    }
+    
+    private async Task ValidateUri(Uri uri, string projectId)
+    {
+        var client = new RestClient();
+        var request = new RestRequest(uri);
+        
+        var response = await client.ExecuteAsync(request);
+        if (!response.IsSuccessful)
+        {
+            var projectExists = await ProjectExists(projectId);
+            if (!projectExists)
+            {
+                throw new PluginApplicationException($"Project with ID {projectId} doesn't exist. Please check the TM path.");
+            }
+            
+            if (response.StatusCode == HttpStatusCode.InternalServerError)
+            {
+                throw new PluginApplicationException("OKAPI Longhorn returned 500 Internal Server Error. " +
+                                                     "The project ID might be invalid or the project doesn't have any output yet. " +
+                                                     $"See more details by accessing {uri} directly (maybe IP whitelisting is needed).");
+            }
+            
+            throw new PluginApplicationException(
+                $"Can't access the output file. OKAPI Longhorn returned status code {response.StatusCode}.");
+        }
+    }
+    
+    private async Task<bool> ProjectExists(string projectId)
+    {
+        var projectsResponse = await Client.ExecuteWithXml<GetProjectsResponse>(ApiEndpoints.Projects, Method.Get, null, Creds.ToArray());
+        return projectsResponse.Projects.Contains(projectId);
     }
 }

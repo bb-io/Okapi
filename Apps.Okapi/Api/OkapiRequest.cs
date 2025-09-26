@@ -2,9 +2,5 @@
 
 namespace Apps.Okapi.Api;
 
-public class OkapiRequest : RestRequest
-{
-    public OkapiRequest(OkapiRequestParameters requestParameters) : base(requestParameters.Url, requestParameters.Method)
-    {
-    }
-}
+public class OkapiRequest(OkapiRequestParameters requestParameters)
+    : RestRequest(requestParameters.Url, requestParameters.Method);
