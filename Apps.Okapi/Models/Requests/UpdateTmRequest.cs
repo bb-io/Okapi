@@ -10,9 +10,15 @@ public class UpdateTmRequest
     [Display("Bilingual file", Description = "Upload bilingual content (e.g., XLIFF/TMX) to update the translation memory.")]
     public FileReference BilingualFile { get; set; } = new();
 
+    [Display("Target languages"), StaticDataSource(typeof(LanguageDataHandler))]
+    public IEnumerable<string> TargetLanguages { get; set; } = Array.Empty<string>();
+
     [Display("Translation memory path", Description = "Absolute path to the translation memory on the OKAPI Longhorn server.")]
     public string TmPath { get; set; } = string.Empty;
-
+    
+    [Display("Source language"), StaticDataSource(typeof(LanguageDataHandler))]
+    public string? SourceLanguage { get; set; } = string.Empty;
+    
     [Display("Segment state to import", Description = "State of the segments to be imported into the translation memory, by default all existing translations will be sent to TM.")]
     [StaticDataSource(typeof(XliffStateDataSourceHandler))]
     public IEnumerable<string>? SegmentStates { get; set; }
