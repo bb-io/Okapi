@@ -195,8 +195,7 @@ public class TmActions(InvocationContext invocationContext, IFileManagementClien
         if (transformation.TargetLanguage is null || transformation.SourceLanguage is null)
             throw new PluginApplicationException("The provided file is not bilingual XLIFF.");
 
-        var sourceLanguage = transformation.SourceLanguage;
-        var targetLanguage = transformation.TargetLanguage;
+        var sourceLanguage = request.SourceLanguage ?? transformation.SourceLanguage;
         var totalSegmentsInFile = transformation.GetUnits().Sum(u => u.Segments.Count);
 
         var segmentStates = request.SegmentStates?
@@ -221,7 +220,7 @@ public class TmActions(InvocationContext invocationContext, IFileManagementClien
             var importConfig = await LoadBatchConfig("import_to_tm");
             await AddBatchConfig(projectId, importConfig, configOverwrite: importConfigOverwrite);
             await UploadFile(projectId, FileParameter.Create("inputFile", xliffBytes, uniqueFileName, "application/xliff+xml"));
-            await Execute(projectId, sourceLanguage, targetLanguage);
+            await Execute(projectId, sourceLanguage, targetLanguages: request.TargetLanguages);
         }
         catch (Exception ex)
         {
