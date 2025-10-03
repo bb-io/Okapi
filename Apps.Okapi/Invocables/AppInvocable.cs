@@ -52,7 +52,7 @@ public class AppInvocable : BaseInvocable
             List<Parameter> formParams = [];
             if (!string.IsNullOrEmpty(configOverwrite))
             {
-                formParams.Add(Parameter.CreateParameter("OverwriteStepParams", configOverwrite, ParameterType.GetOrPost));
+                formParams.Add(Parameter.CreateParameter("overrideStepParams", configOverwrite, ParameterType.GetOrPost));
             }
 
             await Client.UploadFile(endpoint, Method.Post, fileParam, Creds, formParams);
